@@ -1,13 +1,27 @@
-@startuml
+@startuml name "finta"
 
 class MatchResult {
-  - team1: String
-  - team2: String
-  - score1: int
-  - score2: int
+  - id: unsigned long int
+  - {static} nextId: unsigned long int
+  - team1: Team
+  - team2: Team
+  - score1: uint_8
+  - score2: uint_8
 
-  + getMatchResult(): String
-  + setMatchResult(team1: String, team2: String, score1: int, score2: int): void
+  + <<constructor>> MatchResult(team1: Team, team2: Team, score1: uint_8, score2: uint_8)
+  + getMatchResult(): string
+  + setMatchResult(team1: Team, team2: Team, score1: uint_8, score2: uint_8): void
 }
+
+class Team {
+  - name: string
+  
+  + <<constructor>> Team(name: string)
+  + getName(): string
+  + setName(name: string): void
+}
+
+MatchResult o-- Team : team1
+MatchResult o-- Team : team2
 
 @enduml

@@ -1,30 +1,37 @@
-#ifndef MATCHRESULT_HPP
-#define MATCHRESULT_HPP
+#ifndef MATCH_RESULT_HPP
+#define MATCH_RESULT_HPP
 
 #include <string>
+#include <cstdint>
+#include "Team.hpp"
+
 
 class MatchResult {
-private:
-    std::string team1;
-    std::string team2;
-    int score1;
-    int score2;
-
-public:
-    MatchResult();
-    MatchResult(const std::string& team1, const std::string& team2, int score1, int score2);
+   public:
+    MatchResult(Team* team1, Team* team2, uint8_t score1,
+                uint8_t score2);
 
     // Getter methods
-    std::string getTeam1() const;
-    std::string getTeam2() const;
-    int getScore1() const;
-    int getScore2() const;
+    unsigned int getId();
+    Team* getTeam1();
+    Team* getTeam2();
+    uint8_t getScore1();
+    uint8_t getScore2();
 
     // Setter method
-    void setMatchResult(const std::string& team1, const std::string& team2, int score1, int score2);
+    void setMatchResult(Team* team1, Team* team2, uint8_t score1,
+                        uint8_t score2);
 
     // Method to get the match result as a string
-    std::string getMatchResult() const;
+    std::string getMatchResult();
+
+   private:
+    static unsigned long int nextId;
+    unsigned long int id;
+    Team* team1;
+    Team* team2;
+    uint8_t score1;
+    uint8_t score2;
 };
 
-#endif // MATCHRESULT_HPP
+#endif  // MATCH_RESULT_HPP

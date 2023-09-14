@@ -2,7 +2,7 @@ PARAMS=-Wall
 CC=g++
 
 PROGRAM=finta
-OBJECTS=main.o MatchResult.o
+OBJECTS=main.o MatchResult.o Team.o
 
 all: $(PROGRAM)
 
