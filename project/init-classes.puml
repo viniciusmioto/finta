@@ -1,0 +1,13 @@
+@startuml
+
+class MatchResult {
+  - team1: String
+  - team2: String
+  - score1: int
+  - score2: int
+
+  + getMatchResult(): String
+  + setMatchResult(team1: String, team2: String, score1: int, score2: int): void
+}
+
+@enduml

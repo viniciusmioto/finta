@@ -1,0 +1,80 @@
+@startuml
+
+class Match {
+  - date: Date
+  - team1: String
+  - team2: String
+  - score1: int
+  - score2: int
+  - statistics: List<Statistics>
+  + getMatchDetails(): String
+  + addStatistics(statistics: Statistics): void
+}
+
+class Team {
+  - name: String
+  - players: List<Player>
+  - statistics: TeamStatistics
+  + getTeamDetails(): String
+  + addPlayer(player: Player): void
+  + updateStatistics(statistics: Statistics): void
+}
+
+class Player {
+  - name: String
+  - position: String
+  - statistics: PlayerStatistics
+  + getPlayerDetails(): String
+  + updateStatistics(statistics: Statistics): void
+}
+
+class Statistics {
+  - goalsScored: int
+  - assists: int
+  - yellowCards: int
+  - redCards: int
+  + calculateStatistics(): void
+}
+
+class TeamStatistics {
+  - totalGoalsScored: int
+  - averagePassAccuracy: float
+  + calculateTeamStatistics(): void
+}
+
+class PlayerStatistics {
+  - goalsScored: int
+  - assists: int
+  - passAccuracy: float
+  + calculatePlayerStatistics(): void
+}
+
+class DataStorage {
+  - matches: List<Match>
+  - teams: List<Team>
+  - players: List<Player>
+  + storeMatch(match: Match): void
+  + retrieveMatch(matchDate: Date): Match
+  + storeTeam(team: Team): void
+  + retrieveTeam(teamName: String): Team
+  + storePlayer(player: Player): void
+  + retrievePlayer(playerName: String): Player
+}
+
+class UserInterface {
+  - dataStorage: DataStorage
+  + displayMenu(): void
+  + handleUserInput(input: String): void
+}
+
+Match -- Team
+Match -- Statistics
+Team -- Player
+Team -- TeamStatistics
+Player -- PlayerStatistics
+DataStorage -- Match
+DataStorage -- Team
+DataStorage -- Player
+UserInterface -- DataStorage
+
+@enduml
