@@ -5,6 +5,14 @@ unsigned long int MatchResult::nextId{0};
 MatchResult::MatchResult(Team* team1, Team* team2, uint8_t score1, uint8_t score2) 
 : id{nextId}, team1{team1}, team2{team2}, score1{score1}, score2{score2} {
     nextId++;
+
+    // Add this match result to both teams' lists
+    if (team1) {
+        team1->addMatchResult(this);
+    }
+    if (team2) {
+        team2->addMatchResult(this);
+    }
 }
 
 unsigned int MatchResult::getId() { return id; }

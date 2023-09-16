@@ -5,7 +5,6 @@
 #include <cstdint>
 #include "Team.hpp"
 
-
 class MatchResult {
    public:
     MatchResult(Team* team1, Team* team2, uint8_t score1,

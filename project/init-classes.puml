@@ -3,25 +3,23 @@
 class MatchResult {
   - id: unsigned long int
   - {static} nextId: unsigned long int
-  - team1: Team
-  - team2: Team
-  - score1: uint_8
-  - score2: uint_8
+  - scoreHome: uint_8
+  - scoreAway: uint_8
 
-  + <<constructor>> MatchResult(team1: Team, team2: Team, score1: uint_8, score2: uint_8)
+  + MatchResult(team1: Team, team2: Team, score1: uint_8, score2: uint_8)
   + getMatchResult(): string
-  + setMatchResult(team1: Team, team2: Team, score1: uint_8, score2: uint_8): void
+  + setMatchResult(teamHome: Team, teamAway: Team, scoreHome: uint_8, scoreAway: uint_8): void
 }
 
 class Team {
   - name: string
   
-  + <<constructor>> Team(name: string)
+  + Team(name: string)
   + getName(): string
   + setName(name: string): void
 }
 
-MatchResult o-- Team : team1
-MatchResult o-- Team : team2
+MatchResult "0..*" -- "teamHome 1" Team
+MatchResult "0..*" -- "1 teamAway" Team 
 
 @enduml
