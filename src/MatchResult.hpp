@@ -8,19 +8,19 @@
 
 class MatchResult {
    public:
-    MatchResult(Team* team1, Team* team2, uint8_t score1,
-                uint8_t score2);
+    MatchResult(Team* homeTeam, Team* awayTeam, unsigned short int homeTeamScore,
+                unsigned short int awayTeamScore);
 
     // Getter methods
     unsigned int getId();
-    Team* getTeam1();
-    Team* getTeam2();
-    uint8_t getScore1();
-    uint8_t getScore2();
+    Team* getHomeTeam();
+    Team* getAwayTeam();
+    unsigned short int getHomeTeamScore();
+    unsigned short int getAwayTeamScore();
 
     // Setter method
-    void setMatchResult(Team* team1, Team* team2, uint8_t score1,
-                        uint8_t score2);
+    void setMatchResult(Team* homeTeam, Team* awayTeam, unsigned short int homeTeamScore,
+                        unsigned short int awayTeamScore);
 
     // Method to get the match result as a string
     std::string getMatchResult();
@@ -28,10 +28,10 @@ class MatchResult {
    private:
     static unsigned long int nextId;
     unsigned long int id;
-    Team* team1;
-    Team* team2;
-    uint8_t score1;
-    uint8_t score2;
+    Team* homeTeam;
+    Team* awayTeam;
+    unsigned short int homeTeamScore;
+    unsigned short int awayTeamScore;
 };
 
 #endif  // MATCH_RESULT_HPP

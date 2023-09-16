@@ -3,23 +3,41 @@
 class MatchResult {
   - id: unsigned long int
   - {static} nextId: unsigned long int
-  - scoreHome: uint_8
-  - scoreAway: uint_8
+  - homeTeam: Team
+  - awayTeam: Team
+  - homeTeamScore: unsigned short int
+  - awayTeamScore: unsigned short int
 
-  + MatchResult(team1: Team, team2: Team, score1: uint_8, score2: uint_8)
+  + MatchResult(homeTeam: Team, awayTeam: Team, homeTeamScore: unsigned short int, awayTeamScore: unsigned short int)
   + getMatchResult(): string
-  + setMatchResult(teamHome: Team, teamAway: Team, scoreHome: uint_8, scoreAway: uint_8): void
+  + setMatchResult(homeTeam: Team, awayTeam: Team, homeTeamScore: unsigned short int, awayTeamScore: unsigned short int): void
+  + getHomeTeam(): Team
+  + getAwayTeam(): Team
+  + getAwayTeamScore(): unsigned short int
+  + getHomeTeamScore(): unsigned short int
 }
 
 class Team {
   - name: string
+  - points: unsigned short int
+  - matchResults: MatchResult[]
   
   + Team(name: string)
   + getName(): string
   + setName(name: string): void
+  + getPoints(): unsigned short int
+  + addPoints(points: unsigned short int): void
 }
 
-MatchResult "0..*" -- "teamHome 1" Team
-MatchResult "0..*" -- "1 teamAway" Team 
+class Console {
+  - Console()
+
+  + {static} printMatchResults(matchResults: MatchResult[]): void
+  + {static} printMatchResult(team: Team): void
+  + {static} printTable(teams: Team[]): void
+}
+
+MatchResult "0..*" -- "homeTeam 1" Team
+MatchResult "0..*" -- "1 awayTeam" Team 
 
 @enduml
