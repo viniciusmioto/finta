@@ -2,41 +2,83 @@
 
 unsigned long int MatchResult::nextId{0};
 
-MatchResult::MatchResult(Team* team1, Team* team2, uint8_t score1,
-                         uint8_t score2)
-    : id{nextId}, team1{team1}, team2{team2}, score1{score1}, score2{score2} {
+MatchResult::MatchResult(Team* homeTeam, Team* awayTeam,
+                         unsigned short int homeTeamScore,
+                         unsigned short int awayTeamScore)
+    : id{nextId},
+      homeTeam{homeTeam},
+      awayTeam{awayTeam},
+      homeTeamScore{homeTeamScore},
+      awayTeamScore{awayTeamScore} {
     nextId++;
 
     // Add this match result to both teams' lists
-    if (team1) {
-        team1->addMatchResult(this);
+    if (homeTeam) {
+        homeTeam->addMatchResult(this);
     }
-    if (team2) {
-        team2->addMatchResult(this);
+    if (awayTeam) {
+        awayTeam->addMatchResult(this);
     }
+
+    // Add points to the teams
+    // Home team won
+    if (homeTeamScore > awayTeamScore) {
+        homeTeam->addPoints(3);
+    }
+    // Away team won
+    else if (homeTeamScore < awayTeamScore) {
+        awayTeam->addPoints(3);
+    }
+    // Draw
+    else {
+        homeTeam->addPoints(1);
+        awayTeam->addPoints(1);
+    }
+
+    // Add wins, draws and losses to the teams
+    // Home team won
+    if (homeTeamScore > awayTeamScore) {
+        homeTeam->addWins(1);
+        awayTeam->addLosses(1);
+    }
+    // Away team won
+    else if (homeTeamScore < awayTeamScore) {
+        homeTeam->addLosses(1);
+        awayTeam->addWins(1);
+    }
+    // Draw
+    else {
+        homeTeam->addDraws(1);
+        awayTeam->addDraws(1);
+    }
+
+    // Add goals to the teams
+    homeTeam->addGoals(homeTeamScore);
+    awayTeam->addGoals(awayTeamScore);
 }
 
 unsigned int MatchResult::getId() { return id; }
 
-Team* MatchResult::getTeam1() { return team1; }
+Team* MatchResult::getHomeTeam() { return homeTeam; }
 
-Team* MatchResult::getTeam2() { return team2; }
+Team* MatchResult::getAwayTeam() { return awayTeam; }
 
-uint8_t MatchResult::getScore1() { return score1; }
+unsigned short int MatchResult::getHomeTeamScore() { return homeTeamScore; }
 
-uint8_t MatchResult::getScore2() { return score2; }
+unsigned short int MatchResult::getAwayTeamScore() { return awayTeamScore; }
 
-void MatchResult::setMatchResult(Team* team1, Team* team2, uint8_t score1,
-                                 uint8_t score2) {
-    this->team1 = team1;
-    this->team2 = team2;
-    this->score1 = score1;
-    this->score2 = score2;
+void MatchResult::setMatchResult(Team* homeTeam, Team* awayTeam,
+                                 unsigned short int homeTeamScore,
+                                 unsigned short int awayTeamScore) {
+    this->homeTeam = homeTeam;
+    this->awayTeam = awayTeam;
+    this->homeTeamScore = homeTeamScore;
+    this->awayTeamScore = awayTeamScore;
 }
 
 std::string MatchResult::getMatchResult() {
-    return this->getTeam1()->getName() + " " +
-           std::to_string(this->getScore1()) + " x " +
-           std::to_string(this->getScore2()) + " " +
-           this->getTeam2()->getName();
+    return this->getHomeTeam()->getName() + " " +
+           std::to_string(this->getHomeTeamScore()) + " x " +
+           std::to_string(this->getAwayTeamScore()) + " " +
+           this->getAwayTeam()->getName();
 }
