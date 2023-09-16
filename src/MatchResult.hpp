@@ -4,6 +4,7 @@
 #include <string>
 #include <cstdint>
 #include "Team.hpp"
+#include "Colors.hpp"
 
 class MatchResult {
    public:

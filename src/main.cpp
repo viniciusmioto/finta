@@ -1,13 +1,12 @@
 #include <iostream>
-#include "Team.hpp"
-#include "MatchResult.hpp"
+#include "Console.hpp"
 
 int main() {
     // Create teams
-    Team team1{"Chelsea"};
-    Team team2{"Arsenal"};
-    Team team3{"Tottenham"};
-    Team team4{"Liverpool"};
+    Team team1{"Athletico Paranaense"};
+    Team team2{"Botafogo"};
+    Team team3{"Corinthians"};
+    Team team4{"Grêmio"};
 
     // Create match results (team1)
     MatchResult matchResult{&team1, &team2, 2, 1};
@@ -30,30 +29,11 @@ int main() {
     MatchResult matchResult18{&team4, &team3, 1, 0};
 
 
-    // Print all match results of team1
-    std::cout << "Match results of " << team1.getName() << ":\n";
-    std::list<MatchResult*>& matchResultsList = team1.getMatchResults();    
-    std::list<MatchResult*>::iterator it;
-
-    for (it = matchResultsList.begin(); it != matchResultsList.end(); it++) {
-        std::cout << (*it)->getMatchResult() << "\n";
-    }
-
-    // Print all match results of team2
-    std::cout << "\nMatch results of " << team2.getName() << ":\n";
-    matchResultsList = team2.getMatchResults();
-
-    for (it = matchResultsList.begin(); it != matchResultsList.end(); it++) {
-        std::cout << (*it)->getMatchResult() << "\n";
-    }
-
-    // Print all match results of team3
-    std::cout << "\nMatch results of " << team3.getName() << ":\n";
-    matchResultsList = team3.getMatchResults();
-
-    for (it = matchResultsList.begin(); it != matchResultsList.end(); it++) {
-        std::cout << (*it)->getMatchResult() << "\n";
-    }
+    // print match results
+    Console::printMatchResults(team1);
+    Console::printMatchResults(team2);
+    Console::printMatchResults(team3);
+    Console::printMatchResults(team4);
 
     return 0;
 }

@@ -1,6 +1,6 @@
 #include "Team.hpp"
 
-Team::Team(std::string name): name{name} {}
+Team::Team(std::string name) : name{name} {}
 
 std::string Team::getName() { return this->name; }
 
