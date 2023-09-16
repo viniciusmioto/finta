@@ -10,26 +10,26 @@ bool Console::compareTeamsByPoints(Team* homeTeam, Team* awayTeam) {
 }
 
 void Console::printMatchResults(Team& team) {
-    std::cout << BACKGROUND << "Match results of " << team.getName() << ":"
-              << RESET << std::endl;
+    std::cout << background_text << "Match results of " << team.getName() << ":"
+              << reset_text << std::endl;
 
-    std::list<MatchResult*>& matchResultsList = team.getMatchResults();
-    std::list<MatchResult*>::iterator it;
+    const std::list<MatchResult*>& matchResultsList = team.getMatchResults();
+    std::list<MatchResult*>::const_iterator it;
 
     for (it = matchResultsList.begin(); it != matchResultsList.end(); it++) {
         // check if it is the homeTeam, so underlines the name
         if ((*it)->getHomeTeam() == &team) {
             // check if the homeTeam won
             if ((*it)->getHomeTeamScore() > (*it)->getAwayTeamScore())
-                std::cout << GREEN_BACKGROUND << " W " << RESET << " ";
+                std::cout << green_bg_text << " W " << reset_text << " ";
             // check if the homeTeam lost
             else if ((*it)->getHomeTeamScore() < (*it)->getAwayTeamScore())
-                std::cout << RED_BACKGROUND << " L " << RESET << " ";
+                std::cout << red_bg_text << " L " << reset_text << " ";
             // check if the homeTeam draw
             else
-                std::cout << BACKGROUND << " D " << RESET << " ";
+                std::cout << background_text << " D " << reset_text << " ";
 
-            std::cout << UNDERLINE + (*it)->getHomeTeam()->getName() + RESET
+            std::cout << underline_text + (*it)->getHomeTeam()->getName() + reset_text
                       << " " << (*it)->getHomeTeamScore() << " x "
                       << (*it)->getAwayTeamScore() << " "
                       << (*it)->getAwayTeam()->getName() << std::endl;
@@ -39,18 +39,18 @@ void Console::printMatchResults(Team& team) {
         else if ((*it)->getAwayTeam() == &team) {
             // check if the awayTeam won
             if ((*it)->getAwayTeamScore() > (*it)->getHomeTeamScore())
-                std::cout << GREEN_BACKGROUND << " W " << RESET << " ";
+                std::cout << green_bg_text << " W " << reset_text << " ";
             // check if the awayTeam lost
             else if ((*it)->getAwayTeamScore() < (*it)->getHomeTeamScore())
-                std::cout << RED_BACKGROUND << " L " << RESET << " ";
+                std::cout << red_bg_text << " L " << reset_text << " ";
             // check if the awayTeam draw
             else
-                std::cout << BACKGROUND << " D " << RESET << " ";
+                std::cout << background_text << " D " << reset_text << " ";
 
             std::cout << (*it)->getHomeTeam()->getName() << " "
                       << (*it)->getHomeTeamScore() << " x "
                       << (*it)->getAwayTeamScore() << " "
-                      << UNDERLINE + (*it)->getAwayTeam()->getName() << RESET
+                      << underline_text + (*it)->getAwayTeam()->getName() << reset_text
                       << std::endl;
         }
     }
@@ -58,7 +58,7 @@ void Console::printMatchResults(Team& team) {
 }
 
 void Console::printMatchResults(std::list<MatchResult*>& matchResults) {
-    std::cout << BACKGROUND << "Match results:" << RESET << std::endl;
+    std::cout << background_text << "Match results:" << reset_text << std::endl;
     std::list<MatchResult*>::iterator it;
 
     for (it = matchResults.begin(); it != matchResults.end(); it++) {
@@ -87,12 +87,12 @@ void Console::printTable(std::list<Team*>& teams) {
     unsigned short int position = 1;
 
     // Print the table header
-    std::cout << BACKGROUND << std::left << std::setw(positionWidth) << "Pos"
+    std::cout << background_text << std::left << std::setw(positionWidth) << "Pos"
               << " | " << std::setw(nameWidth) << "Team"
               << " | " << std::setw(pointsWidth) << "Pts"
               << std::setw(winsWidth) << "W" << std::setw(drawsWidth) << "D"
               << std::setw(lossesWidth) << "L" << std::setw(goalsWidth) << "G"
-              << RESET << std::endl;
+              << reset_text << std::endl;
 
     // Print the table rows
     for (it = teams.begin(); it != teams.end(); it++) {

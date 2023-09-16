@@ -4,7 +4,6 @@
 #include <string>
 #include <cstdint>
 #include "Team.hpp"
-#include "Colors.hpp"
 
 class MatchResult {
    public:
@@ -12,18 +11,18 @@ class MatchResult {
                 unsigned short int awayTeamScore);
 
     // Getter methods
-    unsigned int getId();
-    Team* getHomeTeam();
-    Team* getAwayTeam();
-    unsigned short int getHomeTeamScore();
-    unsigned short int getAwayTeamScore();
+    unsigned int getId() const;
+    Team* getHomeTeam() const;
+    Team* getAwayTeam() const;
+    unsigned short int getHomeTeamScore() const;
+    unsigned short int getAwayTeamScore() const;
 
     // Setter method
-    void setMatchResult(Team* homeTeam, Team* awayTeam, unsigned short int homeTeamScore,
-                        unsigned short int awayTeamScore);
+    void setMatchResult(Team* homeTeam, Team* awayTeam, const unsigned short int homeTeamScore,
+                        const unsigned short int awayTeamScore);
 
     // Method to get the match result as a string
-    std::string getMatchResult();
+    std::string getMatchResult() const;
 
    private:
     static unsigned long int nextId;

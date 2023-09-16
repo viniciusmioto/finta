@@ -57,26 +57,26 @@ MatchResult::MatchResult(Team* homeTeam, Team* awayTeam,
     awayTeam->addGoals(awayTeamScore);
 }
 
-unsigned int MatchResult::getId() { return id; }
+unsigned int MatchResult::getId() const { return id; }
 
-Team* MatchResult::getHomeTeam() { return homeTeam; }
+Team* MatchResult::getHomeTeam() const { return homeTeam; }
 
-Team* MatchResult::getAwayTeam() { return awayTeam; }
+Team* MatchResult::getAwayTeam() const { return awayTeam; }
 
-unsigned short int MatchResult::getHomeTeamScore() { return homeTeamScore; }
+unsigned short int MatchResult::getHomeTeamScore() const { return homeTeamScore; }
 
-unsigned short int MatchResult::getAwayTeamScore() { return awayTeamScore; }
+unsigned short int MatchResult::getAwayTeamScore() const { return awayTeamScore; }
 
 void MatchResult::setMatchResult(Team* homeTeam, Team* awayTeam,
-                                 unsigned short int homeTeamScore,
-                                 unsigned short int awayTeamScore) {
+                                 const unsigned short int homeTeamScore,
+                                 const unsigned short int awayTeamScore) {
     this->homeTeam = homeTeam;
     this->awayTeam = awayTeam;
     this->homeTeamScore = homeTeamScore;
     this->awayTeamScore = awayTeamScore;
 }
 
-std::string MatchResult::getMatchResult() {
+std::string MatchResult::getMatchResult() const {
     return this->getHomeTeam()->getName() + " " +
            std::to_string(this->getHomeTeamScore()) + " x " +
            std::to_string(this->getAwayTeamScore()) + " " +

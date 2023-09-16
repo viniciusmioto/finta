@@ -10,26 +10,26 @@ class Team {
    public:
     Team(std::string name);
     
-    std::string getName();
-    void setName(std::string name);
+    std::string getName() const;
+    void setName(const std::string& name);
 
     void addMatchResult(MatchResult* matchResult);
-    std::list<MatchResult*>& getMatchResults();
+    const std::list<MatchResult*>& getMatchResults() const;
 
-    unsigned short int getPoints();
-    void addPoints(unsigned short int points);
+    unsigned short int getPoints() const;
+    void addPoints(const unsigned short int points);
 
-    unsigned short int getWins();
-    void addWins(unsigned short int wins);
+    unsigned short int getWins() const;
+    void addWins(const unsigned short int wins);
 
-    unsigned short int getDraws();
-    void addDraws(unsigned short int draws);
+    unsigned short int getDraws() const;
+    void addDraws(const unsigned short int draws);
 
-    unsigned short int getLosses();
-    void addLosses(unsigned short int losses);
+    unsigned short int getLosses() const;
+    void addLosses(const unsigned short int losses);
     
-    unsigned short int getGoals();
-    void addGoals(unsigned short int goals);
+    unsigned short int getGoals() const;
+    void addGoals(const unsigned short int goals);
 
    private:
     std::string name;
