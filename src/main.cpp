@@ -1,6 +1,11 @@
 #include <iostream>
-#include "Console.hpp"
 #include <algorithm>
+#include "Console.hpp"
+#include <fstream>
+#include "json.hpp"
+
+using json = nlohmann::json;
+
 
 int main() {
     // Create teams
@@ -45,6 +50,38 @@ int main() {
     Console::printMatchResults(homeTeam);
 
     Console::printTable(teams);
+
+    std::cout << "---- JSON ----" << std::endl; 
+
+    // Create an input file stream and open the JSON file
+    std::ifstream jsonFile("../data/Brasileirao2022.json");
+
+    if (!jsonFile.is_open()) {
+        std::cerr << "Failed to open the JSON file." << std::endl;
+        return 1;
+    }
+
+    try {
+        // Parse the JSON data from the file
+        json j;
+        jsonFile >> j;
+
+        // Access the first element of the "1" array
+        json match = j["1"][0];
+
+        // Extract and print the "home" and "away" club names
+        std::string homeClub = match["clubs"]["home"];
+        std::string awayClub = match["clubs"]["away"];
+
+        std::cout << "Home Club: " << homeClub << std::endl;
+        std::cout << "Away Club: " << awayClub << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "Error parsing JSON: " << e.what() << std::endl;
+    }
+
+    // Close the file
+    jsonFile.close();
+
 
     return 0;
 }

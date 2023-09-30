@@ -6,8 +6,8 @@ OBJECTS=main.o MatchResult.o Team.o Console.o
 
 all: $(PROGRAM)
 
-$(PROGRAM): $(OBJECTS)
-	$(CC) -o $(PROGRAM) $(PARAMS) $(OBJECTS)
+$(PROGRAM): $(OBJECTS) json.hpp
+	$(CC) -o $(PROGRAM) json.hpp $(PARAMS) $(OBJECTS)
 
 MatchResult.o: MatchResult.hpp MatchResult.cpp
 	$(CC) -c $(PARAMS) -c MatchResult.cpp
