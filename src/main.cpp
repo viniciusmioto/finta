@@ -1,8 +1,9 @@
 #include <iostream>
 #include <algorithm>
-#include "Console.hpp"
 #include <fstream>
 #include "json.hpp"
+
+#include "Console.hpp"
 
 using json = nlohmann::json;
 

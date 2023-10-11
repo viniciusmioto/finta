@@ -4,16 +4,15 @@ CC=g++
 PROGRAM=finta
 OBJECTS=main.o MatchResult.o Team.o Console.o
 
+.PHONY: clean purge all
+
 all: $(PROGRAM)
 
-$(PROGRAM): $(OBJECTS) json.hpp
-	$(CC) -o $(PROGRAM) json.hpp $(PARAMS) $(OBJECTS)
-
-MatchResult.o: MatchResult.hpp MatchResult.cpp
-	$(CC) -c $(PARAMS) -c MatchResult.cpp
+$(PROGRAM): $(OBJECTS)
+	$(CC) $(CFLAGS) -o  $@ $^
 
 clean:
-	rm -f *.o *.gch $(nomePrograma)
+	@rm -f *.o
 
-purge: clean
-	rm -f $(PROGRAM)
+purge:   
+	@rm -f $(PROGRAM) *.o
