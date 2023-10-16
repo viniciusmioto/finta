@@ -33,3 +33,6 @@
 finta
 
 .vscode
+
+# tests
+test*
