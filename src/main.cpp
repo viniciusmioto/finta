@@ -1,88 +1,70 @@
 #include <iostream>
 #include <algorithm>
 #include <fstream>
-#include "json.hpp"
 
 #include "Console.hpp"
-
-using json = nlohmann::json;
-
+#include "Team.hpp"
+#include "Person.hpp"
+#include "Player.hpp"
 
 int main() {
     // Create teams
-    Team homeTeam{"A. Paranaense"};
-    Team awayTeam{"Botafogo"};
-    Team team3{"Corinthians"};
-    Team team4{"Gremio"};
+    Team cap{"A. Paranaense"};
 
-    std::list<Team*> teams{&homeTeam, &awayTeam, &team3, &team4};
+    // Create players
+    Player player1{"Santos", "GK", 1};
+    Player player2{"Jonathan", "RB", 2};
+    Player player3{"Thiago Heleno", "CB", 4};
+    Player player4{"Léo Pereira", "CB", 28};
+    Player player5{"Márcio Azevedo", "LB", 6};
+    Player player6{"Wellington", "CM", 5};
+    Player player7{"Bruno Guimarães", "CM", 39};
+    Player player8{"Léo Cittadini", "CM", 18};
+    Player player9{"Rony", "RW", 7};
+    Player player10{"Marco Ruben", "ST", 9};
+    Player player11{"Nikão", "LW", 11};
 
-    // Create match results (homeTeam)
-    MatchResult matchResult{&homeTeam, &awayTeam, 2, 1};
-    MatchResult matchResult2{&homeTeam, &team3, 3, 0};
-    MatchResult matchResult3{&homeTeam, &team4, 1, 2};
 
-    // Create more match results (awayTeam)
-    MatchResult matchResult6{&awayTeam, &homeTeam, 1, 3};
-    MatchResult matchResult7{&awayTeam, &team3, 1, 1};
-    MatchResult matchResult8{&awayTeam, &team4, 2, 1};
+    // Create staff
+    Person coach{"Tiago Nunes"};
+    Person assistantCoach{"Evandro Fornari"};
 
-    // Create more match results (team3)
-    MatchResult matchResult11{&team3, &homeTeam, 0, 1};
-    MatchResult matchResult12{&team3, &awayTeam, 2, 2};
-    MatchResult matchResult13{&team3, &team4, 0, 0};
+    // Add players to team
+    cap.addPlayer(&player1);
+    cap.addPlayer(&player2);
+    cap.addPlayer(&player3);
+    cap.addPlayer(&player4);
+    cap.addPlayer(&player5);
+    cap.addPlayer(&player6);
+    cap.addPlayer(&player7);
+    cap.addPlayer(&player8);
+    cap.addPlayer(&player9);
+    cap.addPlayer(&player10);
+    cap.addPlayer(&player11);
 
-    // Create more match results (team4)
-    MatchResult matchResult16{&team4, &homeTeam, 2, 2};
-    MatchResult matchResult17{&team4, &awayTeam, 1, 2};
-    MatchResult matchResult18{&team4, &team3, 1, 0};
+    // Add staff to team
+    cap.addStaff(&coach);
+    cap.addStaff(&assistantCoach);
 
-    // Create a list of all match results
-    std::list<MatchResult*> matchResults{&matchResult, &matchResult2, &matchResult3,
-                                         &matchResult6, &matchResult7, &matchResult8,
-                                         &matchResult11, &matchResult12, &matchResult13,
-                                         &matchResult16, &matchResult17, &matchResult18};
+    // create iterator to show players
+    auto it = cap.getPlayers().begin();
 
+    // Show players
+    std::cout << "Jogadores do " << cap.getName() << ":" << std::endl;
+    for (; it != cap.getPlayers().end(); ++it) {
+        std::cout << (*it)->getName() << " - " << (*it)->getPosition()
+                  << " - Nº " << (int)(*it)->getJerseyNumber() << std::endl;
+    }
+
+    // create iterator to show staff
+    auto it2 = cap.getStaff().begin();
+
+    // Show staff
+    std::cout << "Comissão técnica do " << cap.getName() << ":" << std::endl;
+    for (; it2 != cap.getStaff().end(); ++it2) {
+        std::cout << (*it2)->getName() << std::endl;
+    }
     
-    // print all match results
-    Console::printMatchResults(matchResults);
-
-    // print match results of homeTeam
-    Console::printMatchResults(homeTeam);
-
-    Console::printTable(teams);
-
-    std::cout << "---- JSON ----" << std::endl; 
-
-    // Create an input file stream and open the JSON file
-    std::ifstream jsonFile("../data/Brasileirao2022.json");
-
-    if (!jsonFile.is_open()) {
-        std::cerr << "Failed to open the JSON file." << std::endl;
-        return 1;
-    }
-
-    try {
-        // Parse the JSON data from the file
-        json j;
-        jsonFile >> j;
-
-        // Access the first element of the "1" array
-        json match = j["1"][0];
-
-        // Extract and print the "home" and "away" club names
-        std::string homeClub = match["clubs"]["home"];
-        std::string awayClub = match["clubs"]["away"];
-
-        std::cout << "Home Club: " << homeClub << std::endl;
-        std::cout << "Away Club: " << awayClub << std::endl;
-    } catch (const std::exception& e) {
-        std::cerr << "Error parsing JSON: " << e.what() << std::endl;
-    }
-
-    // Close the file
-    jsonFile.close();
-
 
     return 0;
 }

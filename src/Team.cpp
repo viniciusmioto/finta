@@ -36,3 +36,23 @@ unsigned short int Team::getGoals() const { return this->goals; }
 void Team::addGoals(const unsigned short int goals) { this->goals += goals; }
 
 const std::list<MatchResult*>& Team::getMatchResults() const { return matchResults; }
+
+void Team::addStaff(Person* person) {
+    // Check if the person pointer is not null
+    if (person) {
+        // Add the person to the team's list of staff
+        staff.push_back(person);
+    }
+}
+
+const std::list<Person*>& Team::getStaff() const { return staff; }
+
+void Team::addPlayer(Player* player) {
+    // Check if the player pointer is not null
+    if (player) {
+        // Add the player to the team's list of players
+        players.push_back(player);
+    }
+}
+
+const std::list<Player*>& Team::getPlayers() const { return players; }

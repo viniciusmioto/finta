@@ -1,0 +1,17 @@
+#ifndef PERSON_HPP
+#define PERSON_HPP
+
+#include <string>
+
+class Person {
+   public:
+    Person(std::string name);
+
+    std::string getName() const;
+    void setName(const std::string& name);
+
+   private:
+    std::string name;
+};
+
+#endif  // PERSON_HPP

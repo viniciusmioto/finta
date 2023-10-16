@@ -4,6 +4,9 @@
 #include <list>
 #include <string>
 
+#include "Person.hpp"
+#include "Player.hpp"
+
 class MatchResult; // Forward declaration
 
 class Team {
@@ -31,6 +34,12 @@ class Team {
     unsigned short int getGoals() const;
     void addGoals(const unsigned short int goals);
 
+    void addStaff(Person* person);
+    const std::list<Person*>& getStaff() const;
+
+    void addPlayer(Player* player);
+    const std::list<Player*>& getPlayers() const;
+
    private:
     std::string name;
     unsigned short int points;
@@ -39,6 +48,8 @@ class Team {
     unsigned short int losses;
     unsigned short int goals;
     std::list<MatchResult*> matchResults;
+    std::list<Person*> staff;
+    std::list<Player*> players;
 };
 
 #endif  // TEAM_HPP

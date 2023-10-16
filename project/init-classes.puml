@@ -21,12 +21,39 @@ class Team {
   - name: string
   - points: unsigned short int
   - matchResults: MatchResult[]
+  - staff: Person[]
+  - players: Player[]
   
   + Team(name: string)
   + getName(): string
   + setName(name: string): void
   + getPoints(): unsigned short int
   + addPoints(points: unsigned short int): void
+  + getMatchResults(): MatchResult[]
+  + addMatchResult(matchResult: MatchResult): void
+  + getStaff(): Person[]
+  + addStaff(person: Person): void
+  + getPlayers(): Player[]
+  + addPlayer(player: Player): void
+}
+
+class Person {
+  - name: string
+
+  + Person(name: string)
+  + getName(): string
+  + setName(name: string): void
+}
+
+class Player {
+  - number: unsigned short int
+  - position: string
+
+  + Player(name: string, number: unsigned short int, position: string)
+  + getJerseyNumber(): unsigned short int
+  + setJerseyNumber(number: unsigned short int): void
+  + getPosition(): string
+  + setPosition(position: string): void
 }
 
 class Console {
@@ -39,5 +66,9 @@ class Console {
 
 MatchResult "0..*" -- "homeTeam 1" Team
 MatchResult "0..*" -- "1 awayTeam" Team 
+MatchResult -- Console
+Person <|-- Player
+Team "0..*" -- "staff 1..*" Person
+Team "0..*" -- "players 1..*" Player
 
 @enduml
