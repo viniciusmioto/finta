@@ -15,26 +15,29 @@ int main() {
         boost::property_tree::read_json("../data/Brasileirao2022.json", root);
 
         std::string userChoice;
-        int matchDaySelection;
+        int selectedMatchDay;
 
         // Prompt the user for input to choose the child node
         std::cout << "Enter the match day: ";
         std::cin >> userChoice;
 
         while (std::stoi(userChoice) < 1 || std::stoi(userChoice) > 38) {
-            std::cout << yellow_text << "Invalid input. Please enter a number between 1 and 38: " << reset_text;
+            std::cout
+                << yellow_text
+                << "Invalid input. Please enter a number between 1 and 38: "
+                << reset_text;
             std::cin >> userChoice;
         }
 
         try {
-            matchDaySelection = std::stoi(userChoice);
+            selectedMatchDay = std::stoi(userChoice);
         } catch (const std::invalid_argument& e) {
             std::cerr << "Invalid input. Please enter an integer." << std::endl;
             return 1;
         }
 
         for (const auto& match :
-             root.get_child(std::to_string(matchDaySelection))) {
+             root.get_child(std::to_string(selectedMatchDay))) {
             std::string homeTeam = match.second.get<std::string>("clubs.home");
             int homeGoals = match.second.get<int>("goals.home");
             std::string awayTeam = match.second.get<std::string>("clubs.away");
@@ -44,6 +47,29 @@ int main() {
             std::cout << homeTeam << " " << homeGoals << " x " << awayGoals
                       << " " << awayTeam << std::endl;
         }
+
+        std::cout << std::endl;
+
+        std::string selectedTeam;
+        std::cout << "Enter the team name: ";
+        std::cin >> selectedTeam;
+
+        for (int matchDay = 1; matchDay <= 38; ++matchDay) {
+            for (const auto& match : root.get_child(std::to_string(matchDay))) {
+                std::string homeTeam = match.second.get<std::string>("clubs.home");
+                int homeGoals = match.second.get<int>("goals.home");
+                std::string awayTeam = match.second.get<std::string>("clubs.away");
+                int awayGoals = match.second.get<int>("goals.away");
+
+                if (homeTeam == selectedTeam || awayTeam == selectedTeam) {
+                    // Print match result
+                    std::cout << "Match Day " << matchDay << ": ";
+                    std::cout << homeTeam << " " << homeGoals << " x " << awayGoals
+                              << " " << awayTeam << std::endl;
+                }
+            }
+        }
+
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
     }
