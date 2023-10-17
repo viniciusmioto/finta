@@ -11,6 +11,7 @@ const std::string underline_text{"\033[4m"};
 const std::string background_text{"\033[7m"};
 const std::string green_bg_text{"\033[42m"};
 const std::string red_bg_text{"\033[45m"};
+const std::string yellow_text{"\033[33m"};
 
 class Console {
    public:
