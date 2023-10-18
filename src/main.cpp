@@ -10,49 +10,38 @@
 #include "Team.hpp"
 
 int main() {
+    Team amg{"América-MG"};
+    Team cap{"Athletico-PR"};
+    Team acg{"Atlético-GO"};
+    Team cam{"Atlético-MG"};
+    Team afc{"Avaí"};
+    Team bfr{"Botafogo"};
+    Team rbb{"Bragantino"};
+    Team csc{"Ceará SC"};
+    Team sccp{"Corinthians"};
+    Team cfc{"Coritiba"};
+    Team cec{"Cuiabá"};
+    Team crf{"Flamengo"};
+    Team ffc{"Fluminense"};
+    Team fec{"Fortaleza"};
+    Team gec{"Goiás"};
+    Team sci{"Internacional"};
+    Team ecj{"Juventude"};
+    Team sep{"Palmeiras"};
+    Team sfc{"Santos"};
+    Team spfc{"São Paulo"};
+
+    std::list<Team*> teams{
+        &amg, &cap, &acg, &cam, &afc, &bfr, &rbb, &csc, &sccp, &cfc,
+        &cec, &crf, &ffc, &fec, &gec, &sci, &ecj, &sep, &sfc,  &spfc,
+    };
+
+    std::list<MatchResult*> matchResults;
+
+    
     try {
         boost::property_tree::ptree root;
         boost::property_tree::read_json("../data/Brasileirao2022.json", root);
-
-        std::string userChoice;
-        int selectedMatchDay;
-
-        // Prompt the user for input to choose the child node
-        std::cout << "Enter the match day: ";
-        std::cin >> userChoice;
-
-        while (std::stoi(userChoice) < 1 || std::stoi(userChoice) > 38) {
-            std::cout
-                << yellow_text
-                << "Invalid input. Please enter a number between 1 and 38: "
-                << reset_text;
-            std::cin >> userChoice;
-        }
-
-        try {
-            selectedMatchDay = std::stoi(userChoice);
-        } catch (const std::invalid_argument& e) {
-            std::cerr << "Invalid input. Please enter an integer." << std::endl;
-            return 1;
-        }
-
-        for (const auto& match :
-             root.get_child(std::to_string(selectedMatchDay))) {
-            std::string homeTeam = match.second.get<std::string>("clubs.home");
-            int homeGoals = match.second.get<int>("goals.home");
-            std::string awayTeam = match.second.get<std::string>("clubs.away");
-            int awayGoals = match.second.get<int>("goals.away");
-
-            // Print match result
-            std::cout << homeTeam << " " << homeGoals << " x " << awayGoals
-                      << " " << awayTeam << std::endl;
-        }
-
-        std::cout << std::endl;
-
-        std::string selectedTeam;
-        std::cout << "Enter the team name: ";
-        std::cin >> selectedTeam;
 
         for (int matchDay = 1; matchDay <= 38; ++matchDay) {
             for (const auto& match : root.get_child(std::to_string(matchDay))) {
@@ -61,14 +50,32 @@ int main() {
                 std::string awayTeam = match.second.get<std::string>("clubs.away");
                 int awayGoals = match.second.get<int>("goals.away");
 
-                if (homeTeam == selectedTeam || awayTeam == selectedTeam) {
-                    // Print match result
-                    std::cout << "Match Day " << matchDay << ": ";
-                    std::cout << homeTeam << " " << homeGoals << " x " << awayGoals
-                              << " " << awayTeam << std::endl;
+                // Find the Team* pointers for home and away teams
+                Team* homeTeamPtr = nullptr;
+                Team* awayTeamPtr = nullptr;
+                for (Team* team : teams) {
+                    if (homeTeam == team->getName()) {
+                        homeTeamPtr = team;
+                    }
+                    if (awayTeam == team->getName()) {
+                        awayTeamPtr = team;
+                    }
+                }
+
+                if (homeTeamPtr && awayTeamPtr) {
+                    matchResults.push_back(new MatchResult(homeTeamPtr, awayTeamPtr, homeGoals, awayGoals));
                 }
             }
         }
+
+        // print all match results
+        Console::printMatchResults(matchResults);
+
+        // print all match results of cap
+        Console::printMatchResults(cap);
+
+        // show classification table
+        Console::printTable(teams);
 
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
