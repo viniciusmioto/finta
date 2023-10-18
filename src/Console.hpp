@@ -6,12 +6,14 @@
 #include "MatchResult.hpp"
 #include "Team.hpp"
 
-const std::string reset_text{"\033[0m"};
-const std::string underline_text{"\033[4m"};
-const std::string background_text{"\033[7m"};
-const std::string green_bg_text{"\033[42m"};
-const std::string red_bg_text{"\033[45m"};
-const std::string yellow_text{"\033[33m"};
+const std::string RESET_TEXT{"\033[0m"};
+const std::string UNDERLINE{"\033[4m"};
+const std::string WHITE_BG{"\033[7m"};
+const std::string YELLOW_TXT{"\033[33m"};
+const std::string GREEN_BG{"\033[42m"};
+const std::string RED_BG{"\033[45m"};
+const std::string BLUE_BG{"\033[46m"};
+const std::string ORANGE_BG{"\033[47m"};
 
 class Console {
    public:

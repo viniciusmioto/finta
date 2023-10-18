@@ -10,8 +10,8 @@ bool Console::compareTeamsByPoints(Team* homeTeam, Team* awayTeam) {
 }
 
 void Console::printMatchResults(Team& team) {
-    std::cout << background_text << "Match results of " << team.getName() << ":"
-              << reset_text << std::endl;
+    std::cout << WHITE_BG << "Match results of " << team.getName() << ":"
+              << RESET_TEXT << std::endl;
 
     const std::list<MatchResult*>& matchResultsList = team.getMatchResults();
     std::list<MatchResult*>::const_iterator it;
@@ -21,15 +21,16 @@ void Console::printMatchResults(Team& team) {
         if ((*it)->getHomeTeam() == &team) {
             // check if the homeTeam won
             if ((*it)->getHomeTeamScore() > (*it)->getAwayTeamScore())
-                std::cout << green_bg_text << " W " << reset_text << " ";
+                std::cout << GREEN_BG << " W " << RESET_TEXT << " ";
             // check if the homeTeam lost
             else if ((*it)->getHomeTeamScore() < (*it)->getAwayTeamScore())
-                std::cout << red_bg_text << " L " << reset_text << " ";
+                std::cout << RED_BG << " L " << RESET_TEXT << " ";
             // check if the homeTeam draw
             else
-                std::cout << background_text << " D " << reset_text << " ";
+                std::cout << WHITE_BG << " D " << RESET_TEXT << " ";
 
-            std::cout << underline_text + (*it)->getHomeTeam()->getName() + reset_text
+            std::cout << UNDERLINE + (*it)->getHomeTeam()->getName() +
+                             RESET_TEXT
                       << " " << (*it)->getHomeTeamScore() << " x "
                       << (*it)->getAwayTeamScore() << " "
                       << (*it)->getAwayTeam()->getName() << std::endl;
@@ -39,26 +40,26 @@ void Console::printMatchResults(Team& team) {
         else if ((*it)->getAwayTeam() == &team) {
             // check if the awayTeam won
             if ((*it)->getAwayTeamScore() > (*it)->getHomeTeamScore())
-                std::cout << green_bg_text << " W " << reset_text << " ";
+                std::cout << GREEN_BG << " W " << RESET_TEXT << " ";
             // check if the awayTeam lost
             else if ((*it)->getAwayTeamScore() < (*it)->getHomeTeamScore())
-                std::cout << red_bg_text << " L " << reset_text << " ";
+                std::cout << RED_BG << " L " << RESET_TEXT << " ";
             // check if the awayTeam draw
             else
-                std::cout << background_text << " D " << reset_text << " ";
+                std::cout << WHITE_BG << " D " << RESET_TEXT << " ";
 
             std::cout << (*it)->getHomeTeam()->getName() << " "
                       << (*it)->getHomeTeamScore() << " x "
                       << (*it)->getAwayTeamScore() << " "
-                      << underline_text + (*it)->getAwayTeam()->getName() << reset_text
-                      << std::endl;
+                      << UNDERLINE + (*it)->getAwayTeam()->getName()
+                      << RESET_TEXT << std::endl;
         }
     }
     std::cout << std::endl;
 }
 
 void Console::printMatchResults(std::list<MatchResult*>& matchResults) {
-    std::cout << background_text << "Match results:" << reset_text << std::endl;
+    std::cout << WHITE_BG << "Match results:" << RESET_TEXT << std::endl;
     std::list<MatchResult*>::iterator it;
 
     for (it = matchResults.begin(); it != matchResults.end(); it++) {
@@ -75,36 +76,59 @@ void Console::printTable(std::list<Team*>& teams) {
     teams.sort(compareTeamsByPoints);
 
     // Define the column widths
-    const int positionWidth = 2;
-    const int nameWidth = 20;
-    const int pointsWidth = 6;
-    const int winsWidth = 4;
-    const int drawsWidth = 4;
-    const int lossesWidth = 4;
-    const int goalsWidth = 4;
+    const int positionWidth = 3;
+    const int nameWidth = 15;
+    const int pointsWidth = 3;
+    const int winsWidth = 3;
+    const int drawsWidth = 3;
+    const int lossesWidth = 3;
+    const int goalsWidth = 3;
 
     std::list<Team*>::iterator it;
     unsigned short int position = 1;
 
     // Print the table header
-    std::cout << background_text << std::left << std::setw(positionWidth) << "Pos"
-              << " | " << std::setw(nameWidth) << "Team"
+    std::cout << WHITE_BG << std::internal << std::setw(positionWidth) << " Pos"
               << " | " << std::setw(pointsWidth) << "Pts"
-              << std::setw(winsWidth) << "W" << std::setw(drawsWidth) << "D"
-              << std::setw(lossesWidth) << "L" << std::setw(goalsWidth) << "G"
-              << reset_text << std::endl;
+              << " | " << std::setw(winsWidth) << "W"
+              << " | " << std::setw(drawsWidth) << "D"
+              << " | " << std::setw(lossesWidth) << "L"
+              << " | " << std::setw(goalsWidth) << "G" << std::left << " | "
+              << std::setw(nameWidth) << "Team" << RESET_TEXT << std::endl;
 
     // Print the table rows
     for (it = teams.begin(); it != teams.end(); it++) {
-        std::cout << std::left << std::setw(positionWidth) << position << "º | "
-                  << std::setw(nameWidth) << (*it)->getName() << " | "
-                  << std::setw(pointsWidth) << (*it)->getPoints()
-                  << std::setw(winsWidth) << (*it)->getWins()
-                  << std::setw(drawsWidth) << (*it)->getDraws()
-                  << std::setw(lossesWidth) << (*it)->getLosses()
-                  << std::setw(goalsWidth) << (*it)->getGoals() << std::endl;
+        std::string color = RESET_TEXT;
+
+        if (position <= 6)
+            color = BLUE_BG;
+        else if (position <= 8)
+            color = ORANGE_BG;
+        else if (position <= 14)
+            color = GREEN_BG;
+        else if (position >= 17)
+            color = RED_BG;
+
+        std::cout << std::internal << color << std::setw(positionWidth)
+                  << position << "º " << RESET_TEXT << "| "
+                  << std::setw(pointsWidth) << (*it)->getPoints() << " | "
+                  << std::setw(winsWidth) << (*it)->getWins() << " | "
+                  << std::setw(drawsWidth) << (*it)->getDraws() << " | "
+                  << std::setw(lossesWidth) << (*it)->getLosses() << " | "
+                  << std::setw(goalsWidth) << (*it)->getGoals() << " | "
+                  << std::left << std::setw(nameWidth) << (*it)->getName()
+                  << std::endl;
         position++;
     }
+
+    std::cout << std::endl;
+
+
+    // Print the table legend
+    std::cout << BLUE_BG << "  " << RESET_TEXT << " Libertadores group stage" << std::endl;
+    std::cout << ORANGE_BG << "  " << RESET_TEXT << " Libertadores qualifiers" << std::endl;
+    std::cout << GREEN_BG << "  " << RESET_TEXT << " Sudamericana group stage" << std::endl;
+    std::cout << RED_BG << "  " << RESET_TEXT << " Relegation" << std::endl;
 
     std::cout << std::endl;
 }
