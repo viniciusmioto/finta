@@ -58,11 +58,11 @@ void Console::printMatchResults(Team& team) {
     std::cout << std::endl;
 }
 
-void Console::printMatchResults(std::list<MatchResult*>& matchResults) {
+void Console::printMatchResults(const std::list<MatchResult*>& matchResults) {
     std::cout << WHITE_BG << "Match results:" << RESET_TEXT << std::endl;
     std::list<MatchResult*>::iterator it;
 
-    for (it = matchResults.begin(); it != matchResults.end(); it++) {
+    for (auto it = matchResults.begin(); it != matchResults.end(); it++) {
         std::cout << (*it)->getHomeTeam()->getName() << " "
                   << (*it)->getHomeTeamScore() << " x "
                   << (*it)->getAwayTeamScore() << " "

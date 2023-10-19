@@ -8,6 +8,7 @@
 #include "Console.hpp"
 #include "MatchResult.hpp"
 #include "Team.hpp"
+#include "League.hpp"
 
 int main() {
     Team amg{"América-MG"};
@@ -38,44 +39,54 @@ int main() {
 
     std::list<MatchResult*> matchResults;
 
-    
+    League brasileirao(teams, matchResults);
+
     try {
-        boost::property_tree::ptree root;
-        boost::property_tree::read_json("../data/Brasileirao2022.json", root);
+        brasileirao.fillMatchResults("../data/Brasileirao2022.json");
 
-        for (int matchDay = 1; matchDay <= 38; ++matchDay) {
-            for (const auto& match : root.get_child(std::to_string(matchDay))) {
-                std::string homeTeam = match.second.get<std::string>("clubs.home");
-                int homeGoals = match.second.get<int>("goals.home");
-                std::string awayTeam = match.second.get<std::string>("clubs.away");
-                int awayGoals = match.second.get<int>("goals.away");
+        std::cout << "Choose an option:" << std::endl;
+        std::cout << "1 - Show all match results" << std::endl;
+        std::cout << "2 - Show all match results of a team" << std::endl;
+        std::cout << "3 - Show classification table" << std::endl;
+        std::cout << "0 - Exit" << std::endl;
 
-                // Find the Team* pointers for home and away teams
-                Team* homeTeamPtr = nullptr;
-                Team* awayTeamPtr = nullptr;
-                for (Team* team : teams) {
-                    if (homeTeam == team->getName()) {
-                        homeTeamPtr = team;
+        int option;
+        std::cin >> option;
+        std::string teamName;
+
+        while (option != 0) {
+            switch (option) {
+                case 1:
+                    Console::printMatchResults(brasileirao.getMatchResults());
+                    break;
+                case 2:
+                    std::cout << "Choose a team:" << std::endl;
+                    for (Team* team : teams) {
+                        std::cout << team->getName() << std::endl;
                     }
-                    if (awayTeam == team->getName()) {
-                        awayTeamPtr = team;
+                    std::cin >> teamName;
+                    for (Team* team : teams) {
+                        if (teamName == team->getName()) {
+                            Console::printMatchResults(*team);
+                        }
                     }
-                }
-
-                if (homeTeamPtr && awayTeamPtr) {
-                    matchResults.push_back(new MatchResult(homeTeamPtr, awayTeamPtr, homeGoals, awayGoals));
-                }
+                    break;
+                case 3:
+                    Console::printTable(teams);
+                    break;
+                default:
+                    std::cout << "Invalid option" << std::endl;
+                    break;
             }
+
+            std::cout << "Choose an option:" << std::endl;
+            std::cout << "1 - Show all match results" << std::endl;
+            std::cout << "2 - Show all match results of a team" << std::endl;
+            std::cout << "3 - Show classification table" << std::endl;
+            std::cout << "0 - Exit" << std::endl;
+
+            std::cin >> option;
         }
-
-        // print all match results
-        Console::printMatchResults(matchResults);
-
-        // print all match results of cap
-        Console::printMatchResults(cap);
-
-        // show classification table
-        Console::printTable(teams);
 
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
