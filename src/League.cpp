@@ -27,10 +27,12 @@ Team* League::findOrCreateTeam(const std::string& teamName) {
     Team* newTeam = new Team(teamName);
     teams.push_back(newTeam);
 
+#ifdef DEBUG
     std::cout << "Created new team: " << teamName << std::endl;
+#endif
 
     return newTeam;
-} // accurate 
+}  // accurate
 
 void League::fillMatchResults(const std::string& filePath) {
     try {
@@ -53,6 +55,25 @@ void League::fillMatchResults(const std::string& filePath) {
                 // Add the match result
                 this->matchResults.push_back(new MatchResult(
                     homeTeamPtr, awayTeamPtr, homeGoals, awayGoals, matchDay));
+
+                // Print the goal scorers for this match
+                const boost::property_tree::ptree& homeGoalScorers = match.second.get_child("goalsPlayer.home");
+                const boost::property_tree::ptree& awayGoalScorers = match.second.get_child("goalsPlayer.away");
+
+                std::cout << "Matchday " << matchDay << " - " << homeTeam << " vs. " << awayTeam << std::endl;
+                std::cout << "Home Team Goal Scorers: ";
+                for (const auto& scorer : homeGoalScorers) {
+                    std::string playerName = scorer.second.get<std::string>("player");
+                    std::cout << playerName << " ";
+                }
+                std::cout << std::endl;
+
+                std::cout << "Away Team Goal Scorers: ";
+                for (const auto& scorer : awayGoalScorers) {
+                    std::string playerName = scorer.second.get<std::string>("player");
+                    std::cout << playerName << " ";
+                }
+                std::cout << std::endl;
             }
         }
     } catch (const std::exception& e) {

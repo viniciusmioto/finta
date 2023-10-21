@@ -69,6 +69,7 @@ class League {
   + getMatchResults(): MatchResult[]
   + addMatchResult(matchResult: MatchResult): void
   + addMatchResults(matchResults: MatchResult[]): void
+  + findOrCreateTeam(const std::string& teamName)
   + fillMatchResults(string: filePath): void
 }
 
