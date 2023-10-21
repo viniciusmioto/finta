@@ -8,10 +8,13 @@ FINTA is a Football Score Tracker and Analytics System developed in C++. It allo
 ## Features
 
 * Show standings of the league
+
 ![Standings](./img/table.png)
 
 * Show match results by round
+
 ![Match Results](./img/match.png)
 
 * Show match results of a specific team
+
 ![Team Results](./img/team.png)

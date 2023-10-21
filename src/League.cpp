@@ -15,6 +15,23 @@ void League::addMatchResults(std::list<MatchResult*> matchResults) {
     this->matchResults = matchResults;
 }
 
+Team* League::findOrCreateTeam(const std::string& teamName) {
+    // Search for the team in the existing list
+    for (Team* team : teams) {
+        if (teamName == team->getName()) {
+            return team;
+        }
+    }
+
+    // If the team is not found, create a new team and add it to the list
+    Team* newTeam = new Team(teamName);
+    teams.push_back(newTeam);
+
+    std::cout << "Created new team: " << teamName << std::endl;
+
+    return newTeam;
+} // accurate 
+
 void League::fillMatchResults(const std::string& filePath) {
     try {
         boost::property_tree::ptree data;
@@ -29,23 +46,13 @@ void League::fillMatchResults(const std::string& filePath) {
                     match.second.get<std::string>("clubs.away");
                 int awayGoals = match.second.get<int>("goals.away");
 
-                // Find the Team* pointers for home and away teams
-                Team* homeTeamPtr = nullptr;
-                Team* awayTeamPtr = nullptr;
-                for (Team* team : teams) {
-                    if (homeTeam == team->getName()) {
-                        homeTeamPtr = team;
-                    }
-                    if (awayTeam == team->getName()) {
-                        awayTeamPtr = team;
-                    }
-                }
+                // Find or create the Team* pointers for home and away teams
+                Team* homeTeamPtr = findOrCreateTeam(homeTeam);
+                Team* awayTeamPtr = findOrCreateTeam(awayTeam);
 
-                // If both teams were found, add the match result
-                if (homeTeamPtr && awayTeamPtr) {
-                    this->matchResults.push_back(new MatchResult(
-                        homeTeamPtr, awayTeamPtr, homeGoals, awayGoals, matchDay));
-                }
+                // Add the match result
+                this->matchResults.push_back(new MatchResult(
+                    homeTeamPtr, awayTeamPtr, homeGoals, awayGoals, matchDay));
             }
         }
     } catch (const std::exception& e) {

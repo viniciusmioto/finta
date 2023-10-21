@@ -6,31 +6,7 @@
 #include "Team.hpp"
 
 int main() {
-    Team amg{"América-MG"};
-    Team cap{"Athletico-PR"};
-    Team acg{"Atlético-GO"};
-    Team cam{"Atlético-MG"};
-    Team afc{"Avaí"};
-    Team bfr{"Botafogo"};
-    Team rbb{"Bragantino"};
-    Team csc{"Ceará SC"};
-    Team sccp{"Corinthians"};
-    Team cfc{"Coritiba"};
-    Team cec{"Cuiabá"};
-    Team crf{"Flamengo"};
-    Team ffc{"Fluminense"};
-    Team fec{"Fortaleza"};
-    Team gec{"Goiás"};
-    Team sci{"Internacional"};
-    Team ecj{"Juventude"};
-    Team sep{"Palmeiras"};
-    Team sfc{"Santos"};
-    Team spfc{"São Paulo"};
-
-    std::list<Team*> teams{
-        &amg, &cap, &acg, &cam, &afc, &bfr, &rbb, &csc, &sccp, &cfc,
-        &cec, &crf, &ffc, &fec, &gec, &sci, &ecj, &sep, &sfc,  &spfc,
-    };
+    std::list<Team*> teams;
 
     std::list<MatchResult*> matchResults;
 
