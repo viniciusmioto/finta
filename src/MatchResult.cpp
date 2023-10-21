@@ -4,13 +4,14 @@ unsigned long int MatchResult::nextId{0};
 
 MatchResult::MatchResult(Team* homeTeam, Team* awayTeam,
                          unsigned short int homeTeamScore,
-                         unsigned short int awayTeamScore)
+                         unsigned short int awayTeamScore, unsigned short matchDay)
     : id{nextId},
       homeTeam{homeTeam},
       awayTeam{awayTeam},
       homeTeamScore{homeTeamScore},
       awayTeamScore{awayTeamScore} {
     nextId++;
+    setMatchDay(matchDay);
 
     // Add this match result to both teams' lists
     if (homeTeam) {
@@ -63,9 +64,13 @@ Team* MatchResult::getHomeTeam() const { return homeTeam; }
 
 Team* MatchResult::getAwayTeam() const { return awayTeam; }
 
-unsigned short int MatchResult::getHomeTeamScore() const { return homeTeamScore; }
+unsigned short int MatchResult::getHomeTeamScore() const {
+    return homeTeamScore;
+}
 
-unsigned short int MatchResult::getAwayTeamScore() const { return awayTeamScore; }
+unsigned short int MatchResult::getAwayTeamScore() const {
+    return awayTeamScore;
+}
 
 void MatchResult::setMatchResult(Team* homeTeam, Team* awayTeam,
                                  const unsigned short int homeTeamScore,
@@ -81,4 +86,14 @@ std::string MatchResult::getMatchResult() const {
            std::to_string(this->getHomeTeamScore()) + " x " +
            std::to_string(this->getAwayTeamScore()) + " " +
            this->getAwayTeam()->getName();
+}
+
+unsigned short MatchResult::getMatchDay() const { return matchDay; }
+
+void MatchResult::setMatchDay(const unsigned short matchDay) {
+    if (matchDay < 1 || matchDay > 38) {
+        this->matchDay = 0;
+        return;
+    }
+    this->matchDay = matchDay;
 }

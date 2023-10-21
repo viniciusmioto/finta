@@ -41,9 +41,10 @@ void League::fillMatchResults(const std::string& filePath) {
                     }
                 }
 
+                // If both teams were found, add the match result
                 if (homeTeamPtr && awayTeamPtr) {
                     this->matchResults.push_back(new MatchResult(
-                        homeTeamPtr, awayTeamPtr, homeGoals, awayGoals));
+                        homeTeamPtr, awayTeamPtr, homeGoals, awayGoals, matchDay));
                 }
             }
         }

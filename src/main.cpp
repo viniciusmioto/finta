@@ -34,60 +34,69 @@ int main() {
 
     std::list<MatchResult*> matchResults;
 
-    League brasileirao(teams, matchResults);
+    League league(teams, matchResults);
 
-    brasileirao.fillMatchResults("../data/Brasileirao2022.json");
+    league.fillMatchResults("../data/Brasileirao2022.json");
 
-    std::cout << "Choose an option:" << std::endl;
-    std::cout << "1 - Show all match results" << std::endl;
-    std::cout << "2 - Show all match results of a team" << std::endl;
-    std::cout << "3 - Show classification table" << std::endl;
-    std::cout << "0 - Exit" << std::endl;
+    Console::showMenu();
 
     int option;
-    std::cout << "Option: ";
+    std::cout << " Option: ";
     std::cin >> option;
     std::string teamName;
 
     while (option != 0) {
         switch (option) {
             case 1:
-                Console::printMatchResults(brasileirao.getMatchResults());
+                system("clear");
+                Console::printMatchResults(league.getMatchResults());
+
                 break;
             case 2:
-                std::cout << "Choose a team:" << std::endl;
-                for (Team* team : teams) {
-                    std::cout << team->getName() << std::endl;
+                unsigned short int matchDay;
+
+                system("clear");
+                std::cout << WHITE_BG
+                          << " Choose a match day (1 - 38): " << RESET_TEXT;
+                std::cin >> matchDay;
+
+                if (matchDay < 1 || matchDay > 38) {
+                    std::cout << YELLOW_TXT << "Invalid match day" << RESET_TEXT
+                              << std::endl;
+                    break;
                 }
-                std::cout << "Team: ";
-                std::cin.ignore();
-                std::getline(std::cin, teamName);
-                for (Team* team : teams) {
-                    if (teamName == team->getName()) {
-                        system("clear");
-                        std::cout << std::endl;
-                        Console::printMatchResults(*team);
-                    }
-                }
+
+                Console::printMatchResults(league.getMatchResults(), matchDay);
+
                 break;
             case 3:
                 system("clear");
-                std::cout << std::endl;
+                Console::showTeams(teams);
+                std::cout << WHITE_BG << " Choose a team:" << RESET_TEXT
+                          << std::endl;
+
+                std::cin.ignore();
+                std::getline(std::cin, teamName);
+                for (Team* team : teams)
+                    if (teamName == team->getName())
+                        Console::printMatchResults(*team);
+
+                break;
+            case 9:
+                system("clear");
                 Console::printTable(teams);
+
                 break;
             default:
                 std::cout << "Invalid option" << std::endl;
+
                 break;
         }
 
-        std::cout << "Choose an option:" << std::endl;
-        std::cout << "1 - Show all match results" << std::endl;
-        std::cout << "2 - Show all match results of a team" << std::endl;
-        std::cout << "3 - Show classification table" << std::endl;
-        std::cout << "0 - Exit" << std::endl;
+        Console::showMenu();
 
+        std::cout << WHITE_BG << " Option: " << RESET_TEXT;
         std::cin >> option;
-        system("clear");
     }
 
     return 0;

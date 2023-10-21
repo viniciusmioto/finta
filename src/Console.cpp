@@ -9,15 +9,39 @@ bool Console::compareTeamsByPoints(Team* homeTeam, Team* awayTeam) {
            awayTeam->getPoints();  // Sort in descending order
 }
 
+// show menu
+void Console::showMenu() {
+    std::cout << "\n Choose an option:\n"
+              << " 1 - Show all match results\n"
+              << " 2 - Show match results for a match day\n"
+              << " 3 - Show all match results of a team\n"
+              << " 9 - Show classification table\n"
+              << " 0 - Exit" << std::endl;
+}
+
+// show teams
+void Console::showTeams(std::list<Team*>& teams) {
+    std::cout << "Teams:\n" << std::endl;
+    std::list<Team*>::iterator it;
+
+    for (it = teams.begin(); it != teams.end(); it++) {
+        std::cout << (*it)->getName() << std::endl;
+    }
+}
+
 void Console::printMatchResults(Team& team) {
     std::cout << std::endl;
-    std::cout << WHITE_BG << "Match results of " << team.getName() << ":"
+
+    std::cout << PURPLE_BG << " Match results of " << team.getName() << ":"
               << RESET_TEXT << std::endl;
 
     const std::list<MatchResult*>& matchResultsList = team.getMatchResults();
     std::list<MatchResult*>::const_iterator it;
 
     for (it = matchResultsList.begin(); it != matchResultsList.end(); it++) {
+        // show match day
+        // std::cout << "MD [" << (*it)->getMatchDay() << "] ";
+
         // check if it is the homeTeam, so underlines the name
         if ((*it)->getHomeTeam() == &team) {
             // check if the homeTeam won
@@ -59,20 +83,37 @@ void Console::printMatchResults(Team& team) {
     std::cout << std::endl;
 }
 
+void Console::printMatchResults(const std::list<MatchResult*>& matchResults,
+                                unsigned short matchDay) {
+    std::cout << std::endl;
+    std::cout << PURPLE_BG << " Match results of match day " << matchDay << ":"
+              << RESET_TEXT << std::endl;
+
+    std::list<MatchResult*>::const_iterator it;
+
+    for (it = matchResults.begin(); it != matchResults.end(); it++) {
+        if ((*it)->getMatchDay() == matchDay) {
+            std::cout << " " << (*it)->getHomeTeam()->getName() << " "
+                      << (*it)->getHomeTeamScore() << " x "
+                      << (*it)->getAwayTeamScore() << " "
+                      << (*it)->getAwayTeam()->getName() << std::endl;
+        }
+    }
+}
+
 void Console::printMatchResults(const std::list<MatchResult*>& matchResults) {
-    std::cout << WHITE_BG << "Match results:" << RESET_TEXT << std::endl;
+    std::cout << std::endl;
+    std::cout << PURPLE_BG << " Match results:" << RESET_TEXT << std::endl;
     std::list<MatchResult*>::iterator it;
 
-    for (auto it = matchResults.begin(); it != matchResults.end(); it++) {
-        std::cout << (*it)->getHomeTeam()->getName() << " "
-                  << (*it)->getHomeTeamScore() << " x "
-                  << (*it)->getAwayTeamScore() << " "
-                  << (*it)->getAwayTeam()->getName() << std::endl;
+    for (int matchDay = 1; matchDay <= 38; matchDay++) {
+        printMatchResults(matchResults, matchDay);
     }
     std::cout << std::endl;
 }
 
 void Console::printTable(std::list<Team*>& teams) {
+    std::cout << std::endl;
     // Sort the teams by points
     teams.sort(compareTeamsByPoints);
 
@@ -124,11 +165,13 @@ void Console::printTable(std::list<Team*>& teams) {
 
     std::cout << std::endl;
 
-
     // Print the table legend
-    std::cout << BLUE_BG << "  " << RESET_TEXT << " Libertadores group stage" << std::endl;
-    std::cout << ORANGE_BG << "  " << RESET_TEXT << " Libertadores qualifiers" << std::endl;
-    std::cout << GREEN_BG << "  " << RESET_TEXT << " Sudamericana group stage" << std::endl;
+    std::cout << BLUE_BG << "  " << RESET_TEXT << " Libertadores group stage"
+              << std::endl;
+    std::cout << ORANGE_BG << "  " << RESET_TEXT << " Libertadores qualifiers"
+              << std::endl;
+    std::cout << GREEN_BG << "  " << RESET_TEXT << " Sudamericana group stage"
+              << std::endl;
     std::cout << RED_BG << "  " << RESET_TEXT << " Relegation" << std::endl;
 
     std::cout << std::endl;

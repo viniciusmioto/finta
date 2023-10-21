@@ -8,14 +8,22 @@
 class MatchResult {
    public:
     MatchResult(Team* homeTeam, Team* awayTeam, unsigned short int homeTeamScore,
-                unsigned short int awayTeamScore);
+                unsigned short int awayTeamScore, unsigned short matchDay);
 
     // Getter methods
     unsigned int getId() const;
+    
     Team* getHomeTeam() const;
+    
     Team* getAwayTeam() const;
+    
     unsigned short int getHomeTeamScore() const;
+    
     unsigned short int getAwayTeamScore() const;
+
+    unsigned short getMatchDay() const;
+
+    void setMatchDay(const unsigned short matchDay);
 
     // Setter method
     void setMatchResult(Team* homeTeam, Team* awayTeam, const unsigned short int homeTeamScore,
@@ -27,6 +35,7 @@ class MatchResult {
    private:
     static unsigned long int nextId;
     unsigned long int id;
+    unsigned short matchDay;
     Team* homeTeam;
     Team* awayTeam;
     unsigned short int homeTeamScore;
