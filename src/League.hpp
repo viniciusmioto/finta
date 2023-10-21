@@ -4,6 +4,7 @@
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <list>
+#include <iostream>
 
 #include "MatchResult.hpp"
 #include "Team.hpp"
@@ -12,7 +13,6 @@ class League {
    public:
     League(std::list<Team*> teams);
     League(std::list<Team*> teams, std::list<MatchResult*> matchResults);
-    ~League();
 
     void addTeams(std::list<Team*> teams);
 

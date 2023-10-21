@@ -56,6 +56,22 @@ class Player {
   + setPosition(position: string): void
 }
 
+class League {
+  - name: string
+  - teams: Team[]
+  - matchResults: MatchResult[]
+
+  + League(name: string)
+  + getName(): string
+  + setName(name: string): void
+  + getTeams(): Team[]
+  + addTeam(team: Team): void
+  + getMatchResults(): MatchResult[]
+  + addMatchResult(matchResult: MatchResult): void
+  + addMatchResults(matchResults: MatchResult[]): void
+  + fillMatchResults(string: filePath): void
+}
+
 class Console {
   - Console()
 
@@ -66,9 +82,11 @@ class Console {
 
 MatchResult "0..*" -- "homeTeam 1" Team
 MatchResult "0..*" -- "1 awayTeam" Team 
-MatchResult -- Console
 Person <|-- Player
 Team "0..*" -- "staff 1..*" Person
 Team "0..*" -- "players 1..*" Player
+League "0..*" -- "teams 20" Team
+League "0..*" -- "matchResults 1..380" MatchResult
+MatchResult -- Console
 
 @enduml

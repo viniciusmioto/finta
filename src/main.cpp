@@ -1,14 +1,9 @@
-#include <boost/property_tree/json_parser.hpp>
-#include <boost/property_tree/ptree.hpp>
 #include <iostream>
-#include <sstream>
-#include <stdexcept>
-#include <vector>
 
 #include "Console.hpp"
+#include "League.hpp"
 #include "MatchResult.hpp"
 #include "Team.hpp"
-#include "League.hpp"
 
 int main() {
     Team amg{"América-MG"};
@@ -41,8 +36,49 @@ int main() {
 
     League brasileirao(teams, matchResults);
 
-    try {
-        brasileirao.fillMatchResults("../data/Brasileirao2022.json");
+    brasileirao.fillMatchResults("../data/Brasileirao2022.json");
+
+    std::cout << "Choose an option:" << std::endl;
+    std::cout << "1 - Show all match results" << std::endl;
+    std::cout << "2 - Show all match results of a team" << std::endl;
+    std::cout << "3 - Show classification table" << std::endl;
+    std::cout << "0 - Exit" << std::endl;
+
+    int option;
+    std::cout << "Option: ";
+    std::cin >> option;
+    std::string teamName;
+
+    while (option != 0) {
+        switch (option) {
+            case 1:
+                Console::printMatchResults(brasileirao.getMatchResults());
+                break;
+            case 2:
+                std::cout << "Choose a team:" << std::endl;
+                for (Team* team : teams) {
+                    std::cout << team->getName() << std::endl;
+                }
+                std::cout << "Team: ";
+                std::cin.ignore();
+                std::getline(std::cin, teamName);
+                for (Team* team : teams) {
+                    if (teamName == team->getName()) {
+                        system("clear");
+                        std::cout << std::endl;
+                        Console::printMatchResults(*team);
+                    }
+                }
+                break;
+            case 3:
+                system("clear");
+                std::cout << std::endl;
+                Console::printTable(teams);
+                break;
+            default:
+                std::cout << "Invalid option" << std::endl;
+                break;
+        }
 
         std::cout << "Choose an option:" << std::endl;
         std::cout << "1 - Show all match results" << std::endl;
@@ -50,46 +86,8 @@ int main() {
         std::cout << "3 - Show classification table" << std::endl;
         std::cout << "0 - Exit" << std::endl;
 
-        int option;
         std::cin >> option;
-        std::string teamName;
-
-        while (option != 0) {
-            switch (option) {
-                case 1:
-                    Console::printMatchResults(brasileirao.getMatchResults());
-                    break;
-                case 2:
-                    std::cout << "Choose a team:" << std::endl;
-                    for (Team* team : teams) {
-                        std::cout << team->getName() << std::endl;
-                    }
-                    std::cin >> teamName;
-                    for (Team* team : teams) {
-                        if (teamName == team->getName()) {
-                            Console::printMatchResults(*team);
-                        }
-                    }
-                    break;
-                case 3:
-                    Console::printTable(teams);
-                    break;
-                default:
-                    std::cout << "Invalid option" << std::endl;
-                    break;
-            }
-
-            std::cout << "Choose an option:" << std::endl;
-            std::cout << "1 - Show all match results" << std::endl;
-            std::cout << "2 - Show all match results of a team" << std::endl;
-            std::cout << "3 - Show classification table" << std::endl;
-            std::cout << "0 - Exit" << std::endl;
-
-            std::cin >> option;
-        }
-
-    } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
+        system("clear");
     }
 
     return 0;

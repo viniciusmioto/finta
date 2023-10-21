@@ -10,6 +10,7 @@ bool Console::compareTeamsByPoints(Team* homeTeam, Team* awayTeam) {
 }
 
 void Console::printMatchResults(Team& team) {
+    std::cout << std::endl;
     std::cout << WHITE_BG << "Match results of " << team.getName() << ":"
               << RESET_TEXT << std::endl;
 
