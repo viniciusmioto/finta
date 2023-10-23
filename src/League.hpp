@@ -26,6 +26,8 @@ class League {
 
     Team* findOrCreateTeam(const std::string& teamName);
 
+    const std::list<Team*>& getTeams() const;
+
    private:
     std::list<Team*> teams;
     std::list<MatchResult*> matchResults;

@@ -3,10 +3,19 @@
 #include <iomanip>
 
 // Define a custom comparison function or lambda
-bool Console::compareTeamsByPoints(Team* homeTeam, Team* awayTeam) {
-    // Assuming you have a method getPoints() in your Team class
-    return homeTeam->getPoints() >
-           awayTeam->getPoints();  // Sort in descending order
+bool Console::compareTeams(const Team* homeTeam, const Team* awayTeam) {
+    // Compare the points
+    // if the points are equal, compare by wins
+    // if the wins are equal, compare by goals difference
+
+    if (homeTeam->getPoints() == awayTeam->getPoints()) {
+        if (homeTeam->getWins() == awayTeam->getWins()) {
+            return homeTeam->getGoalDifference() >
+                   awayTeam->getGoalDifference();
+        }
+        return homeTeam->getWins() > awayTeam->getWins();
+    }
+    return homeTeam->getPoints() > awayTeam->getPoints();
 }
 
 // show menu
@@ -20,16 +29,16 @@ void Console::showMenu() {
 }
 
 // show teams
-void Console::showTeams(std::list<Team*>& teams) {
+void Console::showTeams(const std::list<Team*>& teams) {
     std::cout << "Teams:\n" << std::endl;
     std::list<Team*>::iterator it;
 
-    for (it = teams.begin(); it != teams.end(); it++) {
+    for (auto it = teams.begin(); it != teams.end(); it++) {
         std::cout << (*it)->getName() << std::endl;
     }
 }
 
-void Console::printMatchResults(Team& team) {
+void Console::printMatchResults(const Team& team) {
     std::cout << std::endl;
 
     std::cout << PURPLE_BG << " Match results of " << team.getName() << ":"
@@ -112,10 +121,15 @@ void Console::printMatchResults(const std::list<MatchResult*>& matchResults) {
     std::cout << std::endl;
 }
 
-void Console::printTable(std::list<Team*>& teams) {
+void Console::printTable(const std::list<Team*>& teams) {
     std::cout << std::endl;
     // Sort the teams by points
-    teams.sort(compareTeamsByPoints);
+    std::list<Team*> teamsCopy = teams;
+
+    std::cout << std::endl;
+
+    // Sort the copy of the teams by points
+    teamsCopy.sort(compareTeams);
 
     // Define the column widths
     const int positionWidth = 3;
@@ -125,6 +139,8 @@ void Console::printTable(std::list<Team*>& teams) {
     const int drawsWidth = 3;
     const int lossesWidth = 3;
     const int goalsWidth = 3;
+    const int goalsAgainstWidth = 3;
+    const int goalDifferenceWidth = 3;
 
     std::list<Team*>::iterator it;
     unsigned short int position = 1;
@@ -135,11 +151,14 @@ void Console::printTable(std::list<Team*>& teams) {
               << " | " << std::setw(winsWidth) << "W"
               << " | " << std::setw(drawsWidth) << "D"
               << " | " << std::setw(lossesWidth) << "L"
-              << " | " << std::setw(goalsWidth) << "G" << std::left << " | "
-              << std::setw(nameWidth) << "Team" << RESET_TEXT << std::endl;
+              << " | " << std::setw(goalsWidth) << "GF"
+              << " | " << std::setw(goalsAgainstWidth) << "GA"
+              << " | " << std::setw(goalDifferenceWidth) << "GD" << std::left
+              << " | " << std::setw(nameWidth) << "Team" << RESET_TEXT
+              << std::endl;
 
     // Print the table rows
-    for (it = teams.begin(); it != teams.end(); it++) {
+    for (it = teamsCopy.begin(); it != teamsCopy.end(); it++) {
         std::string color = RESET_TEXT;
 
         if (position <= 6)
@@ -158,8 +177,10 @@ void Console::printTable(std::list<Team*>& teams) {
                   << std::setw(drawsWidth) << (*it)->getDraws() << " | "
                   << std::setw(lossesWidth) << (*it)->getLosses() << " | "
                   << std::setw(goalsWidth) << (*it)->getGoals() << " | "
-                  << std::left << std::setw(nameWidth) << (*it)->getName()
-                  << std::endl;
+                  << std::setw(goalsAgainstWidth) << (*it)->getGoalsAgainst()
+                  << " | " << std::setw(goalDifferenceWidth)
+                  << (*it)->getGoalDifference() << " | " << std::left
+                  << std::setw(nameWidth) << (*it)->getName() << std::endl;
         position++;
     }
 

@@ -1,7 +1,7 @@
 #include "Team.hpp"
 
 Team::Team(std::string name)
-    : name{name}, points{0}, wins{0}, draws{0}, losses{0}, goals{0} {}
+    : name{name}, points{0}, wins{0}, draws{0}, losses{0}, goals{0}, goalsAgainst{0}, goalDifference{0} {}
 
 std::string Team::getName() const { return this->name; }
 
@@ -11,7 +11,7 @@ void Team::addMatchResult(MatchResult* matchResult) {
     // Check if the matchResult pointer is not null
     if (matchResult) {
         // Add the matchResult to the team's list of match results
-        matchResults.push_back(matchResult);
+        this->matchResults.push_back(matchResult);
     }
 }
 
@@ -56,3 +56,15 @@ void Team::addPlayer(Player* player) {
 }
 
 const std::list<Player*>& Team::getPlayers() const { return players; }
+
+short int Team::getGoalsAgainst() const { return goalsAgainst; }
+
+void Team::addGoalsAgainst(const short int goalsAgainst) {
+    this->goalsAgainst += goalsAgainst;
+}
+
+short int Team::getGoalDifference() const { return goalDifference; }
+
+void Team::setGoalDifference(const short int goalDifference) {
+    this->goalDifference = goalDifference;
+}

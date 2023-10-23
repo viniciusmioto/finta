@@ -1,8 +1,44 @@
 @startuml name "finta"
 
-class MatchResult {
+class Fact {
+  - player: Player
+  - time: string
+  - team: Team
+
+  + Fact(time: string)
+  + getPlayer(): Player
+  + getTime(): string
+  + getTeam(): Team
+
+  + setTime(time: string): void
+}
+
+class Goal {
+  - setPlayer(player: Player): void
+  - setTeam(team: Team): void
+}
+
+class YellowCard {
+  - setPlayer(player: Player): void
+  - setTeam(team: Team): void
+}
+
+class RedCard {
+  - setPlayer(player: Player): void
+  - setTeam(team: Team): void
+}
+
+class Match {
   - id: unsigned long int
   - {static} nextId: unsigned long int
+  - matchInfo: MatchInfo
+  - matchResult: MatchResult
+
+  + Match()
+  + getId(): unsigned long int
+}
+
+class MatchResult {
   - homeTeam: Team
   - awayTeam: Team
   - homeTeamScore: unsigned short int
@@ -17,13 +53,33 @@ class MatchResult {
   + getHomeTeamScore(): unsigned short int
 }
 
+Class MatchInfo {
+  - matchDate: Date
+  - matchTime: Time
+  - matchPlace: string
+  - goals: Goal[]
+
+  + MatchInfo(matchDate: Date, matchTime: Time, matchPlace: string)
+  + getMatchDate(): Date
+  + setMatchDate(matchDate: Date): void
+  + getMatchTime(): Time
+  + setMatchTime(matchTime: Time): void
+  + getMatchPlace(): string
+  + setMatchPlace(matchPlace: string): void
+  + getGoals(): Goal[]
+  + addGoal(goal: Goal): void
+}
+
 class Team {
   - name: string
   - points: unsigned short int
   - matchResults: MatchResult[]
   - staff: Person[]
   - players: Player[]
-  
+  - goals: Fact[]
+  - yellowCards: Fact[]
+  - redCards: Fact[]
+
   + Team(name: string)
   + getName(): string
   + setName(name: string): void
@@ -48,6 +104,9 @@ class Person {
 class Player {
   - number: unsigned short int
   - position: string
+  - goals: Fact[]
+  - yellowCards: Fact[]
+  - redCards: Fact[]
 
   + Player(name: string, number: unsigned short int, position: string)
   + getJerseyNumber(): unsigned short int
@@ -60,6 +119,9 @@ class League {
   - name: string
   - teams: Team[]
   - matchResults: MatchResult[]
+  - goals: Fact[]
+  - yellowCards: Fact[]
+  - redCards: Fact[]
 
   + League(name: string)
   + getName(): string
@@ -69,6 +131,7 @@ class League {
   + getMatchResults(): MatchResult[]
   + addMatchResult(matchResult: MatchResult): void
   + addMatchResults(matchResults: MatchResult[]): void
+  + findOrCreateTeam(const std::string& teamName)
   + fillMatchResults(string: filePath): void
 }
 
@@ -80,13 +143,34 @@ class Console {
   + {static} printTable(teams: Team[]): void
 }
 
+League "1" -- "goals 0..*" Goals
+League "1" -- "yellowCards 0..*" YellowCard
+League "1" -- "redCards 0..*" RedCard
+MatchInfo "1" -- "goals 0..*" Goal
+MatchInfo "1" -- "yellowCards 0..*" YellowCard
+MatchInfo "1" -- "redCards 0..*" RedCard
+Player "1" -- "goals 0..*" Goal
+Player "1" -- "yellowCards 0..*" YellowCard
+Player "1" -- "redCards 0..*" RedCard
+Team "1" -- "goals 0..*" Goal
+Team "1" -- "yellowCards 0..*" YellowCard
+Team "1" -- "redCards 0..*" RedCard
+
 MatchResult "0..*" -- "homeTeam 1" Team
-MatchResult "0..*" -- "1 awayTeam" Team 
-Person <|-- Player
+MatchResult "0..*" -- "1 awayTeam" Team
 Team "0..*" -- "staff 1..*" Person
 Team "0..*" -- "players 1..*" Player
 League "0..*" -- "teams 20" Team
 League "0..*" -- "matchResults 1..380" MatchResult
+
+Person <|-- Player
+Fact <|-- Goal
+Fact <|-- YellowCard
+Fact <|-- RedCard
+
+Match *-- MatchResult
+Match *-- MatchInfo
+
 MatchResult -- Console
 
 @enduml

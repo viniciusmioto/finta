@@ -2,6 +2,7 @@
 #define MATCH_INFO_HPP
 
 #include "MatchResult.hpp"
+#include "Goal.hpp"
 
 class MatchInfo : public MatchResult {
    public:
@@ -22,10 +23,17 @@ class MatchInfo : public MatchResult {
     // Method to get the match info as a string
     std::string getMatchInfo() const;
 
+    // Method to add a goal to the match
+    void addGoal(Goal* goal);
+
+    // Method to get the goals as a string
+    std::string getGoals() const;
+
    private:
     std::string matchDate;
     std::string matchTime;
     std::string matchPlace;
+    std::list<Goal*> goals;
 };
 
 #endif // MATCH_INFO_HPP
