@@ -4,7 +4,7 @@
 #include "MatchResult.hpp"
 #include "Goal.hpp"
 
-class MatchInfo : public MatchResult {
+class MatchInfo {
    public:
     MatchInfo(Team* homeTeam, Team* awayTeam, unsigned short int homeTeamScore,
               unsigned short int awayTeamScore, std::string matchDate, std::string matchTime,
