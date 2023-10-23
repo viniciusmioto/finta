@@ -40,6 +40,12 @@ class Team {
     void addPlayer(Player* player);
     const std::list<Player*>& getPlayers() const;
 
+    short int getGoalsAgainst() const;
+    void addGoalsAgainst(const short int goalsAgainst);
+
+    short int getGoalDifference() const;
+    void setGoalDifference(const short int goalDifference);
+
    private:
     std::string name;
     unsigned short int points;
@@ -47,6 +53,8 @@ class Team {
     unsigned short int draws;
     unsigned short int losses;
     unsigned short int goals;
+    short int goalsAgainst;
+    short int goalDifference;
     std::list<MatchResult*> matchResults;
     std::list<Person*> staff;
     std::list<Player*> players;

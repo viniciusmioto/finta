@@ -4,7 +4,8 @@ unsigned long int MatchResult::nextId{0};
 
 MatchResult::MatchResult(Team* homeTeam, Team* awayTeam,
                          unsigned short int homeTeamScore,
-                         unsigned short int awayTeamScore, unsigned short matchDay)
+                         unsigned short int awayTeamScore,
+                         unsigned short matchDay)
     : id{nextId},
       homeTeam{homeTeam},
       awayTeam{awayTeam},
@@ -56,6 +57,17 @@ MatchResult::MatchResult(Team* homeTeam, Team* awayTeam,
     // Add goals to the teams
     homeTeam->addGoals(homeTeamScore);
     awayTeam->addGoals(awayTeamScore);
+
+    // Add goals against to the teams
+    homeTeam->addGoalsAgainst(awayTeamScore);
+    awayTeam->addGoalsAgainst(homeTeamScore);
+
+    // Add goal difference to the teams
+    homeTeam->setGoalDifference(homeTeam->getGoals() -
+                                homeTeam->getGoalsAgainst());
+
+    awayTeam->setGoalDifference(awayTeam->getGoals() -
+                                awayTeam->getGoalsAgainst());
 }
 
 unsigned int MatchResult::getId() const { return id; }

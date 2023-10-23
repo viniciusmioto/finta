@@ -26,11 +26,11 @@ class Console {
     Console();
     static void showMenu();
     static void showTeams(const std::list<Team*>& teams);
-    static void printMatchResults(Team& team);
+    static void printMatchResults(const Team& team);
     static void printMatchResults(const std::list<MatchResult*>& matchResults);
     static void printMatchResults(const std::list<MatchResult*>& matchResults, unsigned short matchDay);
-    static void printTable(std::list<Team*>& teams);
-    static bool compareTeamsByPoints(Team* homeTeam, Team* awayTeam);
+    static void printTable(const std::list<Team*>& teams);
+    static bool compareTeams(const Team* homeTeam, const Team* awayTeam);
 };
 
 #endif  // CONSOLE_HPP

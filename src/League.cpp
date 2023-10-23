@@ -60,7 +60,7 @@ void League::fillMatchResults(const std::string& filePath) {
                 const boost::property_tree::ptree& homeGoalScorers = match.second.get_child("goalsPlayer.home");
                 const boost::property_tree::ptree& awayGoalScorers = match.second.get_child("goalsPlayer.away");
 
-                std::cout << "Matchday " << matchDay << " - " << homeTeam << " vs. " << awayTeam << std::endl;
+                std::cout << "Match day " << matchDay << " - " << homeTeam << " vs. " << awayTeam << std::endl;
                 std::cout << "Home Team Goal Scorers: ";
                 for (const auto& scorer : homeGoalScorers) {
                     std::string playerName = scorer.second.get<std::string>("player");

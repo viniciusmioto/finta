@@ -143,18 +143,18 @@ class Console {
   + {static} printTable(teams: Team[]): void
 }
 
-League "1" -- "goals 0..*" Fact
-League "1" -- "yellowCards 0..*" Fact
-League "1" -- "redCards 0..*" Fact
-MatchInfo "1" -- "goals 0..*" Fact
-MatchInfo "1" -- "yellowCards 0..*" Fact
-MatchInfo "1" -- "redCards 0..*" Fact
-Player "1" -- "goals 0..*" Fact
-Player "1" -- "yellowCards 0..*" Fact
-Player "1" -- "redCards 0..*" Fact
-Team "1" -- "goals 0..*" Fact
-Team "1" -- "yellowCards 0..*" Fact
-Team "1" -- "redCards 0..*" Fact
+League "1" -- "goals 0..*" Goals
+League "1" -- "yellowCards 0..*" YellowCard
+League "1" -- "redCards 0..*" RedCard
+MatchInfo "1" -- "goals 0..*" Goal
+MatchInfo "1" -- "yellowCards 0..*" YellowCard
+MatchInfo "1" -- "redCards 0..*" RedCard
+Player "1" -- "goals 0..*" Goal
+Player "1" -- "yellowCards 0..*" YellowCard
+Player "1" -- "redCards 0..*" RedCard
+Team "1" -- "goals 0..*" Goal
+Team "1" -- "yellowCards 0..*" YellowCard
+Team "1" -- "redCards 0..*" RedCard
 
 MatchResult "0..*" -- "homeTeam 1" Team
 MatchResult "0..*" -- "1 awayTeam" Team

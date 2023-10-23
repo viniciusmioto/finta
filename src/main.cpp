@@ -57,14 +57,16 @@ int main() {
 
                 std::cin.ignore();
                 std::getline(std::cin, teamName);
-                for (Team* team : teams)
+                for (Team* team : league.getTeams())
                     if (teamName == team->getName())
+                    {
+                        std::cout << team->getName() << std::endl;
                         Console::printMatchResults(*team);
-
+                    }
                 break;
             case 9:
                 system("clear");
-                Console::printTable(teams);
+                Console::printTable(league.getTeams());
 
                 break;
             default:
