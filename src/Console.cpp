@@ -24,7 +24,8 @@ void Console::showMenu() {
               << " 1 - Show all match results\n"
               << " 2 - Show match results for a match day\n"
               << " 3 - Show all match results of a team\n"
-              << " 9 - Show classification table\n"
+              << " 8 - Show classification table\n"
+              << " 9 - Change data year\n"
               << " 0 - Exit" << std::endl;
 }
 

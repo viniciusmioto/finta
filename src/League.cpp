@@ -37,7 +37,7 @@ Team* League::findOrCreateTeam(const std::string& teamName) {
 void League::fillMatchResults(const std::string& filePath) {
     try {
         boost::property_tree::ptree data;
-        boost::property_tree::read_json("../data/Brasileirao2022.json", data);
+        boost::property_tree::read_json(filePath, data);
 
         for (int matchDay = 1; matchDay <= 38; ++matchDay) {
             for (const auto& match : data.get_child(std::to_string(matchDay))) {
@@ -57,23 +57,28 @@ void League::fillMatchResults(const std::string& filePath) {
                     homeTeamPtr, awayTeamPtr, homeGoals, awayGoals, matchDay));
 
                 // Print the goal scorers for this match
-                const boost::property_tree::ptree& homeGoalScorers = match.second.get_child("goalsPlayer.home");
-                const boost::property_tree::ptree& awayGoalScorers = match.second.get_child("goalsPlayer.away");
+                // const boost::property_tree::ptree& homeGoalScorers =
+                // match.second.get_child("goalsPlayer.home"); const
+                // boost::property_tree::ptree& awayGoalScorers =
+                // match.second.get_child("goalsPlayer.away");
 
-                std::cout << "Match day " << matchDay << " - " << homeTeam << " vs. " << awayTeam << std::endl;
-                std::cout << "Home Team Goal Scorers: ";
-                for (const auto& scorer : homeGoalScorers) {
-                    std::string playerName = scorer.second.get<std::string>("player");
-                    std::cout << playerName << " ";
-                }
-                std::cout << std::endl;
+                // std::cout << "Match day " << matchDay << " - " << homeTeam <<
+                // " vs. " << awayTeam << std::endl; std::cout << "Home Team
+                // Goal Scorers: "; for (const auto& scorer : homeGoalScorers) {
+                //     std::string playerName =
+                //     scorer.second.get<std::string>("player"); std::cout <<
+                //     playerName << " ";
+                // }
+                // std::cout << std::endl;
 
-                std::cout << "Away Team Goal Scorers: ";
-                for (const auto& scorer : awayGoalScorers) {
-                    std::string playerName = scorer.second.get<std::string>("player");
-                    std::cout << playerName << " ";
-                }
-                std::cout << std::endl;
+                // std::cout << "Away Team Goal Scorers: ";
+                // for (const auto& scorer : awayGoalScorers) {
+                //     std::string playerName =
+                //     scorer.second.get<std::string>("player"); std::cout <<
+                //     playerName << " ";
+                // }
+                //
+                // std::cout << std::endl;
             }
         }
     } catch (const std::exception& e) {
