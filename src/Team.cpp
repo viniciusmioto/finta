@@ -11,7 +11,7 @@ void Team::addMatchResult(MatchResult* matchResult) {
     // Check if the matchResult pointer is not null
     if (matchResult) {
         // Add the matchResult to the team's list of match results
-        matchResults.push_back(matchResult);
+        this->matchResults.push_back(matchResult);
     }
 }
 

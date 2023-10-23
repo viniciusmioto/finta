@@ -85,3 +85,5 @@ void League::fillMatchResults(const std::string& filePath) {
 const std::list<MatchResult*>& League::getMatchResults() const {
     return this->matchResults;
 }
+
+const std::list<Team*>& League::getTeams() const { return this->teams; }

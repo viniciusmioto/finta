@@ -20,11 +20,11 @@ void Console::showMenu() {
 }
 
 // show teams
-void Console::showTeams(std::list<Team*>& teams) {
+void Console::showTeams(const std::list<Team*>& teams) {
     std::cout << "Teams:\n" << std::endl;
     std::list<Team*>::iterator it;
 
-    for (it = teams.begin(); it != teams.end(); it++) {
+    for (auto it = teams.begin(); it != teams.end(); it++) {
         std::cout << (*it)->getName() << std::endl;
     }
 }

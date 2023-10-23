@@ -25,7 +25,7 @@ class Console {
    public:
     Console();
     static void showMenu();
-    static void showTeams(std::list<Team*>& teams);
+    static void showTeams(const std::list<Team*>& teams);
     static void printMatchResults(Team& team);
     static void printMatchResults(const std::list<MatchResult*>& matchResults);
     static void printMatchResults(const std::list<MatchResult*>& matchResults, unsigned short matchDay);
