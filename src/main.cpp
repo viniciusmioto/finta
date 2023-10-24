@@ -66,6 +66,30 @@ int main() {
                     }
                 }
                 break;
+            case 4:
+                system("clear");
+                unsigned short matchId;
+                std::cout << WHITE_BG << " Choose a match id: " << RESET_TEXT;
+                std::cin >> matchId;
+                for (Match* match : league.getMatches()) {
+                    if (matchId == match->getId()) {
+                        Console::printMatchDetails(*match);
+                    }
+                }
+                break;
+            case 5:
+                system("clear");
+                Console::showTeams(league.getTeams());
+                std::cout << WHITE_BG << " Choose a team:" << RESET_TEXT;
+                std::cin.ignore();
+                std::getline(std::cin, teamName);
+                for (Team* team : league.getTeams()) {
+                    if (teamName == team->getName()) {
+                        std::cout << team->getName() << std::endl;
+                        Console::showPlayers(team->getPlayers());
+                    }
+                }
+                break;
             case 8:
                 system("clear");
                 Console::printTable(league.getTeams());

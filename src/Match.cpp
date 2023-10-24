@@ -1,8 +1,13 @@
 #include "Match.hpp"
 
-unsigned long int Match::nextId{0};
+unsigned long int Match::nextId{1};
 
 Match::Match(unsigned short matchDay, MatchResult* MatchResult) : id{nextId}, matchResult{MatchResult} {
+    setMatchDay(matchDay);
+    nextId++;
+}
+
+Match::Match(unsigned short matchDay, MatchResult* MatchResult, MatchInfo* MatchInfo) : id{nextId}, matchResult{MatchResult}, matchInfo{MatchInfo} {
     setMatchDay(matchDay);
     nextId++;
 }

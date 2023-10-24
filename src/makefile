@@ -2,7 +2,7 @@ CFLAGS_COMMON = -Wall -std=c++1y
 CC = g++
 BOOST_ROOT := -I$(HOME)/boost_1_82_0
 PROGRAM = finta
-OBJECTS = main.o Match.o MatchResult.o Team.o Console.o Person.o Player.o League.o Fact.o Goal.o
+OBJECTS = main.o Match.o MatchInfo.o MatchResult.o Team.o Console.o Person.o Player.o League.o Goal.o
 DEBUG_FLAG =
 
 .PHONY: clean purge all debug

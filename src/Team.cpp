@@ -1,7 +1,14 @@
 #include "Team.hpp"
 
 Team::Team(std::string name)
-    : name{name}, points{0}, wins{0}, draws{0}, losses{0}, goals{0}, goalsAgainst{0}, goalDifference{0} {}
+    : name{name},
+      points{0},
+      wins{0},
+      draws{0},
+      losses{0},
+      goals{0},
+      goalsAgainst{0},
+      goalDifference{0} {}
 
 std::string Team::getName() const { return this->name; }
 
@@ -17,7 +24,9 @@ void Team::addMatchResult(MatchResult* matchResult) {
 
 unsigned short int Team::getPoints() const { return this->points; }
 
-void Team::addPoints(const unsigned short int points) { this->points += points; }
+void Team::addPoints(const unsigned short int points) {
+    this->points += points;
+}
 
 unsigned short int Team::getWins() const { return this->wins; }
 
@@ -29,13 +38,17 @@ void Team::addDraws(const unsigned short int draws) { this->draws += draws; }
 
 unsigned short int Team::getLosses() const { return this->losses; }
 
-void Team::addLosses(const unsigned short int losses) { this->losses += losses; }
+void Team::addLosses(const unsigned short int losses) {
+    this->losses += losses;
+}
 
 unsigned short int Team::getGoals() const { return this->goals; }
 
 void Team::addGoals(const unsigned short int goals) { this->goals += goals; }
 
-const std::list<MatchResult*>& Team::getMatchResults() const { return matchResults; }
+const std::list<MatchResult*>& Team::getMatchResults() const {
+    return matchResults;
+}
 
 void Team::addStaff(Person* person) {
     // Check if the person pointer is not null
@@ -53,6 +66,30 @@ void Team::addPlayer(Player* player) {
         // Add the player to the team's list of players
         players.push_back(player);
     }
+}
+
+Player* Team::findOrCreatePlayer(const std::string& playerName) {
+    // Check if the player exists in the team's list of players
+    for (Player* player : players) {
+        // Check if the player's name matches the given name
+        if (player->getName() == playerName) {
+            // Return the player
+            return player;
+        }
+    }
+
+    // Create a new player
+    Player* player = new Player(playerName);
+
+#ifdef DEBUG
+    std::cout << "Created new player: " << playerName << std::endl;
+#endif
+
+    // Add the player to the team's list of players
+    players.push_back(player);
+
+    // Return the player
+    return player;
 }
 
 const std::list<Player*>& Team::getPlayers() const { return players; }

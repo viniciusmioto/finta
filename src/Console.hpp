@@ -20,15 +20,20 @@ const std::string PURPLE_BG{"\033[44m"};
 const std::string RED_BG{"\033[45m"};
 const std::string BLUE_BG{"\033[46m"};
 const std::string ORANGE_BG{"\033[47m"};
+const int NUM_WIDTH = 3;
+const int NAME_WIDTH = 13;
 
 class Console {
    public:
     Console();
     static void showMenu();
     static void showTeams(const std::list<Team*>& teams);
+    static void showPlayers(const std::list<Player*>& players);
     static void printMatchResults(const Team& team);
     static void printMatchResults(const std::list<Match*>& matches);
-    static void printMatchResults(const std::list<Match*>& matches, unsigned short matchDay);
+    static void printMatchResults(const std::list<Match*>& matches,
+                                  unsigned short matchDay);
+    static void printMatchDetails(const Match& match);
     static void printTable(const std::list<Team*>& teams);
     static bool compareTeams(const Team* homeTeam, const Team* awayTeam);
 };
