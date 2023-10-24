@@ -6,23 +6,21 @@
 #include <list>
 #include <iostream>
 
-#include "MatchResult.hpp"
+#include "Match.hpp"
 #include "Team.hpp"
 
 class League {
    public:
     League(std::list<Team*> teams);
-    League(std::list<Team*> teams, std::list<MatchResult*> matchResults);
+    League(std::list<Team*> teams, std::list<Match*> matches);
 
     void addTeams(std::list<Team*> teams);
 
-    void addMatchResult(MatchResult* matchResult);
+    void addMatch(Match* matches);
 
-    void addMatchResults(std::list<MatchResult*> matchResults);
+    void fillMatches(const std::string& filePath);
 
-    void fillMatchResults(const std::string& filePath);
-
-    const std::list<MatchResult*>& getMatchResults() const;
+    const std::list<Match*>& getMatches() const;
 
     Team* findOrCreateTeam(const std::string& teamName);
 
@@ -30,7 +28,7 @@ class League {
 
    private:
     std::list<Team*> teams;
-    std::list<MatchResult*> matchResults;
+    std::list<Match*> matches;
 };
 
 #endif  // LEAGUE_HPP

@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include "MatchResult.hpp"
+#include "Match.hpp"
 #include "Team.hpp"
 
 const std::string RESET_TEXT{"\033[0m"};
@@ -27,8 +27,8 @@ class Console {
     static void showMenu();
     static void showTeams(const std::list<Team*>& teams);
     static void printMatchResults(const Team& team);
-    static void printMatchResults(const std::list<MatchResult*>& matchResults);
-    static void printMatchResults(const std::list<MatchResult*>& matchResults, unsigned short matchDay);
+    static void printMatchResults(const std::list<Match*>& matches);
+    static void printMatchResults(const std::list<Match*>& matches, unsigned short matchDay);
     static void printTable(const std::list<Team*>& teams);
     static bool compareTeams(const Team* homeTeam, const Team* awayTeam);
 };

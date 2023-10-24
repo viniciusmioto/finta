@@ -14,28 +14,38 @@ class Fact {
 }
 
 class Goal {
-  - setPlayer(player: Player): void
-  - setTeam(team: Team): void
+  + Goal()
+  + setPlayer(player: Player): void
+  + setTeam(team: Team): void
 }
 
 class YellowCard {
-  - setPlayer(player: Player): void
-  - setTeam(team: Team): void
+  + YellowCard()
+  + setPlayer(player: Player): void
+  + setTeam(team: Team): void
 }
 
 class RedCard {
-  - setPlayer(player: Player): void
-  - setTeam(team: Team): void
+  + RedCard()
+  + setPlayer(player: Player): void
+  + setTeam(team: Team): void
 }
 
 class Match {
   - id: unsigned long int
   - {static} nextId: unsigned long int
+  - matchDay: unsigned short int
   - matchInfo: MatchInfo
   - matchResult: MatchResult
 
   + Match()
   + getId(): unsigned long int
+  + getMatchDay(): unsigned short int
+  + setMatchDay(matchDay: unsigned short int): void
+  + getMatchInfo(): MatchInfo
+  + setMatchInfo(matchInfo: MatchInfo): void
+  + getMatchResult(): MatchResult
+  + setMatchResult(matchResult: MatchResult): void
 }
 
 class MatchResult {
@@ -76,9 +86,9 @@ class Team {
   - matchResults: MatchResult[]
   - staff: Person[]
   - players: Player[]
-  - goals: Fact[]
-  - yellowCards: Fact[]
-  - redCards: Fact[]
+  - goals: Goal[]
+  - yellowCards: YellowCard[]
+  - redCards: RedCard[]
 
   + Team(name: string)
   + getName(): string
@@ -104,9 +114,9 @@ class Person {
 class Player {
   - number: unsigned short int
   - position: string
-  - goals: Fact[]
-  - yellowCards: Fact[]
-  - redCards: Fact[]
+  - goals: Goal[]
+  - yellowCards: YellowCard[]
+  - redCards: RedCard[]
 
   + Player(name: string, number: unsigned short int, position: string)
   + getJerseyNumber(): unsigned short int
@@ -119,9 +129,9 @@ class League {
   - name: string
   - teams: Team[]
   - matchResults: MatchResult[]
-  - goals: Fact[]
-  - yellowCards: Fact[]
-  - redCards: Fact[]
+  - goals: Goal[]
+  - yellowCards: Yellow[]
+  - redCards: RedCard[]
 
   + League(name: string)
   + getName(): string
@@ -143,7 +153,7 @@ class Console {
   + {static} printTable(teams: Team[]): void
 }
 
-League "1" -- "goals 0..*" Goals
+League "1" -- "goals 0..*" Goal
 League "1" -- "yellowCards 0..*" YellowCard
 League "1" -- "redCards 0..*" RedCard
 MatchInfo "1" -- "goals 0..*" Goal

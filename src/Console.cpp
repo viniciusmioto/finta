@@ -93,31 +93,30 @@ void Console::printMatchResults(const Team& team) {
     std::cout << std::endl;
 }
 
-void Console::printMatchResults(const std::list<MatchResult*>& matchResults,
+void Console::printMatchResults(const std::list<Match*>& matches,
                                 unsigned short matchDay) {
     std::cout << std::endl;
     std::cout << PURPLE_BG << " Match results of match day " << matchDay << ":"
               << RESET_TEXT << std::endl;
 
-    std::list<MatchResult*>::const_iterator it;
+    std::list<Match*>::const_iterator it;
 
-    for (it = matchResults.begin(); it != matchResults.end(); it++) {
+    for (it = matches.begin(); it != matches.end(); it++) {
         if ((*it)->getMatchDay() == matchDay) {
-            std::cout << " " << (*it)->getHomeTeam()->getName() << " "
-                      << (*it)->getHomeTeamScore() << " x "
-                      << (*it)->getAwayTeamScore() << " "
-                      << (*it)->getAwayTeam()->getName() << std::endl;
+            std::cout << " " << (*it)->getMatchResult()->getHomeTeam()->getName() << " "
+                      << (*it)->getMatchResult()->getHomeTeamScore() << " x "
+                      << (*it)->getMatchResult()->getAwayTeamScore() << " "
+                      << (*it)->getMatchResult()->getAwayTeam()->getName() << std::endl;
         }
     }
 }
 
-void Console::printMatchResults(const std::list<MatchResult*>& matchResults) {
+void Console::printMatchResults(const std::list<Match*>& matches) {
     std::cout << std::endl;
     std::cout << PURPLE_BG << " Match results:" << RESET_TEXT << std::endl;
-    std::list<MatchResult*>::iterator it;
 
     for (int matchDay = 1; matchDay <= 38; matchDay++) {
-        printMatchResults(matchResults, matchDay);
+        printMatchResults(matches, matchDay);
     }
     std::cout << std::endl;
 }

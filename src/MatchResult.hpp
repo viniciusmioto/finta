@@ -8,10 +8,8 @@
 class MatchResult {
    public:
     MatchResult(Team* homeTeam, Team* awayTeam, unsigned short int homeTeamScore,
-                unsigned short int awayTeamScore, unsigned short matchDay);
+                unsigned short int awayTeamScore);
 
-    // Getter methods
-    unsigned int getId() const;
     
     Team* getHomeTeam() const;
     
@@ -21,21 +19,10 @@ class MatchResult {
     
     unsigned short int getAwayTeamScore() const;
 
-    unsigned short getMatchDay() const;
-
-    void setMatchDay(const unsigned short matchDay);
-
-    // Setter method
-    void setMatchResult(Team* homeTeam, Team* awayTeam, const unsigned short int homeTeamScore,
-                        const unsigned short int awayTeamScore);
-
     // Method to get the match result as a string
     std::string getMatchResult() const;
 
    private:
-    static unsigned long int nextId;
-    unsigned long int id;
-    unsigned short matchDay;
     Team* homeTeam;
     Team* awayTeam;
     unsigned short int homeTeamScore;
