@@ -2,13 +2,13 @@
 
 #include "Console.hpp"
 #include "League.hpp"
-#include "MatchResult.hpp"
+#include "Match.hpp"
 #include "Team.hpp"
 
 int main() {
     std::list<Team*> teams;
-    std::list<MatchResult*> matchResults;
-    League league(teams, matchResults);
+    std::list<Match*> matches;
+    League league(teams, matches);
 
     int dataYear;
     std::string dataFile;
@@ -21,7 +21,7 @@ int main() {
     dataFile = "../data/brasileirao-" + std::to_string(dataYear) + ".json";
 
     //  Load data from the selected file.
-    league.fillMatchResults(dataFile);
+    league.fillMatches(dataFile);
 
 #ifdef DEBUG
     Console::showTeams(league.getTeams());
@@ -38,7 +38,7 @@ int main() {
         switch (option) {
             case 1:
                 system("clear");
-                Console::printMatchResults(league.getMatchResults());
+                Console::printMatchResults(league.getMatches());
                 break;
             case 2:
                 unsigned short int matchDay;
@@ -51,13 +51,12 @@ int main() {
                               << std::endl;
                     break;
                 }
-                Console::printMatchResults(league.getMatchResults(), matchDay);
+                Console::printMatchResults(league.getMatches(), matchDay);
                 break;
             case 3:
                 system("clear");
                 Console::showTeams(league.getTeams());
-                std::cout << WHITE_BG << " Choose a team:" << RESET_TEXT
-                          << std::endl;
+                std::cout << WHITE_BG << " Choose a team:" << RESET_TEXT;
                 std::cin.ignore();
                 std::getline(std::cin, teamName);
                 for (Team* team : league.getTeams()) {
@@ -80,7 +79,7 @@ int main() {
                 dataFile =
                     "../data/brasileirao-" + std::to_string(dataYear) + ".json";
 
-                league.fillMatchResults(dataFile);
+                league.fillMatches(dataFile);
                 break;
             default:
                 std::cout << "Invalid option" << std::endl;

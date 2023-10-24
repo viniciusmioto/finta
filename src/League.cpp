@@ -2,18 +2,12 @@
 
 League::League(std::list<Team*> teams) : teams(teams) {}
 
-League::League(std::list<Team*> teams, std::list<MatchResult*> matchResults)
-    : teams(teams), matchResults(matchResults) {}
+League::League(std::list<Team*> teams, std::list<Match*> matches)
+    : teams(teams), matches(matches) {}
 
 void League::addTeams(std::list<Team*> teams) { this->teams = teams; }
 
-void League::addMatchResult(MatchResult* matchResult) {
-    matchResults.push_back(matchResult);
-}
-
-void League::addMatchResults(std::list<MatchResult*> matchResults) {
-    this->matchResults = matchResults;
-}
+void League::addMatch(Match* match) { matches.push_back(match); }
 
 Team* League::findOrCreateTeam(const std::string& teamName) {
     // Search for the team in the existing list
@@ -34,7 +28,7 @@ Team* League::findOrCreateTeam(const std::string& teamName) {
     return newTeam;
 }  // accurate
 
-void League::fillMatchResults(const std::string& filePath) {
+void League::fillMatches(const std::string& filePath) {
     try {
         boost::property_tree::ptree data;
         boost::property_tree::read_json(filePath, data);
@@ -53,8 +47,9 @@ void League::fillMatchResults(const std::string& filePath) {
                 Team* awayTeamPtr = findOrCreateTeam(awayTeam);
 
                 // Add the match result
-                this->matchResults.push_back(new MatchResult(
-                    homeTeamPtr, awayTeamPtr, homeGoals, awayGoals, matchDay));
+                this->matches.push_back(new Match(
+                    matchDay, new MatchResult(homeTeamPtr, awayTeamPtr,
+                                              homeGoals, awayGoals)));
 
                 std::cout << "Match day " << matchDay << " - " << homeTeam
                           << " vs. " << awayTeam << std::endl;
@@ -92,8 +87,6 @@ void League::fillMatchResults(const std::string& filePath) {
     }
 }
 
-const std::list<MatchResult*>& League::getMatchResults() const {
-    return this->matchResults;
-}
+const std::list<Match*>& League::getMatches() const { return this->matches; }
 
 const std::list<Team*>& League::getTeams() const { return this->teams; }

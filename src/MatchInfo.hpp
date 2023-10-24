@@ -6,8 +6,7 @@
 
 class MatchInfo {
    public:
-    MatchInfo(Team* homeTeam, Team* awayTeam, unsigned short int homeTeamScore,
-              unsigned short int awayTeamScore, std::string matchDate, std::string matchTime,
+    MatchInfo(std::string matchDate, std::string matchTime,
               std::string matchPlace);
 
     // Getter methods

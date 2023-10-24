@@ -34,11 +34,18 @@ class RedCard {
 class Match {
   - id: unsigned long int
   - {static} nextId: unsigned long int
+  - matchDay: unsigned short int
   - matchInfo: MatchInfo
   - matchResult: MatchResult
 
   + Match()
   + getId(): unsigned long int
+  + getMatchDay(): unsigned short int
+  + setMatchDay(matchDay: unsigned short int): void
+  + getMatchInfo(): MatchInfo
+  + setMatchInfo(matchInfo: MatchInfo): void
+  + getMatchResult(): MatchResult
+  + setMatchResult(matchResult: MatchResult): void
 }
 
 class MatchResult {
