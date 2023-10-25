@@ -60,10 +60,17 @@ void League::fillMatches(const std::string& filePath) {
                     for (const auto& scorer : homeGoalScorers) {
                         std::string playerName =
                             scorer.second.get<std::string>("player");
-                        std::string minute = "8'";
-                        matchInfo->addGoal(new Goal{
-                            homeTeamPtr->findOrCreatePlayer(playerName), minute,
-                            homeTeamPtr});
+                        const boost::property_tree::ptree& goals =
+                            scorer.second.get_child("gols");
+
+                        for (const auto& goal : goals) {
+                            std::string minute = goal.second.data();
+                            matchInfo->addGoal(new Goal{
+                                homeTeamPtr->findOrCreatePlayer(playerName),
+                                minute,
+                                homeTeamPtr
+                            });
+                        }
                     }
                 }
                 if (awayGoals > 0) {
@@ -73,10 +80,17 @@ void League::fillMatches(const std::string& filePath) {
                     for (const auto& scorer : awayGoalScorers) {
                         std::string playerName =
                             scorer.second.get<std::string>("player");
-                        std::string minute = "13'";
-                        matchInfo->addGoal(new Goal{
-                            awayTeamPtr->findOrCreatePlayer(playerName), minute,
-                            awayTeamPtr});
+                        const boost::property_tree::ptree& goals =
+                            scorer.second.get_child("gols");
+
+                        for (const auto& goal : goals) {
+                            std::string minute = goal.second.data();
+                            matchInfo->addGoal(new Goal{
+                                awayTeamPtr->findOrCreatePlayer(playerName),
+                                minute,
+                                awayTeamPtr
+                            });
+                        }
                     }
                 }
 

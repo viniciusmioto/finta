@@ -154,9 +154,27 @@ void Console::printMatchDetails(const Match& match) {
     // create iterator to iterate over the list of goals
     std::list<Goal*>::const_iterator it;
 
+    std::cout << "Goals of " << match.getMatchResult()->getHomeTeam()->getName()
+              << ":" << std::endl;
     for (it = match.getMatchInfo()->getGoals().begin();
          it != match.getMatchInfo()->getGoals().end(); it++) {
-            std::cout << (*it)->getPlayer()->getName() << std::endl;
+            if ((*it)->getTeam() == match.getMatchResult()->getHomeTeam()) {
+                std::cout << (*it)->getPlayer()->getName() << " "
+                          << (*it)->getTime() << std::endl;
+            }
+    }
+
+    std::cout << std::endl;
+
+    std::cout << "Goals of " << match.getMatchResult()->getAwayTeam()->getName()
+              << ":" << std::endl;
+    // Print the goals from away team
+    for (it = match.getMatchInfo()->getGoals().begin();
+         it != match.getMatchInfo()->getGoals().end(); it++) {
+            if ((*it)->getTeam() == match.getMatchResult()->getAwayTeam()) {
+                std::cout << (*it)->getPlayer()->getName() << " "
+                          << (*it)->getTime() << std::endl;
+            }
     }
 
     std::cout << std::endl;

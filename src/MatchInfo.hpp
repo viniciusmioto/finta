@@ -27,8 +27,6 @@ class MatchInfo {
     // Method to add a goal to the match
     void addGoal(Goal* goal);
 
-    void addGoals(std::list<Goal*> goals);
-
     const std::list<Goal*>& getGoals() const;
 
    private:
@@ -36,6 +34,7 @@ class MatchInfo {
     std::string matchTime;
     std::string matchPlace;
     std::list<Goal*> goals;
+
 };
 
 #endif // MATCH_INFO_HPP
