@@ -10,7 +10,6 @@ class MatchResult {
     MatchResult(Team* homeTeam, Team* awayTeam, unsigned short int homeTeamScore,
                 unsigned short int awayTeamScore);
 
-    
     Team* getHomeTeam() const;
     
     Team* getAwayTeam() const;

@@ -1,5 +1,7 @@
 #include "Player.hpp"
 
+Player::Player(std::string name) : Person{name} {}
+
 Player::Player(std::string name, std::string position,
                uint8_t jerseyNumber)
     : Person{name}, position{position}, jerseyNumber{jerseyNumber} {}

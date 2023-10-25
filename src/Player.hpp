@@ -5,6 +5,7 @@
 
 class Player : public Person {
    public:
+    Player(std::string name);
     Player(std::string name, std::string position, uint8_t jerseyNumber);
 
     std::string getPosition() const;
@@ -18,4 +19,4 @@ class Player : public Person {
     uint8_t jerseyNumber;
 };
 
-#endif // PLAYER_HPP
+#endif  // PLAYER_HPP

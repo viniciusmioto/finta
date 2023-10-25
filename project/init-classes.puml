@@ -72,7 +72,7 @@ Class MatchInfo {
   + MatchInfo(matchDate: Date, matchTime: Time, matchPlace: string)
   + getMatchDate(): Date
   + setMatchDate(matchDate: Date): void
-  + getMatchTime(): Time
+  + getMatchHour(): Time
   + setMatchTime(matchTime: Time): void
   + getMatchPlace(): string
   + setMatchPlace(matchPlace: string): void

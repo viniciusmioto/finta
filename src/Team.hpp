@@ -4,6 +4,8 @@
 #include <list>
 #include <string>
 
+#include <iostream>
+
 #include "Person.hpp"
 #include "Player.hpp"
 
@@ -39,6 +41,7 @@ class Team {
 
     void addPlayer(Player* player);
     const std::list<Player*>& getPlayers() const;
+    Player* findOrCreatePlayer(const std::string& playerName);
 
     short int getGoalsAgainst() const;
     void addGoalsAgainst(const short int goalsAgainst);

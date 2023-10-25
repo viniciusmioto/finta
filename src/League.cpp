@@ -33,28 +33,26 @@ void League::fillMatches(const std::string& filePath) {
         boost::property_tree::ptree data;
         boost::property_tree::read_json(filePath, data);
 
-        for (int matchDay = 1; matchDay <= 38; ++matchDay) {
+        for (unsigned short matchDay = 1; matchDay <= 38; ++matchDay) {
             for (const auto& match : data.get_child(std::to_string(matchDay))) {
                 std::string homeTeam =
                     match.second.get<std::string>("clubs.home");
-                int homeGoals = match.second.get<int>("goals.home");
+                unsigned short homeGoals =
+                    match.second.get<unsigned short>("goals.home");
                 std::string awayTeam =
                     match.second.get<std::string>("clubs.away");
-                int awayGoals = match.second.get<int>("goals.away");
+                unsigned short awayGoals =
+                    match.second.get<unsigned short>("goals.away");
 
                 // Find or create the Team* pointers for home and away teams
                 Team* homeTeamPtr = findOrCreateTeam(homeTeam);
                 Team* awayTeamPtr = findOrCreateTeam(awayTeam);
 
-                // Add the match result
-                this->matches.push_back(new Match(
-                    matchDay, new MatchResult(homeTeamPtr, awayTeamPtr,
-                                              homeGoals, awayGoals)));
+                MatchInfo* matchInfo =
+                    new MatchInfo(match.second.get<std::string>("date"),
+                                  match.second.get<std::string>("hour"),
+                                  match.second.get<std::string>("stadium"));
 
-                std::cout << "Match day " << matchDay << " - " << homeTeam
-                          << " vs. " << awayTeam << std::endl;
-                std::cout << "Home Team  Goal Scorers : ";
-                // Print the goal scorers for this match
                 if (homeGoals > 0) {
                     const boost::property_tree::ptree& homeGoalScorers =
                         match.second.get_child("goalsPlayer.home");
@@ -62,23 +60,32 @@ void League::fillMatches(const std::string& filePath) {
                     for (const auto& scorer : homeGoalScorers) {
                         std::string playerName =
                             scorer.second.get<std::string>("player");
-                        std::cout << playerName << " ";
+                        std::string minute = "8'";
+                        matchInfo->addGoal(new Goal{
+                            homeTeamPtr->findOrCreatePlayer(playerName), minute,
+                            homeTeamPtr});
                     }
-                    std::cout << std::endl;
                 }
                 if (awayGoals > 0) {
                     const boost::property_tree::ptree& awayGoalScorers =
                         match.second.get_child("goalsPlayer.away");
 
-                    std::cout << "Away Team Goal Scorers: ";
                     for (const auto& scorer : awayGoalScorers) {
                         std::string playerName =
                             scorer.second.get<std::string>("player");
-                        std::cout << playerName << " ";
+                        std::string minute = "13'";
+                        matchInfo->addGoal(new Goal{
+                            awayTeamPtr->findOrCreatePlayer(playerName), minute,
+                            awayTeamPtr});
                     }
-
-                    std::cout << std::endl;
                 }
+
+                // Add the match
+                this->matches.push_back(
+                    new Match{matchDay,
+                              new MatchResult{homeTeamPtr, awayTeamPtr,
+                                              homeGoals, awayGoals},
+                              matchInfo});
             }
         }
     } catch (const std::exception& e) {
