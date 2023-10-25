@@ -80,18 +80,6 @@ void League::fillMatches(const std::string& filePath) {
                     }
                 }
 
-                // print goals
-                // create iterator
-                // if (homeGoals > 0 || awayGoals > 0) {
-                //     std::cout << "Goals for Match ID: " << matchDay << std::endl;
-                //     std::list<Goal*>::const_iterator it;
-
-                //     for (it = matchInfo->getGoals().begin();
-                //          it != matchInfo->getGoals().end(); it++) {
-                //         std::cout << (*it)->getPlayer()->getName() << std::endl;
-                //     }
-                // }
-
                 // Add the match
                 this->matches.push_back(
                     new Match{matchDay,

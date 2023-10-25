@@ -27,7 +27,9 @@ class MatchInfo {
     // Method to add a goal to the match
     void addGoal(Goal* goal);
 
-    std::list<Goal*> getGoals() const;
+    void addGoals(std::list<Goal*> goals);
+
+    const std::list<Goal*>& getGoals() const;
 
    private:
     std::string matchDate;

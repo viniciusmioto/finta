@@ -47,4 +47,19 @@ void MatchInfo::addGoal(Goal* goal) {
     goals.push_back(goal);
 }
 
-std::list<Goal*> MatchInfo::getGoals() const { return goals; }
+void MatchInfo::addGoals(std::list<Goal*> goals) {
+    std::list<Goal*>::const_iterator it;
+
+    for (it = goals.begin(); it != goals.end(); it++) {
+        std::cout << "Add Goal: " << std::endl;
+        std::cout << (*it)->getPlayer()->getName() << std::endl;
+        std::cout << (*it)->getTime() << std::endl;
+        std::cout << (*it)->getTeam()->getName() << std::endl;
+
+        std::cout << std::endl;
+
+        this->goals.push_back(*it);
+    }
+}
+
+const std::list<Goal*>& MatchInfo::getGoals() const { return goals; }
