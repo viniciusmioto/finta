@@ -5,11 +5,13 @@ MatchInfo::MatchInfo(std::string matchDate, std::string matchTime,
     : matchDate{matchDate}, matchTime{matchTime}, matchPlace{matchPlace} {}
 
 MatchInfo::MatchInfo(std::string matchDate, std::string matchTime,
-                     std::string matchPlace, std::list<Goal*> goals)
+                     std::string matchPlace, std::list<Goal*> homeGoals,
+                     std::list<Goal*> awayGoals)
     : matchDate{matchDate},
       matchTime{matchTime},
       matchPlace{matchPlace},
-      goals{goals} {}
+      homeGoals{homeGoals},
+      awayGoals{awayGoals} {}
 
 std::string MatchInfo::getMatchDate() const { return matchDate; }
 
@@ -36,15 +38,10 @@ std::string MatchInfo::showMatchInfo() const {
     return matchInfoString;
 }
 
-void MatchInfo::addGoal(Goal* goal) {
-    std::cout << "Add Goal: " << std::endl;
-    std::cout << goal->getPlayer()->getName() << std::endl;
-    std::cout << goal->getTime() << std::endl;
-    std::cout << goal->getTeam()->getName() << std::endl;
+void MatchInfo::addHomeGoal(Goal* goal) { homeGoals.push_back(goal); }
 
-    std::cout << std::endl;
+const std::list<Goal*>& MatchInfo::getHomeGoals() const { return homeGoals; }
 
-    goals.push_back(goal);
-}
+void MatchInfo::addAwayGoal(Goal* goal) { awayGoals.push_back(goal); }
 
-const std::list<Goal*>& MatchInfo::getGoals() const { return goals; }
+const std::list<Goal*>& MatchInfo::getAwayGoals() const { return awayGoals; }

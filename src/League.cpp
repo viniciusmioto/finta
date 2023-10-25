@@ -65,7 +65,7 @@ void League::fillMatches(const std::string& filePath) {
 
                         for (const auto& goal : goals) {
                             std::string minute = goal.second.data();
-                            matchInfo->addGoal(new Goal{
+                            matchInfo->addHomeGoal(new Goal{
                                 homeTeamPtr->findOrCreatePlayer(playerName),
                                 minute,
                                 homeTeamPtr
@@ -85,7 +85,7 @@ void League::fillMatches(const std::string& filePath) {
 
                         for (const auto& goal : goals) {
                             std::string minute = goal.second.data();
-                            matchInfo->addGoal(new Goal{
+                            matchInfo->addAwayGoal(new Goal{
                                 awayTeamPtr->findOrCreatePlayer(playerName),
                                 minute,
                                 awayTeamPtr

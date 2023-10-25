@@ -7,7 +7,7 @@ class Fact {
 
   + Fact(time: string)
   + getPlayer(): Player
-  + getTime(): string
+  + getMinute(): string
   + getTeam(): Team
 
   + setTime(time: string): void

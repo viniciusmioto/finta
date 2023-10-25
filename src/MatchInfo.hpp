@@ -9,7 +9,7 @@ class MatchInfo {
     MatchInfo(std::string matchDate, std::string matchTime,
               std::string matchPlace);
     MatchInfo(std::string matchDate, std::string matchTime,
-              std::string matchPlace, std::list<Goal*> goals);
+              std::string matchPlace, std::list<Goal*> homeGoals, std::list<Goal*> awayGoals);
 
     // Getter methods
     std::string getMatchDate() const;
@@ -25,16 +25,20 @@ class MatchInfo {
     std::string showMatchInfo() const;
 
     // Method to add a goal to the match
-    void addGoal(Goal* goal);
+    void addHomeGoal(Goal* goal);
 
-    const std::list<Goal*>& getGoals() const;
+    const std::list<Goal*>& getHomeGoals() const;
+
+    void addAwayGoal(Goal* goal);
+
+    const std::list<Goal*>& getAwayGoals() const;
 
    private:
     std::string matchDate;
     std::string matchTime;
     std::string matchPlace;
-    std::list<Goal*> goals;
-
+    std::list<Goal*> homeGoals;
+    std::list<Goal*> awayGoals;
 };
 
 #endif // MATCH_INFO_HPP

@@ -1,18 +1,18 @@
 #include "Goal.hpp"
 
-Goal::Goal(Player* player, std::string time, Team* team)
-    : time{time}, team{team} {
+Goal::Goal(Player* player, std::string minute, Team* team)
+    : minute{minute}, team{team} {
         setPlayer(player);
     }
 
 Player* Goal::getPlayer() const { return player; }
 
-std::string Goal::getTime() const { return time; }
+std::string Goal::getMinute() const { return minute; }
 
 Team* Goal::getTeam() const { return team; }
 
 void Goal::setPlayer(Player* player) { this->player = player; }
 
-void Goal::setTime(const std::string& time) { this->time = time; }
+void Goal::setMinute(const std::string& minute) { this->minute = minute; }
 
 void Goal::setTeam(Team* team) { this->team = team; }

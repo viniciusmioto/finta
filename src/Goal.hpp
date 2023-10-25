@@ -7,18 +7,18 @@
 
 class Goal {
     public:
-        Goal(Player* player, std::string time, Team* team);
+        Goal(Player* player, std::string minute, Team* team);
         Player* getPlayer() const;
-        std::string getTime() const;
+        std::string getMinute() const;
         Team* getTeam() const;
 
         void setPlayer(Player* player);
-        void setTime(const std::string& time);
+        void setMinute(const std::string& minute);
         void setTeam(Team* team);
 
     private:
         Player* player;
-        std::string time;
+        std::string minute;
         Team* team;
 };
 
