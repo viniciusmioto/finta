@@ -6,7 +6,6 @@
 class Player : public Person {
    public:
     Player(std::string name);
-    Player(std::string name, std::string position, uint8_t jerseyNumber);
 
     std::string getPosition() const;
     void setPosition(const std::string& position);
@@ -17,10 +16,16 @@ class Player : public Person {
     unsigned short getGoalsScored() const;
     void setGoalsScored(const unsigned short goalsScored);
 
+    unsigned short getYellowCards() const;
+    void setYellowCards(const unsigned short yellowCards);
+
+    unsigned short getRedCards() const;
+    void setRedCards(const unsigned short redCards);
+
    private:
-    std::string position;
-    uint8_t jerseyNumber;
     unsigned short goalsScored;
+    unsigned short yellowCards;
+    unsigned short redCards;
 };
 
 #endif  // PLAYER_HPP

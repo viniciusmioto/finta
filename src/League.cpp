@@ -71,13 +71,13 @@ void League::fillMatches(const std::string& filePath) {
                             (minute.find("(GC)") != std::string::npos);
 
                         if (isOwnGoal)
-                        matchInfo->addHomeGoal(new Goal{
-                            awayTeamPtr->findOrCreatePlayer(playerName), minute,
-                            homeTeamPtr, isOwnGoal});
+                            matchInfo->addHomeGoal(new Goal{
+                                awayTeamPtr->findOrCreatePlayer(playerName),
+                                minute, isOwnGoal});
                         else
-                        matchInfo->addHomeGoal(new Goal{
-                            homeTeamPtr->findOrCreatePlayer(playerName), minute,
-                            homeTeamPtr, isOwnGoal});
+                            matchInfo->addHomeGoal(new Goal{
+                                homeTeamPtr->findOrCreatePlayer(playerName),
+                                minute, isOwnGoal});
                     }
                 }
             }
@@ -99,14 +99,50 @@ void League::fillMatches(const std::string& filePath) {
                         if (isOwnGoal)
                             matchInfo->addAwayGoal(new Goal{
                                 homeTeamPtr->findOrCreatePlayer(playerName),
-                                minute, awayTeamPtr, isOwnGoal});
+                                minute, isOwnGoal});
                         else
                             matchInfo->addAwayGoal(new Goal{
                                 awayTeamPtr->findOrCreatePlayer(playerName),
-                                minute, awayTeamPtr, isOwnGoal});
+                                minute, isOwnGoal});
                     }
                 }
             }
+
+             // Extract yellow cards for the home team
+        for (const auto& yellowCard : match.second.get_child("cards.home.yellow")) {
+            std::string playerName = yellowCard.second.get<std::string>("player");
+            std::string minute = yellowCard.second.get<std::string>("time");
+
+            matchInfo->addHomeYellowCard(new YellowCard{
+                homeTeamPtr->findOrCreatePlayer(playerName), minute});
+        }
+
+        // Extract yellow cards for the away team
+        for (const auto& yellowCard : match.second.get_child("cards.away.yellow")) {
+            std::string playerName = yellowCard.second.get<std::string>("player");
+            std::string minute = yellowCard.second.get<std::string>("time");
+
+            matchInfo->addAwayYellowCard(new YellowCard{
+                awayTeamPtr->findOrCreatePlayer(playerName), minute});
+        }
+
+        // Extract red cards for the home team
+        for (const auto& redCard : match.second.get_child("cards.home.red")) {
+            std::string playerName = redCard.second.get<std::string>("player");
+            std::string minute = redCard.second.get<std::string>("time");
+
+            matchInfo->addHomeRedCard(new RedCard{
+                homeTeamPtr->findOrCreatePlayer(playerName), minute});
+        }
+
+        // Extract red cards for the away team
+        for (const auto& redCard : match.second.get_child("cards.away.red")) {
+            std::string playerName = redCard.second.get<std::string>("player");
+            std::string minute = redCard.second.get<std::string>("time");
+
+            matchInfo->addAwayRedCard(new RedCard{
+                awayTeamPtr->findOrCreatePlayer(playerName), minute});
+        }
 
             // Add the match
             this->matches.push_back(new Match{

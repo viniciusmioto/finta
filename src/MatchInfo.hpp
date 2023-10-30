@@ -3,6 +3,8 @@
 
 #include "MatchResult.hpp"
 #include "Goal.hpp"
+#include "YellowCard.hpp"
+#include "RedCard.hpp"
 
 class MatchInfo {
    public:
@@ -33,12 +35,33 @@ class MatchInfo {
 
     const std::list<Goal*>& getAwayGoals() const;
 
+    void addHomeYellowCard(YellowCard* yellowCard);
+
+    const std::list<YellowCard*>& getHomeYellowCards() const;
+
+    void addAwayYellowCard(YellowCard* yellowCard);
+
+    const std::list<YellowCard*>& getAwayYellowCards() const;
+
+    void addHomeRedCard(RedCard* redCard);
+
+    const std::list<RedCard*>& getHomeRedCards() const;
+
+    void addAwayRedCard(RedCard* redCard);
+
+    const std::list<RedCard*>& getAwayRedCards() const;
+
    private:
     std::string matchDate;
     std::string matchTime;
     std::string matchPlace;
     std::list<Goal*> homeGoals;
     std::list<Goal*> awayGoals;
+    std::list<YellowCard*> homeYellowCards;
+    std::list<YellowCard*> awayYellowCards;
+    std::list<RedCard*> homeRedCards;
+    std::list<RedCard*> awayRedCards;
+
 };
 
 #endif // MATCH_INFO_HPP

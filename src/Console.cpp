@@ -46,9 +46,13 @@ void Console::printPlayers(const std::list<Player*>& players) {
     std::cout << "Players:\n" << std::endl;
     std::list<Player*>::iterator it;
 
+    std::cout << PURPLE_BG << std::setw(NUM_WIDTH) << " ⚽"
+              << " | " << std::setw(NUM_WIDTH) << "🟨"
+              << " | " << std::setw(NUM_WIDTH) << "🟥"
+              << " | " << std::setw(NAME_WIDTH * 1.5) << "Name" << std::setw(NAME_WIDTH * 1.5) << RESET_TEXT << std::endl;
+
     for (auto it = players.begin(); it != players.end(); it++) {
-        std::cout << (*it)->getName() << " | " << (*it)->getGoalsScored()
-                  << "⚽ " << std::endl;
+        std::cout << std::setw(NUM_WIDTH) << (*it)->getGoalsScored() << " |" << std::setw(NUM_WIDTH) << (*it)->getYellowCards() << " |" << std::setw(NUM_WIDTH) << (*it)->getRedCards() << " | " << (*it)->getName() << std::endl;
     }
 }
 

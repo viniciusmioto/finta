@@ -1,22 +1,12 @@
 #include "Goal.hpp"
 
-Goal::Goal(Player* player, std::string minute, Team* team, bool isOwnGoal)
-    : minute{minute}, team{team}, isOwnGoal{isOwnGoal} {
-    setPlayer(player);
+Goal::Goal(Player* player, std::string minute, bool isOwnGoal)
+    : Fact(player, minute), isOwnGoal{isOwnGoal} {
+    player->setGoalsScored(player->getGoalsScored() + 1);
 }
 
-Player* Goal::getPlayer() const { return player; }
+Goal::~Goal() {}
 
-std::string Goal::getMinute() const { return minute; }
+bool Goal::getIsOwnGoal() const { return isOwnGoal; }
 
-Team* Goal::getTeam() const { return team; }
-
-void Goal::setPlayer(Player* player) {
-    this->player = player;
-    if (!isOwnGoal)
-        this->player->setGoalsScored(this->player->getGoalsScored() + 1);
-}
-
-void Goal::setMinute(const std::string& minute) { this->minute = minute; }
-
-void Goal::setTeam(Team* team) { this->team = team; }
+void Goal::setIsOwnGoal(bool isOwnGoal) { this->isOwnGoal = isOwnGoal; }
