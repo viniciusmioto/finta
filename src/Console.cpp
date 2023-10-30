@@ -19,7 +19,7 @@ bool Console::compareTeams(const Team* homeTeam, const Team* awayTeam) {
 }
 
 // show menu
-void Console::showMenu() {
+void Console::printMenu() {
     std::cout << "\n Choose an option:\n"
               << " 1 - Show all match results\n"
               << " 2 - Show match results for a match day\n"
@@ -33,7 +33,7 @@ void Console::showMenu() {
 }
 
 // show teams
-void Console::showTeams(const std::list<Team*>& teams) {
+void Console::printTeams(const std::list<Team*>& teams) {
     std::cout << "Teams:\n" << std::endl;
     std::list<Team*>::iterator it;
 
@@ -42,12 +42,13 @@ void Console::showTeams(const std::list<Team*>& teams) {
     }
 }
 
-void Console::showPlayers(const std::list<Player*>& players) {
+void Console::printPlayers(const std::list<Player*>& players) {
     std::cout << "Players:\n" << std::endl;
     std::list<Player*>::iterator it;
 
     for (auto it = players.begin(); it != players.end(); it++) {
-        std::cout << (*it)->getName() << std::endl;
+        std::cout << (*it)->getName() << " | " << (*it)->getGoalsScored()
+                  << "⚽ " << std::endl;
     }
 }
 
@@ -79,9 +80,14 @@ void Console::printMatchResults(const Team& team) {
     const std::list<MatchResult*>& matchResultsList = team.getMatchResults();
     std::list<MatchResult*>::const_iterator it;
 
+    unsigned short int matchDay = 1;
     for (it = matchResultsList.begin(); it != matchResultsList.end(); it++) {
-        // show match id
-        // std::cout << "[" << (*it)->getMatch()->getId() << "] ";
+        // show match day
+        if (matchDay < 10)
+            std::cout << "[" << matchDay << "]  ";
+        else
+            std::cout << "[" << matchDay << "] ";
+        matchDay++;
 
         // check if it is the homeTeam, so underlines the name
         if ((*it)->getHomeTeam() == &team) {

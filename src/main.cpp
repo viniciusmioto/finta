@@ -24,10 +24,10 @@ int main() {
     league.fillMatches(dataFile);
 
 #ifdef DEBUG
-    Console::showTeams(league.getTeams());
+    Console::printTeams(league.getTeams());
 #endif
 
-    Console::showMenu();
+    Console::printMenu();
 
     int option;
     std::cout << " Option: ";
@@ -55,7 +55,7 @@ int main() {
                 break;
             case 3:
                 system("clear");
-                Console::showTeams(league.getTeams());
+                Console::printTeams(league.getTeams());
                 std::cout << WHITE_BG << " Choose a team:" << RESET_TEXT;
                 std::cin.ignore();
                 std::getline(std::cin, teamName);
@@ -79,14 +79,14 @@ int main() {
                 break;
             case 5:
                 system("clear");
-                Console::showTeams(league.getTeams());
+                Console::printTeams(league.getTeams());
                 std::cout << WHITE_BG << " Choose a team:" << RESET_TEXT;
                 std::cin.ignore();
                 std::getline(std::cin, teamName);
                 for (Team* team : league.getTeams()) {
                     if (teamName == team->getName()) {
                         std::cout << team->getName() << std::endl;
-                        Console::showPlayers(team->getPlayers());
+                        Console::printPlayers(team->getPlayers());
                     }
                 }
                 break;
@@ -110,7 +110,7 @@ int main() {
                 break;
         }
 
-        Console::showMenu();
+        Console::printMenu();
 
         std::cout << WHITE_BG << " Option: " << RESET_TEXT;
         std::cin >> option;

@@ -3,8 +3,8 @@
 
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
-#include <list>
 #include <iostream>
+#include <list>
 
 #include "Match.hpp"
 #include "Team.hpp"
@@ -17,6 +17,10 @@ class League {
     void addTeams(std::list<Team*> teams);
 
     void addMatch(Match* matches);
+
+    void addGoalScorers(Team* team,
+                                const boost::property_tree::ptree& goalScorers,
+                                MatchInfo* matchInfo, Team* scorerTeam);
 
     void fillMatches(const std::string& filePath);
 
