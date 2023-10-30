@@ -1,31 +1,9 @@
 #include "Player.hpp"
 
 Player::Player(std::string name) : Person{name} {
-    position = "";
-    jerseyNumber = 0;
     goalsScored = 0;
-}
-
-Player::Player(std::string name, std::string position,
-               uint8_t jerseyNumber)
-    : Person{name}, position{position}, jerseyNumber{jerseyNumber} {
-    goalsScored = 0;
-    }
-
-std::string Player::getPosition() const {
-    return position;
-}
-
-void Player::setPosition(const std::string& position) {
-    this->position = position;
-}
-
-uint8_t Player::getJerseyNumber() const {
-    return jerseyNumber;
-}
-
-void Player::setJerseyNumber(const uint8_t jerseyNumber) {
-    this->jerseyNumber = jerseyNumber;
+    yellowCards = 0;
+    redCards = 0;
 }
 
 unsigned short Player::getGoalsScored() const {
@@ -34,4 +12,20 @@ unsigned short Player::getGoalsScored() const {
 
 void Player::setGoalsScored(const unsigned short goalsScored) {
     this->goalsScored = goalsScored;
+}
+
+unsigned short Player::getYellowCards() const {
+    return yellowCards;
+}
+
+void Player::setYellowCards(const unsigned short yellowCards) {
+    this->yellowCards = yellowCards;
+}
+
+unsigned short Player::getRedCards() const {
+    return redCards;
+}
+
+void Player::setRedCards(const unsigned short redCards) {
+    this->redCards = redCards;
 }
