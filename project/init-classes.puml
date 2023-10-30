@@ -3,32 +3,27 @@
 class Fact {
   - player: Player
   - time: string
-  - team: Team
 
-  + Fact(time: string)
+  + Fact(player: Player, time: string)
+
   + getPlayer(): Player
   + getMinute(): string
-  + getTeam(): Team
 
-  + setTime(time: string): void
+  + setMinute(minute: string): void
+  + setPlayer(player: Player): void
 }
 
 class Goal {
-  + Goal()
-  + setPlayer(player: Player): void
-  + setTeam(team: Team): void
+  - isOwnGoal: bool
+  + Goal(player: Player, time: string, isOwnGoal: bool)
 }
 
 class YellowCard {
-  + YellowCard()
-  + setPlayer(player: Player): void
-  + setTeam(team: Team): void
+  + YellowCard(player: Player, time: string)
 }
 
 class RedCard {
-  + RedCard()
-  + setPlayer(player: Player): void
-  + setTeam(team: Team): void
+  + RedCard(player: Player, time: string)
 }
 
 class Match {
@@ -68,6 +63,8 @@ Class MatchInfo {
   - matchTime: Time
   - matchPlace: string
   - goals: Goal[]
+  - yellowCards: Fact[]
+  - redCards: Fact[]
 
   + MatchInfo(matchDate: Date, matchTime: Time, matchPlace: string)
   + getMatchDate(): Date
@@ -86,9 +83,11 @@ class Team {
   - matchResults: MatchResult[]
   - staff: Person[]
   - players: Player[]
-  - goals: Goal[]
-  - yellowCards: YellowCard[]
-  - redCards: RedCard[]
+  - goals: unsigned short int
+  - goalsAgainst: unsigned short int
+  - goalsDifference: unsigned short int
+  - yellowCards: unsigned short int
+  - redCards: unsigned short int
 
   + Team(name: string)
   + getName(): string
@@ -112,35 +111,35 @@ class Person {
 }
 
 class Player {
-  - number: unsigned short int
-  - position: string
-  - goals: Goal[]
-  - yellowCards: YellowCard[]
-  - redCards: RedCard[]
+  - goalsScored: unsigned short int
+  - yellowCards: unsigned short int
+  - redCards: unsigned short int
 
   + Player(name: string, number: unsigned short int, position: string)
-  + getJerseyNumber(): unsigned short int
-  + setJerseyNumber(number: unsigned short int): void
-  + getPosition(): string
-  + setPosition(position: string): void
+  + getGoalsScored(): unsigned short int
+  + addGoalsScored(goalsScored: unsigned short int): void
+  + getYellowCards(): unsigned short int
+  + addYellowCards(yellowCards: unsigned short int): void
+  + getRedCards(): unsigned short int
+  + addRedCards(redCards: unsigned short int): void
 }
 
 class League {
   - name: string
   - teams: Team[]
   - matchResults: MatchResult[]
-  - goals: Goal[]
-  - yellowCards: Yellow[]
-  - redCards: RedCard[]
 
   + League(name: string)
+  + League(name: string, teams: Team[])
+  + League(name: string, teams: Team[], matchResults: MatchResult[])
+ 
   + getName(): string
   + setName(name: string): void
   + getTeams(): Team[]
   + addTeam(team: Team): void
-  + getMatchResults(): MatchResult[]
-  + addMatchResult(matchResult: MatchResult): void
-  + addMatchResults(matchResults: MatchResult[]): void
+  + getMatch(): Match
+  + addMatch(match: Match): void
+  + addMatch(matches: Match): void
   + findOrCreateTeam(const std::string& teamName)
   + fillMatchResults(string: filePath): void
 }
@@ -153,25 +152,16 @@ class Console {
   + {static} printTable(teams: Team[]): void
 }
 
-League "1" -- "goals 0..*" Goal
-League "1" -- "yellowCards 0..*" YellowCard
-League "1" -- "redCards 0..*" RedCard
 MatchInfo "1" -- "goals 0..*" Goal
-MatchInfo "1" -- "yellowCards 0..*" YellowCard
-MatchInfo "1" -- "redCards 0..*" RedCard
-Player "1" -- "goals 0..*" Goal
-Player "1" -- "yellowCards 0..*" YellowCard
-Player "1" -- "redCards 0..*" RedCard
-Team "1" -- "goals 0..*" Goal
-Team "1" -- "yellowCards 0..*" YellowCard
-Team "1" -- "redCards 0..*" RedCard
+MatchInfo "1" -- "yellowCards 0..*" Fact
+MatchInfo "1" -- "redCards 0..*" Fact
 
 MatchResult "0..*" -- "homeTeam 1" Team
 MatchResult "0..*" -- "1 awayTeam" Team
 Team "0..*" -- "staff 1..*" Person
 Team "0..*" -- "players 1..*" Player
 League "0..*" -- "teams 20" Team
-League "0..*" -- "matchResults 1..380" MatchResult
+League "0..*" -- "matches 1..380" Match
 
 Person <|-- Player
 Fact <|-- Goal

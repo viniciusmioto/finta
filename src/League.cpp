@@ -1,9 +1,17 @@
 #include "League.hpp"
 
-League::League(std::list<Team*> teams) : teams(teams) {}
+League::League(std::string name) : name{name} {}
 
-League::League(std::list<Team*> teams, std::list<Match*> matches)
-    : teams(teams), matches(matches) {}
+League::League(std::string name, std::list<Team*> teams)
+    : name{name}, teams(teams) {}
+
+League::League(std::string name, std::list<Team*> teams,
+               std::list<Match*> matches)
+    : name{name}, teams(teams), matches(matches) {}
+
+std::string League::getName() const { return this->name; }
+
+void League::setName(std::string name) { this->name = name; }
 
 void League::addTeams(std::list<Team*> teams) { this->teams = teams; }
 
@@ -50,9 +58,9 @@ void League::fillMatches(const std::string& filePath) {
             Team* awayTeamPtr = findOrCreateTeam(awayTeam);
 
             MatchInfo* matchInfo =
-                new MatchInfo(match.second.get<std::string>("date"),
+                new MatchInfo{match.second.get<std::string>("date"),
                               match.second.get<std::string>("hour"),
-                              match.second.get<std::string>("stadium"));
+                              match.second.get<std::string>("stadium")};
 
             if (homeGoals > 0) {
                 const boost::property_tree::ptree& homeGoalScorers =
@@ -108,41 +116,49 @@ void League::fillMatches(const std::string& filePath) {
                 }
             }
 
-             // Extract yellow cards for the home team
-        for (const auto& yellowCard : match.second.get_child("cards.home.yellow")) {
-            std::string playerName = yellowCard.second.get<std::string>("player");
-            std::string minute = yellowCard.second.get<std::string>("time");
+            // Extract yellow cards for the home team
+            for (const auto& yellowCard :
+                 match.second.get_child("cards.home.yellow")) {
+                std::string playerName =
+                    yellowCard.second.get<std::string>("player");
+                std::string minute = yellowCard.second.get<std::string>("time");
 
-            matchInfo->addHomeYellowCard(new YellowCard{
-                homeTeamPtr->findOrCreatePlayer(playerName), minute});
-        }
+                matchInfo->addHomeYellowCard(new YellowCard{
+                    homeTeamPtr->findOrCreatePlayer(playerName), minute});
+            }
 
-        // Extract yellow cards for the away team
-        for (const auto& yellowCard : match.second.get_child("cards.away.yellow")) {
-            std::string playerName = yellowCard.second.get<std::string>("player");
-            std::string minute = yellowCard.second.get<std::string>("time");
+            // Extract yellow cards for the away team
+            for (const auto& yellowCard :
+                 match.second.get_child("cards.away.yellow")) {
+                std::string playerName =
+                    yellowCard.second.get<std::string>("player");
+                std::string minute = yellowCard.second.get<std::string>("time");
 
-            matchInfo->addAwayYellowCard(new YellowCard{
-                awayTeamPtr->findOrCreatePlayer(playerName), minute});
-        }
+                matchInfo->addAwayYellowCard(new YellowCard{
+                    awayTeamPtr->findOrCreatePlayer(playerName), minute});
+            }
 
-        // Extract red cards for the home team
-        for (const auto& redCard : match.second.get_child("cards.home.red")) {
-            std::string playerName = redCard.second.get<std::string>("player");
-            std::string minute = redCard.second.get<std::string>("time");
+            // Extract red cards for the home team
+            for (const auto& redCard :
+                 match.second.get_child("cards.home.red")) {
+                std::string playerName =
+                    redCard.second.get<std::string>("player");
+                std::string minute = redCard.second.get<std::string>("time");
 
-            matchInfo->addHomeRedCard(new RedCard{
-                homeTeamPtr->findOrCreatePlayer(playerName), minute});
-        }
+                matchInfo->addHomeRedCard(new RedCard{
+                    homeTeamPtr->findOrCreatePlayer(playerName), minute});
+            }
 
-        // Extract red cards for the away team
-        for (const auto& redCard : match.second.get_child("cards.away.red")) {
-            std::string playerName = redCard.second.get<std::string>("player");
-            std::string minute = redCard.second.get<std::string>("time");
+            // Extract red cards for the away team
+            for (const auto& redCard :
+                 match.second.get_child("cards.away.red")) {
+                std::string playerName =
+                    redCard.second.get<std::string>("player");
+                std::string minute = redCard.second.get<std::string>("time");
 
-            matchInfo->addAwayRedCard(new RedCard{
-                awayTeamPtr->findOrCreatePlayer(playerName), minute});
-        }
+                matchInfo->addAwayRedCard(new RedCard{
+                    awayTeamPtr->findOrCreatePlayer(playerName), minute});
+            }
 
             // Add the match
             this->matches.push_back(new Match{

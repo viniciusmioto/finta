@@ -11,16 +11,17 @@
 
 class League {
    public:
-    League(std::list<Team*> teams);
-    League(std::list<Team*> teams, std::list<Match*> matches);
+    League(std::string name);
+    League(std::string name, std::list<Team*> teams);
+    League(std::string name, std::list<Team*> teams, std::list<Match*> matches);
+
+    std::string getName() const;
+
+    void setName(std::string name);
 
     void addTeams(std::list<Team*> teams);
 
     void addMatch(Match* matches);
-
-    void addGoalScorers(Team* team,
-                                const boost::property_tree::ptree& goalScorers,
-                                MatchInfo* matchInfo, Team* scorerTeam);
 
     void fillMatches(const std::string& filePath);
 
@@ -31,6 +32,7 @@ class League {
     const std::list<Team*>& getTeams() const;
 
    private:
+    std::string name;
     std::list<Team*> teams;
     std::list<Match*> matches;
 };

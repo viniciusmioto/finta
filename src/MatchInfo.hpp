@@ -35,21 +35,21 @@ class MatchInfo {
 
     const std::list<Goal*>& getAwayGoals() const;
 
-    void addHomeYellowCard(YellowCard* yellowCard);
+    void addHomeYellowCard(Fact* yellowCard);
 
-    const std::list<YellowCard*>& getHomeYellowCards() const;
+    const std::list<Fact*>& getHomeYellowCards() const;
 
-    void addAwayYellowCard(YellowCard* yellowCard);
+    void addAwayYellowCard(Fact* yellowCard);
 
-    const std::list<YellowCard*>& getAwayYellowCards() const;
+    const std::list<Fact*>& getAwayYellowCards() const;
 
-    void addHomeRedCard(RedCard* redCard);
+    void addHomeRedCard(Fact* redCard);
 
-    const std::list<RedCard*>& getHomeRedCards() const;
+    const std::list<Fact*>& getHomeRedCards() const;
 
-    void addAwayRedCard(RedCard* redCard);
+    void addAwayRedCard(Fact* redCard);
 
-    const std::list<RedCard*>& getAwayRedCards() const;
+    const std::list<Fact*>& getAwayRedCards() const;
 
    private:
     std::string matchDate;
@@ -57,10 +57,10 @@ class MatchInfo {
     std::string matchPlace;
     std::list<Goal*> homeGoals;
     std::list<Goal*> awayGoals;
-    std::list<YellowCard*> homeYellowCards;
-    std::list<YellowCard*> awayYellowCards;
-    std::list<RedCard*> homeRedCards;
-    std::list<RedCard*> awayRedCards;
+    std::list<Fact*> homeYellowCards;
+    std::list<Fact*> awayYellowCards;
+    std::list<Fact*> homeRedCards;
+    std::list<Fact*> awayRedCards;
 
 };
 

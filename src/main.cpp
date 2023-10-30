@@ -8,7 +8,7 @@
 int main() {
     std::list<Team*> teams;
     std::list<Match*> matches;
-    League league(teams, matches);
+    League league("brasileirão", teams, matches);
 
     int dataYear;
     std::string dataFile;

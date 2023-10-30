@@ -7,12 +7,6 @@ class Player : public Person {
    public:
     Player(std::string name);
 
-    std::string getPosition() const;
-    void setPosition(const std::string& position);
-
-    uint8_t getJerseyNumber() const;
-    void setJerseyNumber(const uint8_t jerseyNumber);
-
     unsigned short getGoalsScored() const;
     void setGoalsScored(const unsigned short goalsScored);
 
