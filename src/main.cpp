@@ -103,6 +103,7 @@ int main() {
                 dataFile =
                     "../data/brasileirao-" + std::to_string(dataYear) + ".json";
 
+                league.clearData();
                 league.fillMatches(dataFile);
                 break;
             default:

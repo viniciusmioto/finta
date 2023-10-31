@@ -9,6 +9,42 @@ League::League(std::string name, std::list<Team*> teams,
                std::list<Match*> matches)
     : name{name}, teams(teams), matches(matches) {}
 
+League::~League() {
+    for (Team* team : teams) {
+        for (Player* player : team->getPlayers()) {
+            delete player;
+        }
+        delete team;
+    }
+    teams.clear();
+
+    for (Match* match : matches) {
+        for (Goal* goal : match->getMatchInfo()->getHomeGoals()) {
+            delete goal;
+        }
+        delete match;
+    }
+    matches.clear();
+}
+
+void League::clearData() {
+    for (Team* team : teams) {
+        for (Player* player : team->getPlayers()) {
+            delete player;
+        }
+        delete team;
+    }
+    teams.clear();
+
+    for (Match* match : matches) {
+        for (Goal* goal : match->getMatchInfo()->getHomeGoals()) {
+            delete goal;
+        }
+        delete match;
+    }
+    matches.clear();
+}
+
 std::string League::getName() const { return this->name; }
 
 void League::setName(std::string name) { this->name = name; }

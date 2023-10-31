@@ -15,6 +15,8 @@ class League {
     League(std::string name, std::list<Team*> teams);
     League(std::string name, std::list<Team*> teams, std::list<Match*> matches);
 
+    ~League();
+
     std::string getName() const;
 
     void setName(std::string name);
@@ -30,6 +32,8 @@ class League {
     Team* findOrCreateTeam(const std::string& teamName);
 
     const std::list<Team*>& getTeams() const;
+
+    void clearData();
 
    private:
     std::string name;
