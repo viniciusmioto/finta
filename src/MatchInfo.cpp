@@ -13,6 +13,15 @@ MatchInfo::MatchInfo(std::string matchDate, std::string matchTime,
       homeGoals{homeGoals},
       awayGoals{awayGoals} {}
 
+MatchInfo::~MatchInfo() {
+    for (auto goal : homeGoals) delete goal;
+    for (auto goal : awayGoals) delete goal;
+    for (auto yellowCard : homeYellowCards) delete yellowCard;
+    for (auto yellowCard : awayYellowCards) delete yellowCard;
+    for (auto redCard : homeRedCards) delete redCard;
+    for (auto redCard : awayRedCards) delete redCard;
+}
+
 std::string MatchInfo::getMatchDate() const { return matchDate; }
 
 std::string MatchInfo::getMatchHour() const { return matchTime; }

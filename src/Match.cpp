@@ -12,6 +12,11 @@ Match::Match(unsigned short matchDay, MatchResult* MatchResult, MatchInfo* Match
     nextId++;
 }
 
+Match::~Match() {
+    delete matchResult;
+    delete matchInfo;
+}
+
 unsigned int Match::getId() const { return id; }
 
 unsigned short Match::getMatchDay() const { return matchDay; }

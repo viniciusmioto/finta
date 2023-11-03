@@ -10,6 +10,16 @@ Team::Team(std::string name)
       goalsAgainst{0},
       goalDifference{0} {}
 
+Team::~Team() {
+    for (Person* person : staff) {
+        delete person;
+    }
+
+    for (Player* player : players) {
+        delete player;
+    }
+}
+
 std::string Team::getName() const { return this->name; }
 
 void Team::setName(const std::string& name) { this->name = name; }

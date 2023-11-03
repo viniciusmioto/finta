@@ -8,6 +8,7 @@ class Match {
    public:
     Match(unsigned short matchDay, MatchResult* matchResult);
     Match(unsigned short matchDay, MatchResult* matchResult, MatchInfo* matchInfo);
+    ~Match();
 
     unsigned int getId() const;
     unsigned short getMatchDay() const;
