@@ -79,14 +79,22 @@ int main() {
                 break;
             case 5:
                 system("clear");
+                short int parameter;
                 Console::printTeams(league.getTeams());
                 std::cout << WHITE_BG << " Choose a team:" << RESET_TEXT;
                 std::cin.ignore();
                 std::getline(std::cin, teamName);
+
+                std::cout << "\n" << WHITE_BG << " Choose an sorting parameter:" << RESET_TEXT << std::endl;
+
+                std::cout << "  0 - Alphabetic\n" << "  1 - Goals\n" << "  2 - Yellow Cards\n" << "  3 - Red Cards\n" << std::endl;
+                std::cout << WHITE_BG << " Option: " << RESET_TEXT;
+                std::cin >> parameter;
+
                 for (Team* team : league.getTeams()) {
                     if (teamName == team->getName()) {
                         std::cout << team->getName() << std::endl;
-                        Console::printPlayers(team->getPlayers());
+                        Console::printPlayers(team->getPlayers(), parameter);
                     }
                 }
                 break;

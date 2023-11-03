@@ -18,6 +18,27 @@ bool Console::compareTeams(const Team* homeTeam, const Team* awayTeam) {
     return homeTeam->getPoints() > awayTeam->getPoints();
 }
 
+bool Console::comparePlayersByGoals(const Player* player1,
+                                    const Player* player2) {
+    return player1->getGoalsScored() > player2->getGoalsScored();
+}
+
+bool Console::comparePlayersByYellowCards(const Player* player1,
+                                          const Player* player2) {
+    return player1->getYellowCards() > player2->getYellowCards();
+}
+
+bool Console::comparePlayersByRedCards(const Player* player1,
+                                       const Player* player2) {
+    return player1->getRedCards() > player2->getRedCards();
+}
+
+bool Console::comparePlayersByName(const Player* player1,
+                                   const Player* player2) {
+    return player1->getName() < player2->getName();
+}
+
+
 // show menu
 void Console::printMenu() {
     std::cout << "\n Choose an option:\n"
@@ -44,8 +65,27 @@ void Console::printTeams(const std::list<Team*>& teams) {
     std::cout << std::endl;
 }
 
-void Console::printPlayers(const std::list<Player*>& players) {
+void Console::printPlayers(const std::list<Player*>& players, const unsigned short int parameter) {
     std::cout << "Players:\n" << std::endl;
+
+    std::list<Player*> playersCopy = players;
+
+    switch (parameter)
+    {
+    case 1:
+        playersCopy.sort(comparePlayersByGoals);
+        break;
+    case 2:
+        playersCopy.sort(comparePlayersByYellowCards);
+        break;
+    case 3:
+        playersCopy.sort(comparePlayersByRedCards);
+        break;
+    default:
+        playersCopy.sort(comparePlayersByName);
+    }
+
+    
     std::list<Player*>::iterator it;
 
     std::cout << PURPLE_BG << std::setw(NUM_WIDTH) << " ⚽"
@@ -54,7 +94,7 @@ void Console::printPlayers(const std::list<Player*>& players) {
               << " | " << std::setw(NAME_WIDTH * 1.5) << "Name"
               << std::setw(NAME_WIDTH * 1.5) << RESET_TEXT << std::endl;
 
-    for (auto it = players.begin(); it != players.end(); it++) {
+    for (auto it = playersCopy.begin(); it != playersCopy.end(); it++) {
         std::cout << std::setw(NUM_WIDTH) << (*it)->getGoalsScored() << " |"
                   << std::setw(NUM_WIDTH) << (*it)->getYellowCards() << " |"
                   << std::setw(NUM_WIDTH) << (*it)->getRedCards() << " | "
