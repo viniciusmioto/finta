@@ -25,7 +25,7 @@ const int NAME_WIDTH = 13;
 
 class Console {
    public:
-    Console();
+    Console() = delete;
     static void printMenu();
     static void printTeams(const std::list<Team*>& teams);
     static void printPlayers(const std::list<Player*>& players, const unsigned short int parameter);

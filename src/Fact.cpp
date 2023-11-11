@@ -1,5 +1,11 @@
 #include "Fact.hpp"
 
+std::ostream& operator<<(std::ostream& os, const Fact& fact) {
+    os << fact.player->getName() << " " << fact.minute;
+
+    return os;
+}
+
 Fact::Fact(Player* player, std::string minute)
     : player{player}, minute{minute} {}
 

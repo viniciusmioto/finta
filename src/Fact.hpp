@@ -7,10 +7,11 @@
 #include "Team.hpp"
 
 class Fact {
+    friend std::ostream& operator<<(std::ostream& os, const Fact& fact);
+
    public:
     Fact(Player* player, std::string minute);
     virtual ~Fact() = default;
-
 
     Player* getPlayer() const;
     std::string getMinute() const;

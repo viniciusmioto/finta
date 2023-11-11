@@ -124,43 +124,6 @@ void Console::printStaff(const std::list<Staff*>& staff) {
     std::cout << std::endl;
 }
 
-void Console::printGoal(const Goal& goal) {
-    std::cout << "⚽ " << goal.getPlayer()->getName() << " " << goal.getMinute()
-              << std::endl;
-}
-
-void Console::printGoals(const std::list<Goal*>& goals, const Team& team) {
-    if (goals.size() == 0) return;
-
-    std::cout << std::endl;
-    std::cout << UNDERLINE << "Goals from"
-              << " " << team.getName() << RESET_TEXT << ":" << std::endl;
-
-    std::list<Goal*>::const_iterator it;
-
-    for (it = goals.begin(); it != goals.end(); it++) {
-        printGoal(**it);
-    }
-
-    std::cout << std::endl;
-}
-
-void Console::printCards(const std::list<Fact*>& cards, const Team& team,
-                         bool isYellowCard) {
-    if (cards.size() == 0) return;
-
-    std::cout << UNDERLINE << "Cards for " << team.getName() << RESET_TEXT
-              << ": " << std::endl;
-
-    std::list<Fact*>::const_iterator it;
-    std::string card = isYellowCard ? "🟨 " : "🟥 ";
-    for (it = cards.begin(); it != cards.end(); it++)
-        std::cout << card << (*it)->getPlayer()->getName() << " "
-                  << (*it)->getMinute() << std::endl;
-
-    std::cout << std::endl;
-}
-
 void Console::printMatchResults(const Team& team) {
     std::cout << std::endl;
 
@@ -257,38 +220,7 @@ void Console::printMatchDetails(const Match& match) {
     std::cout << std::endl;
     std::cout << PURPLE_BG << " Match details:" << RESET_TEXT << std::endl;
 
-    std::cout << "🔰 " << UNDERLINE << "Match ID" << RESET_TEXT << ": "
-              << match.getId() << std::endl;
-    std::cout << "📌 " << UNDERLINE << "Match day" << RESET_TEXT << ": "
-              << match.getMatchDay() << std::endl;
-    std::cout << "🗓️  " << UNDERLINE << "Date" << RESET_TEXT << ": "
-              << match.getMatchInfo()->getMatchDate() << std::endl;
-    std::cout << "🕖 " << UNDERLINE << "Hour" << RESET_TEXT << ": "
-              << match.getMatchInfo()->getMatchHour() << std::endl;
-    std::cout << "🏟️  " << UNDERLINE << "Stadium" << RESET_TEXT << ": "
-              << match.getMatchInfo()->getMatchPlace() << std::endl
-              << std::endl;
-    std::cout << match.getMatchResult()->getHomeTeam()->getName() << " "
-              << match.getMatchResult()->getHomeTeamScore() << " x "
-              << match.getMatchResult()->getAwayTeamScore() << " "
-              << match.getMatchResult()->getAwayTeam()->getName() << std::endl;
-
-    printGoals(match.getMatchInfo()->getHomeGoals(),
-               *match.getMatchResult()->getHomeTeam());
-    printGoals(match.getMatchInfo()->getAwayGoals(),
-               *match.getMatchResult()->getAwayTeam());
-
-    printCards(match.getMatchInfo()->getHomeYellowCards(),
-               *match.getMatchResult()->getHomeTeam(), true);
-
-    printCards(match.getMatchInfo()->getHomeRedCards(),
-               *match.getMatchResult()->getHomeTeam(), false);
-
-    printCards(match.getMatchInfo()->getAwayYellowCards(),
-               *match.getMatchResult()->getAwayTeam(), true);
-
-    printCards(match.getMatchInfo()->getAwayRedCards(),
-               *match.getMatchResult()->getAwayTeam(), false);
+    std::cout << (match) << std::endl;
 
     std::cout << std::endl;
 }

@@ -6,6 +6,8 @@
 #include "Team.hpp"
 
 class MatchResult {
+    friend std::ostream& operator<<(std::ostream& os, const MatchResult& matchResult);
+
    public:
     MatchResult(Team* homeTeam, Team* awayTeam, unsigned short int homeTeamScore,
                 unsigned short int awayTeamScore);

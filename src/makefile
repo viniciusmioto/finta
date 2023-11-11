@@ -16,6 +16,7 @@ OBJECTS = main.o \
 		Goal.o \
 		YellowCard.o \
 		RedCard.o \
+		MatchStats.o \
 
 DEBUG_FLAG =
 

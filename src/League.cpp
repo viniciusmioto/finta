@@ -40,7 +40,29 @@ Team* League::findOrCreateTeam(const std::string& teamName) {
 #endif
 
     return newTeam;
-}  // accurate
+}
+
+int convertPercentageToInt(const std::string& percentage) {
+    // Make a copy of the input string
+    std::string modifiedPercentage = percentage;
+
+    // Find the position of '%' in the string
+    size_t pos = modifiedPercentage.find('%');
+
+    // Check if '%' is found
+    if (pos != std::string::npos) {
+        // Erase the '%' character from the string
+        modifiedPercentage.erase(pos, 1);
+    } else {
+        // Handle the case where '%' is not found
+        throw std::invalid_argument("Invalid percentage format");
+    }
+
+    // Convert the modified string to an integer
+    int result = std::stoi(modifiedPercentage);
+
+    return result;
+}
 
 void League::fillMatches(const std::string& filePath) {
     boost::property_tree::ptree data;
@@ -173,12 +195,66 @@ void League::fillMatches(const std::string& filePath) {
                 new MatchResult{homeTeamPtr, awayTeamPtr, homeGoals, awayGoals};
 
             // Update the team staff stats
-            homeTeamPtr->updateStaffStats(homeTeamPtr->findOrCreateStaff(homeCoach), homeGoals - awayGoals);
-            awayTeamPtr->updateStaffStats(awayTeamPtr->findOrCreateStaff(awayCoach), awayGoals - homeGoals);
+            homeTeamPtr->updateStaffStats(
+                homeTeamPtr->findOrCreateStaff(homeCoach),
+                homeGoals - awayGoals);
+            awayTeamPtr->updateStaffStats(
+                awayTeamPtr->findOrCreateStaff(awayCoach),
+                awayGoals - homeGoals);
+
+            MatchStats* homeMatchStats = new MatchStats();
+            MatchStats* awayMatchStats = new MatchStats();
+
+            for (const auto& stat : match.second.get_child("stats")) {
+                std::string homeStat = stat.second.get<std::string>("home");
+                std::string awayStat = stat.second.get<std::string>("away");
+                std::string statName = stat.second.get<std::string>("stat");
+
+                // Create MatchStats objects
+
+                if (statName == "Precisão de passe") {
+                    homeMatchStats->setPassAccuracy(
+                        convertPercentageToInt(homeStat));
+                    awayMatchStats->setPassAccuracy(
+                        convertPercentageToInt(awayStat));
+                } else {
+                    unsigned short homeStatValue = std::stoi(homeStat);
+                    unsigned short awayStatValue = std::stoi(awayStat);
+
+                    if (statName == "Chutes") {
+                        homeMatchStats->setShots(homeStatValue);
+                        awayMatchStats->setShots(awayStatValue);
+                    } else if (statName == "Chutes a gol") {
+                        homeMatchStats->setShotsOnTarget(homeStatValue);
+                        awayMatchStats->setShotsOnTarget(awayStatValue);
+                    } else if (statName == "Posse de bola") {
+                        homeMatchStats->setPossession(homeStatValue);
+                        awayMatchStats->setPossession(awayStatValue);
+                    } else if (statName == "Passes") {
+                        homeMatchStats->setPasses(homeStatValue);
+                        awayMatchStats->setPasses(awayStatValue);
+                    } else if (statName == "Faltas") {
+                        homeMatchStats->setFouls(homeStatValue);
+                        awayMatchStats->setFouls(awayStatValue);
+                    } else if (statName == "Cartões amarelos") {
+                        homeMatchStats->setYellowCards(homeStatValue);
+                        awayMatchStats->setYellowCards(awayStatValue);
+                    } else if (statName == "Cartões vermelhos") {
+                        homeMatchStats->setRedCards(homeStatValue);
+                        awayMatchStats->setRedCards(awayStatValue);
+                    } else if (statName == "Impedimentos") {
+                        homeMatchStats->setOffsides(homeStatValue);
+                        awayMatchStats->setOffsides(awayStatValue);
+                    } else if (statName == "Escanteios") {
+                        homeMatchStats->setCorners(homeStatValue);
+                        awayMatchStats->setCorners(awayStatValue);
+                    }
+                }
+            }
 
             // Add the match
-            this->matches.push_back(
-                new Match{matchDay, matchResult, matchInfo});
+            this->matches.push_back(new Match{matchDay, matchResult, matchInfo,
+                                              homeMatchStats, awayMatchStats});
         }
     }
 }

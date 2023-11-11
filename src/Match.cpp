@@ -1,13 +1,46 @@
 #include "Match.hpp"
 
+std::ostream& operator<<(std::ostream& os, const Match& match) {
+    os << "🔰 Match ID: " << match.id << " | 📌 Match Day: " << match.matchDay
+       << std::endl;
+
+    os << "\n" << *match.matchResult << "\n" << std::endl;
+    os << *match.matchInfo << std::endl;
+
+    os << "Home Team Stats: " << std::endl;
+
+    os << *match.homeMatchStats << std::endl;
+
+    os << "Away Team Stats: " << std::endl;
+
+    os << *match.awayMatchStats << std::endl;
+
+    return os;
+}
+
 unsigned long int Match::nextId{1};
 
-Match::Match(unsigned short matchDay, MatchResult* MatchResult) : id{nextId}, matchResult{MatchResult} {
+Match::Match(unsigned short matchDay, MatchResult* MatchResult)
+    : id{nextId}, matchResult{MatchResult} {
     setMatchDay(matchDay);
     nextId++;
 }
 
-Match::Match(unsigned short matchDay, MatchResult* MatchResult, MatchInfo* MatchInfo) : id{nextId}, matchResult{MatchResult}, matchInfo{MatchInfo} {
+Match::Match(unsigned short matchDay, MatchResult* MatchResult,
+             MatchInfo* MatchInfo)
+    : id{nextId}, matchResult{MatchResult}, matchInfo{MatchInfo} {
+    setMatchDay(matchDay);
+    nextId++;
+}
+
+Match::Match(unsigned short matchDay, MatchResult* MatchResult,
+             MatchInfo* MatchInfo, MatchStats* HomeMatchStats,
+             MatchStats* AwayMatchStats)
+    : id{nextId},
+      matchResult{MatchResult},
+      matchInfo{MatchInfo},
+      homeMatchStats{HomeMatchStats},
+      awayMatchStats{AwayMatchStats} {
     setMatchDay(matchDay);
     nextId++;
 }
@@ -15,6 +48,8 @@ Match::Match(unsigned short matchDay, MatchResult* MatchResult, MatchInfo* Match
 Match::~Match() {
     delete matchResult;
     delete matchInfo;
+    delete homeMatchStats;
+    delete awayMatchStats;
 }
 
 unsigned int Match::getId() const { return id; }
@@ -38,3 +73,7 @@ void Match::setMatchResult(MatchResult* matchResult) {
 }
 
 void Match::setMatchInfo(MatchInfo* matchInfo) { this->matchInfo = matchInfo; }
+
+MatchStats* Match::getHomeMatchStats() const { return homeMatchStats; }
+
+MatchStats* Match::getAwayMatchStats() const { return awayMatchStats; }

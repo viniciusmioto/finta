@@ -7,6 +7,9 @@
 #include "RedCard.hpp"
 
 class MatchInfo {
+    friend std::ostream& operator<<(std::ostream& os, const MatchInfo& matchInfo);
+
+
    public:
     MatchInfo(std::string matchDate, std::string matchTime,
               std::string matchPlace);
