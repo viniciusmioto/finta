@@ -33,8 +33,6 @@ class League {
 
     const std::list<Team*>& getTeams() const;
 
-    void clearData();
-
    private:
     std::string name;
     std::list<Team*> teams;

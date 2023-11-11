@@ -38,7 +38,6 @@ bool Console::comparePlayersByName(const Player* player1,
     return player1->getName() < player2->getName();
 }
 
-
 // show menu
 void Console::printMenu() {
     std::cout << "\n Choose an option:\n"
@@ -47,8 +46,8 @@ void Console::printMenu() {
               << " 3 - Show all match results of a team\n"
               << " 4 - Show match details\n"
               << " 5 - Show players of a team\n"
+              << " 6 - Show staff of a team\n"
               << " 8 - Show classification table\n"
-              << " 9 - Change data year\n"
               << " 0 - Exit" << std::endl
               << std::endl;
 }
@@ -65,27 +64,26 @@ void Console::printTeams(const std::list<Team*>& teams) {
     std::cout << std::endl;
 }
 
-void Console::printPlayers(const std::list<Player*>& players, const unsigned short int parameter) {
+void Console::printPlayers(const std::list<Player*>& players,
+                           const unsigned short int parameter) {
     std::cout << "Players:\n" << std::endl;
 
     std::list<Player*> playersCopy = players;
 
-    switch (parameter)
-    {
-    case 1:
-        playersCopy.sort(comparePlayersByGoals);
-        break;
-    case 2:
-        playersCopy.sort(comparePlayersByYellowCards);
-        break;
-    case 3:
-        playersCopy.sort(comparePlayersByRedCards);
-        break;
-    default:
-        playersCopy.sort(comparePlayersByName);
+    switch (parameter) {
+        case 1:
+            playersCopy.sort(comparePlayersByGoals);
+            break;
+        case 2:
+            playersCopy.sort(comparePlayersByYellowCards);
+            break;
+        case 3:
+            playersCopy.sort(comparePlayersByRedCards);
+            break;
+        default:
+            playersCopy.sort(comparePlayersByName);
     }
 
-    
     std::list<Player*>::iterator it;
 
     std::cout << PURPLE_BG << std::setw(NUM_WIDTH) << " ⚽"
@@ -100,6 +98,30 @@ void Console::printPlayers(const std::list<Player*>& players, const unsigned sho
                   << std::setw(NUM_WIDTH) << (*it)->getRedCards() << " | "
                   << (*it)->getName() << std::endl;
     }
+}
+
+void Console::printStaff(const std::list<Staff*>& staff) {
+    std::cout << "Staff:\n" << std::endl;
+    std::list<Staff*>::iterator it;
+
+    std::cout << PURPLE_BG << std::setw(NUM_WIDTH) << "MP"
+              << "|" << std::setw(NUM_WIDTH) << "W"
+              << "|" << std::setw(NUM_WIDTH) << "D"
+              << "|" << std::setw(NUM_WIDTH) << "L"
+              << "|" << std::setw(NAME_WIDTH * 0.5) << " Res  "
+              << "  |" << std::setw(NAME_WIDTH * 1.4) << "Name"
+              << std::setw(NAME_WIDTH * 1.4) << RESET_TEXT << std::endl;
+
+    for (auto it = staff.begin(); it != staff.end(); it++) {
+        std::cout << std::setw(NUM_WIDTH) << (*it)->getMatches() << "|"
+                  << std::setw(NUM_WIDTH) << (*it)->getWins() << "|"
+                  << std::setw(NUM_WIDTH) << (*it)->getDraws() << "|"
+                  << std::setw(NUM_WIDTH) << (*it)->getLosses() << "|"
+                  << std::setw(NAME_WIDTH * 0.5) << (*it)->getResultPercentage()
+                  << "% | " << (*it)->getName() << std::endl;
+    }
+
+    std::cout << std::endl;
 }
 
 void Console::printGoal(const Goal& goal) {
@@ -127,8 +149,8 @@ void Console::printCards(const std::list<Fact*>& cards, const Team& team,
                          bool isYellowCard) {
     if (cards.size() == 0) return;
 
-    std::cout << UNDERLINE << "Cards for " << team.getName() << RESET_TEXT << ": "
-              << std::endl;
+    std::cout << UNDERLINE << "Cards for " << team.getName() << RESET_TEXT
+              << ": " << std::endl;
 
     std::list<Fact*>::const_iterator it;
     std::string card = isYellowCard ? "🟨 " : "🟥 ";

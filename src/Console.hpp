@@ -29,6 +29,7 @@ class Console {
     static void printMenu();
     static void printTeams(const std::list<Team*>& teams);
     static void printPlayers(const std::list<Player*>& players, const unsigned short int parameter);
+    static void printStaff(const std::list<Staff*>& staff);
     static void printGoal(const Goal& goal);
     static void printGoals(const std::list<Goal*>& goals, const Team& team);
     static void printCards(const std::list<Fact*>& cards, const Team& team, bool isYellowCard);

@@ -9,30 +9,10 @@ League::League(std::string name, std::list<Team*> teams,
                std::list<Match*> matches)
     : name{name}, teams(teams), matches(matches) {}
 
-League::~League() { 
-    for (Team* team : teams) 
-        delete team;
-    
-    for (Match* match : matches)
-        delete match;
- }
+League::~League() {
+    for (Team* team : teams) delete team;
 
-void League::clearData() {
-    for (Team* team : teams) {
-        for (Player* player : team->getPlayers()) {
-            delete player;
-        }
-        delete team;
-    }
-    teams.clear();
-
-    for (Match* match : matches) {
-        for (Goal* goal : match->getMatchInfo()->getHomeGoals()) {
-            delete goal;
-        }
-        delete match;
-    }
-    matches.clear();
+    for (Match* match : matches) delete match;
 }
 
 std::string League::getName() const { return this->name; }
@@ -186,11 +166,19 @@ void League::fillMatches(const std::string& filePath) {
                     awayTeamPtr->findOrCreatePlayer(playerName), minute});
             }
 
+            std::string homeCoach = match.second.get<std::string>("coach.home");
+            std::string awayCoach = match.second.get<std::string>("coach.away");
+
+            MatchResult* matchResult =
+                new MatchResult{homeTeamPtr, awayTeamPtr, homeGoals, awayGoals};
+
+            // Update the team staff stats
+            homeTeamPtr->updateStaffStats(homeTeamPtr->findOrCreateStaff(homeCoach), homeGoals - awayGoals);
+            awayTeamPtr->updateStaffStats(awayTeamPtr->findOrCreateStaff(awayCoach), awayGoals - homeGoals);
+
             // Add the match
-            this->matches.push_back(new Match{
-                matchDay,
-                new MatchResult{homeTeamPtr, awayTeamPtr, homeGoals, awayGoals},
-                matchInfo});
+            this->matches.push_back(
+                new Match{matchDay, matchResult, matchInfo});
         }
     }
 }

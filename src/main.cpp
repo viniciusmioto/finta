@@ -85,9 +85,16 @@ int main() {
                 std::cin.ignore();
                 std::getline(std::cin, teamName);
 
-                std::cout << "\n" << WHITE_BG << " Choose an sorting parameter:" << RESET_TEXT << std::endl;
+                std::cout << "\n"
+                          << WHITE_BG
+                          << " Choose an sorting parameter:" << RESET_TEXT
+                          << std::endl;
 
-                std::cout << "  0 - Alphabetic\n" << "  1 - Goals\n" << "  2 - Yellow Cards\n" << "  3 - Red Cards\n" << std::endl;
+                std::cout << "  0 - Alphabetic\n"
+                          << "  1 - Goals\n"
+                          << "  2 - Yellow Cards\n"
+                          << "  3 - Red Cards\n"
+                          << std::endl;
                 std::cout << WHITE_BG << " Option: " << RESET_TEXT;
                 std::cin >> parameter;
 
@@ -98,21 +105,24 @@ int main() {
                     }
                 }
                 break;
+            case 6:
+                system("clear");
+                Console::printTeams(league.getTeams());
+                std::cout << WHITE_BG << " Choose a team:" << RESET_TEXT;
+                std::cin.ignore();
+                std::getline(std::cin, teamName);
+
+                for (Team* team : league.getTeams()) {
+                    if (teamName == team->getName()) {
+                        std::cout << team->getName() << std::endl;
+                        Console::printStaff(team->getStaff());
+                    }
+                }
+
+                break;
             case 8:
                 system("clear");
                 Console::printTable(league.getTeams());
-                break;
-            case 9:
-                // Allow the user to change the data year.
-                std::cout << "Enter the year (2006-2022): ";
-                std::cin >> dataYear;
-
-                // Generate the file path based on the user input.
-                dataFile =
-                    "../data/brasileirao-" + std::to_string(dataYear) + ".json";
-
-                league.clearData();
-                league.fillMatches(dataFile);
                 break;
             default:
                 std::cout << "Invalid option" << std::endl;

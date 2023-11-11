@@ -11,8 +11,8 @@ Team::Team(std::string name)
       goalDifference{0} {}
 
 Team::~Team() {
-    for (Person* person : staff) {
-        delete person;
+    for (Staff* staff : staff) {
+        delete staff;
     }
 
     for (Player* player : players) {
@@ -60,15 +60,15 @@ const std::list<MatchResult*>& Team::getMatchResults() const {
     return matchResults;
 }
 
-void Team::addStaff(Person* person) {
-    // Check if the person pointer is not null
-    if (person) {
-        // Add the person to the team's list of staff
-        staff.push_back(person);
+void Team::addStaff(Staff* staff) {
+    // Check if the staff pointer is not null
+    if (staff) {
+        // Add the staff to the team's list of staff
+        this->staff.push_back(staff);
     }
 }
 
-const std::list<Person*>& Team::getStaff() const { return staff; }
+const std::list<Staff*>& Team::getStaff() const { return staff; }
 
 void Team::addPlayer(Player* player) {
     // Check if the player pointer is not null
@@ -114,4 +114,41 @@ short int Team::getGoalDifference() const { return goalDifference; }
 
 void Team::setGoalDifference(const short int goalDifference) {
     this->goalDifference = goalDifference;
+}
+
+Staff* Team::findOrCreateStaff(const std::string& staffName) {
+    // Check if the staff member exists in the team's list of staff
+    for (Staff* staffMember : staff) {
+        // Check if the staff member's name matches the given name
+        if (staffMember->getName() == staffName) {
+            // Return the staff member
+            return staffMember;
+        }
+    }
+
+    // Create a new staff member
+    Staff* staffMember = new Staff(staffName);
+
+#ifdef DEBUG
+    std::cout << "Created new staff member: " << staffName << std::endl;
+#endif
+
+    // Add the staff member to the team's list of staff
+    staff.push_back(staffMember);
+
+    // Return the staff member
+    return staffMember;
+}
+
+void Team::updateStaffStats(Staff *teamStaff, short result) {
+    // check result
+    if (result == 0) { // draw
+        teamStaff->setDraws(teamStaff->getDraws() + 1);
+    } else if (result >= 1) { // win
+        teamStaff->setWins(teamStaff->getWins() + 1);
+    } else if (result <= -1) { // lose
+        teamStaff->setLosses(teamStaff->getLosses() + 1);
+    }
+
+    teamStaff->setMatches(teamStaff->getMatches() + 1);
 }

@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-#include "Person.hpp"
+#include "Staff.hpp"
 #include "Player.hpp"
 
 class MatchResult; // Forward declaration
@@ -37,8 +37,8 @@ class Team {
     unsigned short int getGoals() const;
     void addGoals(const unsigned short int goals);
 
-    void addStaff(Person* person);
-    const std::list<Person*>& getStaff() const;
+    void addStaff(Staff* staff);
+    const std::list<Staff*>& getStaff() const;
 
     void addPlayer(Player* player);
     const std::list<Player*>& getPlayers() const;
@@ -50,6 +50,9 @@ class Team {
     short int getGoalDifference() const;
     void setGoalDifference(const short int goalDifference);
 
+    Staff* findOrCreateStaff(const std::string& staffName);
+    void updateStaffStats(Staff *teamStaff, short result);
+
    private:
     std::string name;
     unsigned short int points;
@@ -60,7 +63,7 @@ class Team {
     short int goalsAgainst;
     short int goalDifference;
     std::list<MatchResult*> matchResults;
-    std::list<Person*> staff;
+    std::list<Staff*> staff;
     std::list<Player*> players;
 };
 

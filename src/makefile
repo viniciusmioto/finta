@@ -10,6 +10,7 @@ OBJECTS = main.o \
 		Team.o \
 		Console.o \
 		Person.o \
+		Staff.o \
 		Player.o \
 		Fact.o \
 		Goal.o \
