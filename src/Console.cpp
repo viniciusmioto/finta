@@ -82,6 +82,7 @@ void Console::printPlayers(const std::list<Player*>& players,
             break;
         default:
             playersCopy.sort(comparePlayersByName);
+            break;
     }
 
     std::list<Player*>::iterator it;
@@ -196,12 +197,7 @@ void Console::printMatchResults(const std::list<Match*>& matches,
     for (it = matches.begin(); it != matches.end(); it++) {
         if ((*it)->getMatchDay() == matchDay) {
             std::cout << CYAN_TXT << "[" << (*it)->getId() << "] " << RESET_TEXT
-                      << (*it)->getMatchResult()->getHomeTeam()->getName()
-                      << " " << (*it)->getMatchResult()->getHomeTeamScore()
-                      << " x " << (*it)->getMatchResult()->getAwayTeamScore()
-                      << " "
-                      << (*it)->getMatchResult()->getAwayTeam()->getName()
-                      << std::endl;
+                      << *((*it)->getMatchResult()) << std::endl;
         }
     }
 }

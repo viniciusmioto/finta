@@ -19,8 +19,8 @@ class Team {
     std::string getName() const;
     void setName(const std::string& name);
 
-    void addMatchResult(MatchResult* matchResult);
     const std::list<MatchResult*>& getMatchResults() const;
+    void addMatchResult(MatchResult* matchResult);
 
     unsigned short int getPoints() const;
     void addPoints(const unsigned short int points);
@@ -37,11 +37,14 @@ class Team {
     unsigned short int getGoals() const;
     void addGoals(const unsigned short int goals);
 
-    void addStaff(Staff* staff);
     const std::list<Staff*>& getStaff() const;
+    void addStaff(Staff* staff);
 
-    void addPlayer(Player* player);
+    Staff* findOrCreateStaff(const std::string& staffName);
+    void updateStaffStats(Staff *teamStaff, short result);
+
     const std::list<Player*>& getPlayers() const;
+    void addPlayer(Player* player);
     Player* findOrCreatePlayer(const std::string& playerName);
 
     short int getGoalsAgainst() const;
@@ -49,9 +52,6 @@ class Team {
 
     short int getGoalDifference() const;
     void setGoalDifference(const short int goalDifference);
-
-    Staff* findOrCreateStaff(const std::string& staffName);
-    void updateStaffStats(Staff *teamStaff, short result);
 
    private:
     std::string name;

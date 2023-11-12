@@ -74,19 +74,24 @@ MatchResult::MatchResult(Team* homeTeam, Team* awayTeam,
 
 Team* MatchResult::getHomeTeam() const { return homeTeam; }
 
+void MatchResult::setHomeTeam(Team* homeTeam) { this->homeTeam = homeTeam; }
+
 Team* MatchResult::getAwayTeam() const { return awayTeam; }
+
+void MatchResult::setAwayTeam(Team* awayTeam) { this->awayTeam = awayTeam; }
 
 unsigned short int MatchResult::getHomeTeamScore() const {
     return homeTeamScore;
+}
+
+void MatchResult::setHomeTeamScore(unsigned short int homeTeamScore) {
+    this->homeTeamScore = homeTeamScore;
 }
 
 unsigned short int MatchResult::getAwayTeamScore() const {
     return awayTeamScore;
 }
 
-std::string MatchResult::getMatchResult() const {
-    return this->getHomeTeam()->getName() + " " +
-           std::to_string(this->getHomeTeamScore()) + " x " +
-           std::to_string(this->getAwayTeamScore()) + " " +
-           this->getAwayTeam()->getName();
+void MatchResult::setAwayTeamScore(unsigned short int awayTeamScore) {
+    this->awayTeamScore = awayTeamScore;
 }

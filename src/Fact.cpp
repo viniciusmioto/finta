@@ -11,8 +11,8 @@ Fact::Fact(Player* player, std::string minute)
 
 Player* Fact::getPlayer() const { return player; }
 
-std::string Fact::getMinute() const { return minute; }
-
 void Fact::setPlayer(Player* player) { this->player = player; }
+
+std::string Fact::getMinute() const { return minute; }
 
 void Fact::setMinute(const std::string& minute) { this->minute = minute; }

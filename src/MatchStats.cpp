@@ -44,41 +44,59 @@ MatchStats::MatchStats(unsigned short shots, unsigned short shotsOnTarget,
       corners{corners} {}
 
 // getters
-unsigned short MatchStats::getShots() const { return shots; }
-unsigned short MatchStats::getShotsOnTarget() const { return shotsOnTarget; }
-unsigned short MatchStats::getPossession() const { return possession; }
-unsigned short MatchStats::getPasses() const { return passes; }
-unsigned short MatchStats::getPassAccuracy() const { return passAccuracy; }
-unsigned short MatchStats::getFouls() const { return fouls; }
-unsigned short MatchStats::getYellowCards() const { return yellowCards; }
-unsigned short MatchStats::getRedCards() const { return redCards; }
-unsigned short MatchStats::getOffsides() const { return offsides; }
-unsigned short MatchStats::getCorners() const { return corners; }
 
-// setters
+unsigned short MatchStats::getShots() const { return shots; }
+
 void MatchStats::setShots(const unsigned short shots) { this->shots = shots; }
+
+unsigned short MatchStats::getShotsOnTarget() const { return shotsOnTarget; }
+
 void MatchStats::setShotsOnTarget(const unsigned short shotsOnTarget) {
     this->shotsOnTarget = shotsOnTarget;
 }
+
+unsigned short MatchStats::getPossession() const { return possession; }
+
 void MatchStats::setPossession(const unsigned short possession) {
     this->possession = possession;
 }
+
+unsigned short MatchStats::getPasses() const { return passes; }
+
 void MatchStats::setPasses(const unsigned short passes) {
     this->passes = passes;
 }
+
+unsigned short MatchStats::getPassAccuracy() const { return passAccuracy; }
+
 void MatchStats::setPassAccuracy(const unsigned short passAccuracy) {
     this->passAccuracy = passAccuracy;
 }
+
+unsigned short MatchStats::getFouls() const { return fouls; }
+
 void MatchStats::setFouls(const unsigned short fouls) { this->fouls = fouls; }
+
+unsigned short MatchStats::getYellowCards() const { return yellowCards; }
+
 void MatchStats::setYellowCards(const unsigned short yellowCards) {
     this->yellowCards = yellowCards;
 }
+
+unsigned short MatchStats::getRedCards() const { return redCards; }
+
 void MatchStats::setRedCards(const unsigned short redCards) {
     this->redCards = redCards;
 }
+
+unsigned short MatchStats::getOffsides() const { return offsides; }
+
 void MatchStats::setOffsides(const unsigned short offsides) {
     this->offsides = offsides;
 }
+
+unsigned short MatchStats::getCorners() const { return corners; }
+
 void MatchStats::setCorners(const unsigned short corners) {
     this->corners = corners;
 }

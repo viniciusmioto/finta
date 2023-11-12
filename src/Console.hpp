@@ -28,21 +28,24 @@ class Console {
     Console() = delete;
     static void printMenu();
     static void printTeams(const std::list<Team*>& teams);
-    static void printPlayers(const std::list<Player*>& players, const unsigned short int parameter);
+    static void printPlayers(const std::list<Player*>& players,
+                             const unsigned short int parameter);
     static void printStaff(const std::list<Staff*>& staff);
-    static void printGoal(const Goal& goal);
-    static void printGoals(const std::list<Goal*>& goals, const Team& team);
-    static void printCards(const std::list<Fact*>& cards, const Team& team, bool isYellowCard);
     static void printMatchResults(const Team& team);
     static void printMatchResults(const std::list<Match*>& matches);
     static void printMatchResults(const std::list<Match*>& matches,
                                   unsigned short matchDay);
     static void printMatchDetails(const Match& match);
     static void printTable(const std::list<Team*>& teams);
+
+   private:
     static bool compareTeams(const Team* homeTeam, const Team* awayTeam);
-    static bool comparePlayersByGoals(const Player* player1, const Player* player2);
-    static bool comparePlayersByYellowCards(const Player* player1, const Player* player2);
-    static bool comparePlayersByRedCards(const Player* player1, const Player* player2);
+    static bool comparePlayersByGoals(const Player* player1,
+                                      const Player* player2);
+    static bool comparePlayersByYellowCards(const Player* player1,
+                                            const Player* player2);
+    static bool comparePlayersByRedCards(const Player* player1,
+                                         const Player* player2);
     static bool comparePlayersByName(const Player* player1, const Player* player2);
 };
 

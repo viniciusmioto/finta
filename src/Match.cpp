@@ -1,5 +1,7 @@
 #include "Match.hpp"
 
+unsigned long int Match::nextId{1};
+
 std::ostream& operator<<(std::ostream& os, const Match& match) {
     os << "🔰 Match ID: " << match.id << " | 📌 Match Day: " << match.matchDay
        << std::endl;
@@ -17,8 +19,6 @@ std::ostream& operator<<(std::ostream& os, const Match& match) {
 
     return os;
 }
-
-unsigned long int Match::nextId{1};
 
 Match::Match(unsigned short matchDay, MatchResult* MatchResult)
     : id{nextId}, matchResult{MatchResult} {
@@ -66,14 +66,23 @@ void Match::setMatchDay(const unsigned short matchDay) {
 
 MatchResult* Match::getMatchResult() const { return matchResult; }
 
-MatchInfo* Match::getMatchInfo() const { return matchInfo; }
-
 void Match::setMatchResult(MatchResult* matchResult) {
     this->matchResult = matchResult;
 }
 
+MatchInfo* Match::getMatchInfo() const { return matchInfo; }
+
 void Match::setMatchInfo(MatchInfo* matchInfo) { this->matchInfo = matchInfo; }
+
 
 MatchStats* Match::getHomeMatchStats() const { return homeMatchStats; }
 
+void Match::setHomeMatchStats(MatchStats* homeMatchStats) {
+    this->homeMatchStats = homeMatchStats;
+}
+
 MatchStats* Match::getAwayMatchStats() const { return awayMatchStats; }
+
+void Match::setAwayMatchStats(MatchStats* awayMatchStats) {
+    this->awayMatchStats = awayMatchStats;
+}

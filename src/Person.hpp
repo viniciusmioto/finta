@@ -1,6 +1,7 @@
 #ifndef PERSON_HPP
 #define PERSON_HPP
 
+#include <iostream>
 #include <string>
 
 class Person {

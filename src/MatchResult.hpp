@@ -13,15 +13,16 @@ class MatchResult {
                 unsigned short int awayTeamScore);
 
     Team* getHomeTeam() const;
-    
+    void setHomeTeam(Team* homeTeam);
+
     Team* getAwayTeam() const;
+    void setAwayTeam(Team* awayTeam);
     
     unsigned short int getHomeTeamScore() const;
-    
-    unsigned short int getAwayTeamScore() const;
+    void setHomeTeamScore(unsigned short int homeTeamScore);
 
-    // Method to get the match result as a string
-    std::string getMatchResult() const;
+    unsigned short int getAwayTeamScore() const;
+    void setAwayTeamScore(unsigned short int awayTeamScore);
 
    private:
     Team* homeTeam;

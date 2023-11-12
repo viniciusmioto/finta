@@ -19,9 +19,9 @@ std::string League::getName() const { return this->name; }
 
 void League::setName(std::string name) { this->name = name; }
 
-void League::addTeams(std::list<Team*> teams) { this->teams = teams; }
+const std::list<Team*>& League::getTeams() const { return this->teams; }
 
-void League::addMatch(Match* match) { matches.push_back(match); }
+void League::addTeams(std::list<Team*> teams) { this->teams = teams; }
 
 Team* League::findOrCreateTeam(const std::string& teamName) {
     // Search for the team in the existing list
@@ -42,27 +42,9 @@ Team* League::findOrCreateTeam(const std::string& teamName) {
     return newTeam;
 }
 
-int convertPercentageToInt(const std::string& percentage) {
-    // Make a copy of the input string
-    std::string modifiedPercentage = percentage;
+const std::list<Match*>& League::getMatches() const { return this->matches; }
 
-    // Find the position of '%' in the string
-    size_t pos = modifiedPercentage.find('%');
-
-    // Check if '%' is found
-    if (pos != std::string::npos) {
-        // Erase the '%' character from the string
-        modifiedPercentage.erase(pos, 1);
-    } else {
-        // Handle the case where '%' is not found
-        throw std::invalid_argument("Invalid percentage format");
-    }
-
-    // Convert the modified string to an integer
-    int result = std::stoi(modifiedPercentage);
-
-    return result;
-}
+void League::addMatch(Match* match) { matches.push_back(match); }
 
 void League::fillMatches(const std::string& filePath) {
     boost::property_tree::ptree data;
@@ -259,6 +241,24 @@ void League::fillMatches(const std::string& filePath) {
     }
 }
 
-const std::list<Match*>& League::getMatches() const { return this->matches; }
+int League::convertPercentageToInt(const std::string& percentage) {
+    // Make a copy of the input string
+    std::string modifiedPercentage = percentage;
 
-const std::list<Team*>& League::getTeams() const { return this->teams; }
+    // Find the position of '%' in the string
+    size_t pos = modifiedPercentage.find('%');
+
+    // Check if '%' is found
+    if (pos != std::string::npos) {
+        // Erase the '%' character from the string
+        modifiedPercentage.erase(pos, 1);
+    } else {
+        // Handle the case where '%' is not found
+        throw std::invalid_argument("Invalid percentage format");
+    }
+
+    // Convert the modified string to an integer
+    int result = std::stoi(modifiedPercentage);
+
+    return result;
+}

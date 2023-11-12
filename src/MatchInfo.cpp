@@ -62,57 +62,58 @@ MatchInfo::~MatchInfo() {
 
 std::string MatchInfo::getMatchDate() const { return matchDate; }
 
+void MatchInfo::setMatchDate(const std::string& matchDate) {
+    this->matchDate = matchDate;
+}
+
 std::string MatchInfo::getMatchHour() const { return matchTime; }
+
+void MatchInfo::setMatchHour(const std::string& matchTime) {
+    this->matchTime = matchTime;
+}
 
 std::string MatchInfo::getMatchPlace() const { return matchPlace; }
 
-void MatchInfo::setMatchInfo(Team* homeTeam, Team* awayTeam,
-                             const unsigned short int homeTeamScore,
-                             const unsigned short int awayTeamScore,
-                             const std::string& matchDate,
-                             const std::string& matchTime,
-                             const std::string& matchPlace) {
-    this->matchDate = matchDate;
-    this->matchTime = matchTime;
+void MatchInfo::setMatchPlace(const std::string& matchPlace) {
     this->matchPlace = matchPlace;
 }
 
-void MatchInfo::addHomeGoal(Goal* goal) { homeGoals.push_back(goal); }
-
 const std::list<Goal*>& MatchInfo::getHomeGoals() const { return homeGoals; }
 
-void MatchInfo::addAwayGoal(Goal* goal) { awayGoals.push_back(goal); }
+void MatchInfo::addHomeGoal(Goal* goal) { homeGoals.push_back(goal); }
 
 const std::list<Goal*>& MatchInfo::getAwayGoals() const { return awayGoals; }
 
-void MatchInfo::addHomeYellowCard(Fact* yellowCard) {
-    homeYellowCards.push_back(yellowCard);
-}
+void MatchInfo::addAwayGoal(Goal* goal) { awayGoals.push_back(goal); }
 
 const std::list<Fact*>& MatchInfo::getHomeYellowCards() const {
     return homeYellowCards;
 }
 
-void MatchInfo::addAwayYellowCard(Fact* yellowCard) {
-    awayYellowCards.push_back(yellowCard);
+void MatchInfo::addHomeYellowCard(Fact* yellowCard) {
+    homeYellowCards.push_back(yellowCard);
 }
 
 const std::list<Fact*>& MatchInfo::getAwayYellowCards() const {
     return awayYellowCards;
 }
 
-void MatchInfo::addHomeRedCard(Fact* redCard) {
-    homeRedCards.push_back(redCard);
+void MatchInfo::addAwayYellowCard(Fact* yellowCard) {
+    awayYellowCards.push_back(yellowCard);
 }
 
 const std::list<Fact*>& MatchInfo::getHomeRedCards() const {
     return homeRedCards;
 }
 
-void MatchInfo::addAwayRedCard(Fact* redCard) {
-    awayRedCards.push_back(redCard);
+void MatchInfo::addHomeRedCard(Fact* redCard) {
+    homeRedCards.push_back(redCard);
 }
 
 const std::list<Fact*>& MatchInfo::getAwayRedCards() const {
     return awayRedCards;
+}
+
+void MatchInfo::addAwayRedCard(Fact* redCard) {
+    awayRedCards.push_back(redCard);
 }

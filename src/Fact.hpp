@@ -14,17 +14,14 @@ class Fact {
     virtual ~Fact() = default;
 
     Player* getPlayer() const;
-    std::string getMinute() const;
-    Team* getTeam() const;
-
     virtual void setPlayer(Player* player);
+
+    std::string getMinute() const;
     void setMinute(const std::string& minute);
-    void setTeam(Team* team);
 
    private:
     Player* player;
     std::string minute;
-    Team* team;
 };
 
 #endif  // FACT_HPP

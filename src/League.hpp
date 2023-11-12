@@ -18,23 +18,20 @@ class League {
     ~League();
 
     std::string getName() const;
-
     void setName(std::string name);
 
+    const std::list<Team*>& getTeams() const;
     void addTeams(std::list<Team*> teams);
-
-    void addMatch(Match* matches);
-
-    void fillMatches(const std::string& filePath);
-
-    const std::list<Match*>& getMatches() const;
-
     Team* findOrCreateTeam(const std::string& teamName);
 
-    const std::list<Team*>& getTeams() const;
+    const std::list<Match*>& getMatches() const;
+    void addMatch(Match* matches);
+    void fillMatches(const std::string& filePath);
 
    private:
-    std::string name;
+    int convertPercentageToInt(const std::string& percentage);
+
+        std::string name;
     std::list<Team*> teams;
     std::list<Match*> matches;
 };

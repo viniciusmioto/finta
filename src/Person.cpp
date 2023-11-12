@@ -9,4 +9,3 @@ std::string Person::getName() const {
 void Person::setName(const std::string& name) {
     this->name = name;
 }
-

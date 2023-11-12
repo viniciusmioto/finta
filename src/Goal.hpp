@@ -13,7 +13,6 @@ class Goal : virtual public Fact {
         virtual ~Goal();
 
         bool getIsOwnGoal() const;
-
         void setIsOwnGoal(bool isOwnGoal);
 
     private:
