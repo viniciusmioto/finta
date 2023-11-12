@@ -11,6 +11,8 @@ class Person {
     std::string getName() const;
     void setName(const std::string& name);
 
+    bool operator<(const Person& person) const;
+
    private:
     std::string name;
 };

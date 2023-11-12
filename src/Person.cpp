@@ -9,3 +9,7 @@ std::string Person::getName() const {
 void Person::setName(const std::string& name) {
     this->name = name;
 }
+
+bool Person::operator<(const Person& person) const {
+    return this->name < person.name;
+}

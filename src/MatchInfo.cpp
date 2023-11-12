@@ -51,6 +51,23 @@ MatchInfo::MatchInfo(std::string matchDate, std::string matchTime,
       homeGoals{homeGoals},
       awayGoals{awayGoals} {}
 
+MatchInfo::MatchInfo(std::string matchDate, std::string matchTime,
+                     std::string matchPlace, std::list<Goal*> homeGoals,
+                     std::list<Goal*> awayGoals,
+                     std::list<Fact*> homeYellowCards,
+                     std::list<Fact*> awayYellowCards,
+                     std::list<Fact*> homeRedCards,
+                     std::list<Fact*> awayRedCards)
+    : matchDate{matchDate},
+      matchTime{matchTime},
+      matchPlace{matchPlace},
+      homeGoals{homeGoals},
+      awayGoals{awayGoals},
+      homeYellowCards{homeYellowCards},
+      awayYellowCards{awayYellowCards},
+      homeRedCards{homeRedCards},
+      awayRedCards{awayRedCards} {}
+
 MatchInfo::~MatchInfo() {
     for (auto goal : homeGoals) delete goal;
     for (auto goal : awayGoals) delete goal;

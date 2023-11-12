@@ -53,6 +53,8 @@ class Team {
     short int getGoalDifference() const;
     void setGoalDifference(const short int goalDifference);
 
+    bool operator>(const Team& team) const;
+
    private:
     std::string name;
     unsigned short int points;

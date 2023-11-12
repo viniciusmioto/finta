@@ -16,6 +16,11 @@ class MatchInfo {
     MatchInfo(std::string matchDate, std::string matchTime,
               std::string matchPlace, std::list<Goal*> homeGoals,
               std::list<Goal*> awayGoals);
+    MatchInfo(std::string matchDate, std::string matchTime,
+              std::string matchPlace, std::list<Goal*> homeGoals,
+              std::list<Goal*> awayGoals, std::list<Fact*> homeYellowCards,
+              std::list<Fact*> awayYellowCards, std::list<Fact*> homeRedCards,
+              std::list<Fact*> awayRedCards);
     ~MatchInfo();
 
     std::string getMatchDate() const;

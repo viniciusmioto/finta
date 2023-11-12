@@ -94,13 +94,13 @@ Staff* Team::findOrCreateStaff(const std::string& staffName) {
     return staffMember;
 }
 
-void Team::updateStaffStats(Staff *teamStaff, short result) {
+void Team::updateStaffStats(Staff* teamStaff, short result) {
     // check result
-    if (result == 0) { // draw
+    if (result == 0) {  // draw
         teamStaff->setDraws(teamStaff->getDraws() + 1);
-    } else if (result >= 1) { // win
+    } else if (result >= 1) {  // win
         teamStaff->setWins(teamStaff->getWins() + 1);
-    } else if (result <= -1) { // lose
+    } else if (result <= -1) {  // lose
         teamStaff->setLosses(teamStaff->getLosses() + 1);
     }
 
@@ -151,4 +151,29 @@ short int Team::getGoalDifference() const { return goalDifference; }
 
 void Team::setGoalDifference(const short int goalDifference) {
     this->goalDifference = goalDifference;
+}
+
+bool Team::operator>(const Team& team) const {
+    // Compare the points
+    // if the points are equal, compare by wins
+    // if the wins are equal, compare by goals difference
+    // if the goals difference is equal, compare by goals scored
+
+    if (this->points > team.points) {
+        return true;
+    } else if (this->points == team.points) {
+        if (this->wins > team.wins) {
+            return true;
+        } else if (this->wins == team.wins) {
+            if (this->goalDifference > team.goalDifference) {
+                return true;
+            } else if (this->goalDifference == team.goalDifference) {
+                if (this->goals > team.goals) {
+                    return true;
+                }
+            }
+        }
+    }
+
+    return false;
 }

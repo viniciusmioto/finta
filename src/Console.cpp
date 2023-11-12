@@ -4,18 +4,7 @@
 
 // Define a custom comparison function or lambda
 bool Console::compareTeams(const Team* homeTeam, const Team* awayTeam) {
-    // Compare the points
-    // if the points are equal, compare by wins
-    // if the wins are equal, compare by goals difference
-
-    if (homeTeam->getPoints() == awayTeam->getPoints()) {
-        if (homeTeam->getWins() == awayTeam->getWins()) {
-            return homeTeam->getGoalDifference() >
-                   awayTeam->getGoalDifference();
-        }
-        return homeTeam->getWins() > awayTeam->getWins();
-    }
-    return homeTeam->getPoints() > awayTeam->getPoints();
+    return *homeTeam > *awayTeam;
 }
 
 bool Console::comparePlayersByGoals(const Player* player1,
@@ -35,7 +24,7 @@ bool Console::comparePlayersByRedCards(const Player* player1,
 
 bool Console::comparePlayersByName(const Player* player1,
                                    const Player* player2) {
-    return player1->getName() < player2->getName();
+    return *player1 < *player2;
 }
 
 // show menu
