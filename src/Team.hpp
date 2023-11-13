@@ -41,7 +41,7 @@ class Team {
     void addStaff(Staff* staff);
 
     Staff* findOrCreateStaff(const std::string& staffName);
-    void updateStaffStats(Staff *teamStaff, short result);
+    void updateStaffStats(Staff *staffMember, short result);
 
     const std::list<Player*>& getPlayers() const;
     void addPlayer(Player* player);
@@ -53,7 +53,9 @@ class Team {
     short int getGoalDifference() const;
     void setGoalDifference(const short int goalDifference);
 
-    bool operator>(const Team& team) const;
+    bool operator==(const Team& otherTeam) const;
+    bool operator==(const std::string& otherTeamName) const;
+    bool operator>(const Team& otherTeam) const;
 
    private:
     std::string name;

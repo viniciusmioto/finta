@@ -37,12 +37,12 @@ int main() {
     while (option != 0) {
         switch (option) {
             case 1:
-                system("clear");
+                std::cout << "\033[2J\033[1;1H";
                 Console::printMatchResults(league.getMatches());
                 break;
             case 2:
                 unsigned short int matchDay;
-                system("clear");
+                std::cout << "\033[2J\033[1;1H";
                 std::cout << WHITE_BG
                           << " Choose a match day (1 - 38): " << RESET_TEXT;
                 std::cin >> matchDay;
@@ -54,7 +54,7 @@ int main() {
                 Console::printMatchResults(league.getMatches(), matchDay);
                 break;
             case 3:
-                system("clear");
+                std::cout << "\033[2J\033[1;1H";
                 Console::printTeams(league.getTeams());
                 std::cout << WHITE_BG << " Choose a team:" << RESET_TEXT;
                 std::cin.ignore();
@@ -67,7 +67,7 @@ int main() {
                 }
                 break;
             case 4:
-                system("clear");
+                std::cout << "\033[2J\033[1;1H";
                 unsigned short matchId;
                 std::cout << WHITE_BG << " Choose a match id: " << RESET_TEXT;
                 std::cin >> matchId;
@@ -78,7 +78,7 @@ int main() {
                 }
                 break;
             case 5:
-                system("clear");
+                std::cout << "\033[2J\033[1;1H";
                 short int parameter;
                 Console::printTeams(league.getTeams());
                 std::cout << WHITE_BG << " Choose a team:" << RESET_TEXT;
@@ -106,7 +106,7 @@ int main() {
                 }
                 break;
             case 6:
-                system("clear");
+                std::cout << "\033[2J\033[1;1H";
                 Console::printTeams(league.getTeams());
                 std::cout << WHITE_BG << " Choose a team:" << RESET_TEXT;
                 std::cin.ignore();
@@ -121,7 +121,7 @@ int main() {
 
                 break;
             case 8:
-                system("clear");
+                std::cout << "\033[2J\033[1;1H";
                 Console::printTable(league.getTeams());
                 break;
             default:

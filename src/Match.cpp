@@ -23,14 +23,14 @@ std::ostream& operator<<(std::ostream& os, const Match& match) {
 Match::Match(unsigned short matchDay, MatchResult* MatchResult)
     : id{nextId}, matchResult{MatchResult} {
     setMatchDay(matchDay);
-    nextId++;
+    this->nextId++;
 }
 
 Match::Match(unsigned short matchDay, MatchResult* MatchResult,
              MatchInfo* MatchInfo)
     : id{nextId}, matchResult{MatchResult}, matchInfo{MatchInfo} {
     setMatchDay(matchDay);
-    nextId++;
+    this->nextId++;
 }
 
 Match::Match(unsigned short matchDay, MatchResult* MatchResult,
@@ -41,8 +41,8 @@ Match::Match(unsigned short matchDay, MatchResult* MatchResult,
       matchInfo{MatchInfo},
       homeMatchStats{HomeMatchStats},
       awayMatchStats{AwayMatchStats} {
-    setMatchDay(matchDay);
-    nextId++;
+    this->setMatchDay(matchDay);
+    this->nextId++;
 }
 
 Match::~Match() {
@@ -52,9 +52,9 @@ Match::~Match() {
     delete awayMatchStats;
 }
 
-unsigned int Match::getId() const { return id; }
+unsigned int Match::getId() const { return this->id; }
 
-unsigned short Match::getMatchDay() const { return matchDay; }
+unsigned short Match::getMatchDay() const { return this->matchDay; }
 
 void Match::setMatchDay(const unsigned short matchDay) {
     if (matchDay < 1 || matchDay > 38) {
@@ -64,24 +64,24 @@ void Match::setMatchDay(const unsigned short matchDay) {
     this->matchDay = matchDay;
 }
 
-MatchResult* Match::getMatchResult() const { return matchResult; }
+MatchResult* Match::getMatchResult() const { return this->matchResult; }
 
 void Match::setMatchResult(MatchResult* matchResult) {
     this->matchResult = matchResult;
 }
 
-MatchInfo* Match::getMatchInfo() const { return matchInfo; }
+MatchInfo* Match::getMatchInfo() const { return this->matchInfo; }
 
 void Match::setMatchInfo(MatchInfo* matchInfo) { this->matchInfo = matchInfo; }
 
 
-MatchStats* Match::getHomeMatchStats() const { return homeMatchStats; }
+MatchStats* Match::getHomeMatchStats() const { return this->homeMatchStats; }
 
 void Match::setHomeMatchStats(MatchStats* homeMatchStats) {
     this->homeMatchStats = homeMatchStats;
 }
 
-MatchStats* Match::getAwayMatchStats() const { return awayMatchStats; }
+MatchStats* Match::getAwayMatchStats() const { return this->awayMatchStats; }
 
 void Match::setAwayMatchStats(MatchStats* awayMatchStats) {
     this->awayMatchStats = awayMatchStats;

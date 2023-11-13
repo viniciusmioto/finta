@@ -1,5 +1,5 @@
-CFLAGS_COMMON = -Wall -std=c++1y
 CC = g++
+CFLAGS_COMMON = -pedantic-errors -Wall -Wextra -Werror -std=c++20 -O3
 BOOST_ROOT := -I$(HOME)/boost_1_82_0
 PROGRAM = finta
 OBJECTS = main.o \
@@ -18,8 +18,6 @@ OBJECTS = main.o \
 		RedCard.o \
 		MatchStats.o \
 
-DEBUG_FLAG =
-
 .PHONY: clean purge all debug
 
 all: $(PROGRAM)
@@ -31,9 +29,6 @@ $(PROGRAM): $(OBJECTS)
 	$(CC) $(CFLAGS_COMMON) $(BOOST_ROOT) $(DEBUG_FLAG) -c -o $@ $<
 
 clean:
-	@rm -f *.o
-
-purge:
 	@rm -f $(PROGRAM) *.o
 
 debug: DEBUG_FLAG = -g -DDEBUG

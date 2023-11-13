@@ -24,34 +24,22 @@ MatchResult::MatchResult(Team* homeTeam, Team* awayTeam,
         awayTeam->addMatchResult(this);
     }
 
-    // Add points to the teams
     // Home team won
     if (homeTeamScore > awayTeamScore) {
         homeTeam->addPoints(3);
-    }
-    // Away team won
-    else if (homeTeamScore < awayTeamScore) {
-        awayTeam->addPoints(3);
-    }
-    // Draw
-    else {
-        homeTeam->addPoints(1);
-        awayTeam->addPoints(1);
-    }
-
-    // Add wins, draws and losses to the teams
-    // Home team won
-    if (homeTeamScore > awayTeamScore) {
         homeTeam->addWins(1);
         awayTeam->addLosses(1);
     }
     // Away team won
     else if (homeTeamScore < awayTeamScore) {
+        awayTeam->addPoints(3);
         homeTeam->addLosses(1);
         awayTeam->addWins(1);
     }
     // Draw
     else {
+        homeTeam->addPoints(1);
+        awayTeam->addPoints(1);
         homeTeam->addDraws(1);
         awayTeam->addDraws(1);
     }
@@ -72,16 +60,16 @@ MatchResult::MatchResult(Team* homeTeam, Team* awayTeam,
                                 awayTeam->getGoalsAgainst());
 }
 
-Team* MatchResult::getHomeTeam() const { return homeTeam; }
+Team* MatchResult::getHomeTeam() const { return this->homeTeam; }
 
 void MatchResult::setHomeTeam(Team* homeTeam) { this->homeTeam = homeTeam; }
 
-Team* MatchResult::getAwayTeam() const { return awayTeam; }
+Team* MatchResult::getAwayTeam() const { return this->awayTeam; }
 
 void MatchResult::setAwayTeam(Team* awayTeam) { this->awayTeam = awayTeam; }
 
 unsigned short int MatchResult::getHomeTeamScore() const {
-    return homeTeamScore;
+    return this->homeTeamScore;
 }
 
 void MatchResult::setHomeTeamScore(unsigned short int homeTeamScore) {
@@ -89,7 +77,7 @@ void MatchResult::setHomeTeamScore(unsigned short int homeTeamScore) {
 }
 
 unsigned short int MatchResult::getAwayTeamScore() const {
-    return awayTeamScore;
+    return this->awayTeamScore;
 }
 
 void MatchResult::setAwayTeamScore(unsigned short int awayTeamScore) {

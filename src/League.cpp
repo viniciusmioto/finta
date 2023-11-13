@@ -26,14 +26,14 @@ void League::addTeams(std::list<Team*> teams) { this->teams = teams; }
 Team* League::findOrCreateTeam(const std::string& teamName) {
     // Search for the team in the existing list
     for (Team* team : teams) {
-        if (teamName == team->getName()) {
+        if (*team == teamName) {
             return team;
         }
     }
 
     // If the team is not found, create a new team and add it to the list
-    Team* newTeam = new Team(teamName);
-    teams.push_back(newTeam);
+    Team* newTeam{new Team(teamName)};
+    this->teams.push_back(newTeam);
 
 #ifdef DEBUG
     std::cout << "Created new team: " << teamName << std::endl;
@@ -44,7 +44,7 @@ Team* League::findOrCreateTeam(const std::string& teamName) {
 
 const std::list<Match*>& League::getMatches() const { return this->matches; }
 
-void League::addMatch(Match* match) { matches.push_back(match); }
+void League::addMatch(Match* match) { this->matches.push_back(match); }
 
 void League::fillMatches(const std::string& filePath) {
     boost::property_tree::ptree data;
@@ -67,10 +67,10 @@ void League::fillMatches(const std::string& filePath) {
             Team* homeTeamPtr = findOrCreateTeam(homeTeam);
             Team* awayTeamPtr = findOrCreateTeam(awayTeam);
 
-            MatchInfo* matchInfo =
+            MatchInfo* matchInfo{
                 new MatchInfo{match.second.get<std::string>("date"),
                               match.second.get<std::string>("hour"),
-                              match.second.get<std::string>("stadium")};
+                              match.second.get<std::string>("stadium")}};
 
             if (homeGoals > 0) {
                 const boost::property_tree::ptree& homeGoalScorers =
@@ -173,8 +173,8 @@ void League::fillMatches(const std::string& filePath) {
             std::string homeCoach = match.second.get<std::string>("coach.home");
             std::string awayCoach = match.second.get<std::string>("coach.away");
 
-            MatchResult* matchResult =
-                new MatchResult{homeTeamPtr, awayTeamPtr, homeGoals, awayGoals};
+            MatchResult* matchResult{new MatchResult{homeTeamPtr, awayTeamPtr,
+                                                     homeGoals, awayGoals}};
 
             // Update the team staff stats
             homeTeamPtr->updateStaffStats(
@@ -184,8 +184,8 @@ void League::fillMatches(const std::string& filePath) {
                 awayTeamPtr->findOrCreateStaff(awayCoach),
                 awayGoals - homeGoals);
 
-            MatchStats* homeMatchStats = new MatchStats();
-            MatchStats* awayMatchStats = new MatchStats();
+            MatchStats* homeMatchStats{new MatchStats()};
+            MatchStats* awayMatchStats{new MatchStats()};
 
             for (const auto& stat : match.second.get_child("stats")) {
                 std::string homeStat = stat.second.get<std::string>("home");
@@ -200,36 +200,34 @@ void League::fillMatches(const std::string& filePath) {
                     awayMatchStats->setPassAccuracy(
                         convertPercentageToInt(awayStat));
                 } else {
-                    unsigned short homeStatValue = std::stoi(homeStat);
-                    unsigned short awayStatValue = std::stoi(awayStat);
-
+ 
                     if (statName == "Chutes") {
-                        homeMatchStats->setShots(homeStatValue);
-                        awayMatchStats->setShots(awayStatValue);
+                        homeMatchStats->setShots(std::stoi(homeStat));
+                        awayMatchStats->setShots(std::stoi(awayStat));
                     } else if (statName == "Chutes a gol") {
-                        homeMatchStats->setShotsOnTarget(homeStatValue);
-                        awayMatchStats->setShotsOnTarget(awayStatValue);
+                        homeMatchStats->setShotsOnTarget(std::stoi(homeStat));
+                        awayMatchStats->setShotsOnTarget(std::stoi(awayStat));
                     } else if (statName == "Posse de bola") {
-                        homeMatchStats->setPossession(homeStatValue);
-                        awayMatchStats->setPossession(awayStatValue);
+                        homeMatchStats->setPossession(std::stoi(homeStat));
+                        awayMatchStats->setPossession(std::stoi(awayStat));
                     } else if (statName == "Passes") {
-                        homeMatchStats->setPasses(homeStatValue);
-                        awayMatchStats->setPasses(awayStatValue);
+                        homeMatchStats->setPasses(std::stoi(homeStat));
+                        awayMatchStats->setPasses(std::stoi(awayStat));
                     } else if (statName == "Faltas") {
-                        homeMatchStats->setFouls(homeStatValue);
-                        awayMatchStats->setFouls(awayStatValue);
+                        homeMatchStats->setFouls(std::stoi(homeStat));
+                        awayMatchStats->setFouls(std::stoi(awayStat));
                     } else if (statName == "Cartões amarelos") {
-                        homeMatchStats->setYellowCards(homeStatValue);
-                        awayMatchStats->setYellowCards(awayStatValue);
+                        homeMatchStats->setYellowCards(std::stoi(homeStat));
+                        awayMatchStats->setYellowCards(std::stoi(awayStat));
                     } else if (statName == "Cartões vermelhos") {
-                        homeMatchStats->setRedCards(homeStatValue);
-                        awayMatchStats->setRedCards(awayStatValue);
+                        homeMatchStats->setRedCards(std::stoi(homeStat));
+                        awayMatchStats->setRedCards(std::stoi(awayStat));
                     } else if (statName == "Impedimentos") {
-                        homeMatchStats->setOffsides(homeStatValue);
-                        awayMatchStats->setOffsides(awayStatValue);
+                        homeMatchStats->setOffsides(std::stoi(homeStat));
+                        awayMatchStats->setOffsides(std::stoi(awayStat));
                     } else if (statName == "Escanteios") {
-                        homeMatchStats->setCorners(homeStatValue);
-                        awayMatchStats->setCorners(awayStatValue);
+                        homeMatchStats->setCorners(std::stoi(homeStat));
+                        awayMatchStats->setCorners(std::stoi(awayStat));
                     }
                 }
             }
@@ -241,7 +239,7 @@ void League::fillMatches(const std::string& filePath) {
     }
 }
 
-int League::convertPercentageToInt(const std::string& percentage) {
+unsigned short League::convertPercentageToInt(const std::string& percentage) {
     // Make a copy of the input string
     std::string modifiedPercentage = percentage;
 
@@ -258,7 +256,6 @@ int League::convertPercentageToInt(const std::string& percentage) {
     }
 
     // Convert the modified string to an integer
-    int result = std::stoi(modifiedPercentage);
-
-    return result;
+  
+    return std::stoi(modifiedPercentage);
 }

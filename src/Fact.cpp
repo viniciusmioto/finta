@@ -9,10 +9,10 @@ std::ostream& operator<<(std::ostream& os, const Fact& fact) {
 Fact::Fact(Player* player, std::string minute)
     : player{player}, minute{minute} {}
 
-Player* Fact::getPlayer() const { return player; }
+Player* Fact::getPlayer() const { return this->player; }
 
 void Fact::setPlayer(Player* player) { this->player = player; }
 
-std::string Fact::getMinute() const { return minute; }
+std::string Fact::getMinute() const { return this->minute; }
 
 void Fact::setMinute(const std::string& minute) { this->minute = minute; }

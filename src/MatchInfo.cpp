@@ -77,60 +77,60 @@ MatchInfo::~MatchInfo() {
     for (auto redCard : awayRedCards) delete redCard;
 }
 
-std::string MatchInfo::getMatchDate() const { return matchDate; }
+std::string MatchInfo::getMatchDate() const { return this->matchDate; }
 
 void MatchInfo::setMatchDate(const std::string& matchDate) {
     this->matchDate = matchDate;
 }
 
-std::string MatchInfo::getMatchHour() const { return matchTime; }
+std::string MatchInfo::getMatchHour() const { return this->matchTime; }
 
 void MatchInfo::setMatchHour(const std::string& matchTime) {
     this->matchTime = matchTime;
 }
 
-std::string MatchInfo::getMatchPlace() const { return matchPlace; }
+std::string MatchInfo::getMatchPlace() const { return this->matchPlace; }
 
 void MatchInfo::setMatchPlace(const std::string& matchPlace) {
     this->matchPlace = matchPlace;
 }
 
-const std::list<Goal*>& MatchInfo::getHomeGoals() const { return homeGoals; }
+const std::list<Goal*>& MatchInfo::getHomeGoals() const { return this->homeGoals; }
 
-void MatchInfo::addHomeGoal(Goal* goal) { homeGoals.push_back(goal); }
+void MatchInfo::addHomeGoal(Goal* goal) { this->homeGoals.push_back(goal); }
 
-const std::list<Goal*>& MatchInfo::getAwayGoals() const { return awayGoals; }
+const std::list<Goal*>& MatchInfo::getAwayGoals() const { return this->awayGoals; }
 
-void MatchInfo::addAwayGoal(Goal* goal) { awayGoals.push_back(goal); }
+void MatchInfo::addAwayGoal(Goal* goal) { this->awayGoals.push_back(goal); }
 
 const std::list<Fact*>& MatchInfo::getHomeYellowCards() const {
-    return homeYellowCards;
+    return this->homeYellowCards;
 }
 
 void MatchInfo::addHomeYellowCard(Fact* yellowCard) {
-    homeYellowCards.push_back(yellowCard);
+    this->homeYellowCards.push_back(yellowCard);
 }
 
 const std::list<Fact*>& MatchInfo::getAwayYellowCards() const {
-    return awayYellowCards;
+    return this->awayYellowCards;
 }
 
 void MatchInfo::addAwayYellowCard(Fact* yellowCard) {
-    awayYellowCards.push_back(yellowCard);
+    this->awayYellowCards.push_back(yellowCard);
 }
 
 const std::list<Fact*>& MatchInfo::getHomeRedCards() const {
-    return homeRedCards;
+    return this->homeRedCards;
 }
 
 void MatchInfo::addHomeRedCard(Fact* redCard) {
-    homeRedCards.push_back(redCard);
+    this->homeRedCards.push_back(redCard);
 }
 
 const std::list<Fact*>& MatchInfo::getAwayRedCards() const {
-    return awayRedCards;
+    return this->awayRedCards;
 }
 
 void MatchInfo::addAwayRedCard(Fact* redCard) {
-    awayRedCards.push_back(redCard);
+    this->awayRedCards.push_back(redCard);
 }

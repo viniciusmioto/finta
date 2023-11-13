@@ -29,9 +29,9 @@ class League {
     void fillMatches(const std::string& filePath);
 
    private:
-    int convertPercentageToInt(const std::string& percentage);
+    unsigned short convertPercentageToInt(const std::string& percentage);
 
-        std::string name;
+    std::string name;
     std::list<Team*> teams;
     std::list<Match*> matches;
 };
