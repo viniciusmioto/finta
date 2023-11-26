@@ -1,20 +1,5 @@
 #include "MatchStats.hpp"
 
-std::ostream& operator<<(std::ostream& os, const MatchStats& stats) {
-    os << "🥅 Shots: " << stats.getShots() << std::endl;
-    os << "🎯 Shots on target: " << stats.getShotsOnTarget() << std::endl;
-    os << "✳️  Possession: " << stats.getPossession() << "%" << std::endl;
-    os << "👟 Passes: " << stats.getPasses() << std::endl;
-    os << "✅ Pass accuracy: " << stats.getPassAccuracy() << "%" << std::endl;
-    os << "💢 Fouls: " << stats.getFouls() << std::endl;
-    os << "🟨 Yellow cards: " << stats.getYellowCards() << std::endl;
-    os << "🟥 Red cards: " << stats.getRedCards() << std::endl;
-    os << "🚫 Offsides: " << stats.getOffsides() << std::endl;
-    os << "⛳ Corners: " << stats.getCorners() << std::endl;
-
-    return os;
-}
-
 MatchStats::MatchStats()
     : shots{0},
       shotsOnTarget{0},
@@ -42,8 +27,6 @@ MatchStats::MatchStats(unsigned short shots, unsigned short shotsOnTarget,
       redCards{redCards},
       offsides{offsides},
       corners{corners} {}
-
-// getters
 
 unsigned short MatchStats::getShots() const { return this->shots; }
 
@@ -103,4 +86,19 @@ unsigned short MatchStats::getCorners() const { return this->corners; }
 
 void MatchStats::setCorners(const unsigned short corners) {
     this->corners = corners;
+}
+
+std::ostream& operator<<(std::ostream& os, const MatchStats& stats) {
+    os << "🥅 Shots: " << stats.getShots() << std::endl;
+    os << "🎯 Shots on target: " << stats.getShotsOnTarget() << std::endl;
+    os << "✳️  Possession: " << stats.getPossession() << "%" << std::endl;
+    os << "👟 Passes: " << stats.getPasses() << std::endl;
+    os << "✅ Pass accuracy: " << stats.getPassAccuracy() << "%" << std::endl;
+    os << "💢 Fouls: " << stats.getFouls() << std::endl;
+    os << "🟨 Yellow cards: " << stats.getYellowCards() << std::endl;
+    os << "🟥 Red cards: " << stats.getRedCards() << std::endl;
+    os << "🚫 Offsides: " << stats.getOffsides() << std::endl;
+    os << "⛳ Corners: " << stats.getCorners() << std::endl;
+
+    return os;
 }

@@ -11,13 +11,9 @@ Team::Team(std::string name)
       goalDifference{0} {}
 
 Team::~Team() {
-    for (Staff* staff : staff) {
-        delete staff;
-    }
+    for (auto staff : staff) delete staff;
 
-    for (Player* player : players) {
-        delete player;
-    }
+    for (auto player : players) delete player;
 }
 
 std::string Team::getName() const { return this->name; }

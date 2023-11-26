@@ -13,7 +13,8 @@ class MatchResult;  // Forward declaration
 class Team {
    public:
     Team(std::string name);
-    ~Team();
+    
+    virtual ~Team();
 
     std::string getName() const;
     void setName(const std::string& name);

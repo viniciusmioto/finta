@@ -1,43 +1,5 @@
 #include "MatchInfo.hpp"
 
-std::ostream& operator<<(std::ostream& os, const MatchInfo& matchInfo) {
-    os << "🗓️  Date: " << matchInfo.matchDate << std::endl;
-    os << "🕖 Time: " << matchInfo.matchTime << std::endl;
-    os << "🏟️  Stadium: " << matchInfo.matchPlace << "\n" << std::endl;
-
-    os << "Home goals: " << std::endl;
-
-    for (auto goal : matchInfo.homeGoals) os << "⚽  " << *goal << std::endl;
-
-    os << std::endl;
-
-    os << "Away goals: " << std::endl;
-
-    for (auto goal : matchInfo.awayGoals) os << "⚽  " << *goal << std::endl;
-
-    os << std::endl;
-
-    os << "Home cards: " << std::endl;
-
-    for (auto yellowCard : matchInfo.homeYellowCards)
-        os << "🟨  " << *yellowCard << std::endl;
-
-    for (auto redCard : matchInfo.homeRedCards)
-        os << "🟥  " << *redCard << std::endl;
-
-    os << std::endl;
-
-    os << "Away cards: " << std::endl;
-
-    for (auto yellowCard : matchInfo.awayYellowCards)
-        os << "🟨  " << *yellowCard << std::endl;
-
-    for (auto redCard : matchInfo.awayRedCards)
-        os << "🟥  " << *redCard << std::endl;
-
-    return os;
-}
-
 MatchInfo::MatchInfo(std::string matchDate, std::string matchTime,
                      std::string matchPlace)
     : matchDate{matchDate}, matchTime{matchTime}, matchPlace{matchPlace} {}
@@ -137,4 +99,42 @@ const std::list<Fact*>& MatchInfo::getAwayRedCards() const {
 
 void MatchInfo::addAwayRedCard(Fact* redCard) {
     this->awayRedCards.push_back(redCard);
+}
+
+std::ostream& operator<<(std::ostream& os, const MatchInfo& matchInfo) {
+    os << "🗓️  Date: " << matchInfo.matchDate << std::endl;
+    os << "🕖 Time: " << matchInfo.matchTime << std::endl;
+    os << "🏟️  Stadium: " << matchInfo.matchPlace << "\n" << std::endl;
+
+    os << "Home goals: " << std::endl;
+
+    for (auto goal : matchInfo.homeGoals) os << "⚽  " << *goal << std::endl;
+
+    os << std::endl;
+
+    os << "Away goals: " << std::endl;
+
+    for (auto goal : matchInfo.awayGoals) os << "⚽  " << *goal << std::endl;
+
+    os << std::endl;
+
+    os << "Home cards: " << std::endl;
+
+    for (auto yellowCard : matchInfo.homeYellowCards)
+        os << "🟨  " << *yellowCard << std::endl;
+
+    for (auto redCard : matchInfo.homeRedCards)
+        os << "🟥  " << *redCard << std::endl;
+
+    os << std::endl;
+
+    os << "Away cards: " << std::endl;
+
+    for (auto yellowCard : matchInfo.awayYellowCards)
+        os << "🟨  " << *yellowCard << std::endl;
+
+    for (auto redCard : matchInfo.awayRedCards)
+        os << "🟥  " << *redCard << std::endl;
+
+    return os;
 }

@@ -7,7 +7,7 @@ class RedCard : virtual public Fact {
    public:
     RedCard(Player* player, std::string minute);
 
-    virtual ~RedCard();
+    virtual ~RedCard() = default;
 };
 
 #endif

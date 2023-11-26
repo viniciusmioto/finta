@@ -10,9 +10,9 @@ League::League(std::string name, std::list<Team*> teams,
     : name{name}, teams(teams), matches(matches) {}
 
 League::~League() {
-    for (Team* team : teams) delete team;
+    for (auto team: teams) delete team;
 
-    for (Match* match : matches) delete match;
+    for (auto match : matches) delete match;
 }
 
 std::string League::getName() const { return this->name; }

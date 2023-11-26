@@ -15,7 +15,8 @@ class Match {
     Match(unsigned short matchDay, MatchResult* matchResult,
           MatchInfo* matchInfo, MatchStats* homeMatchStats,
           MatchStats* awayMatchStats);
-    ~Match();
+    
+    virtual ~Match();
 
     unsigned int getId() const;
 

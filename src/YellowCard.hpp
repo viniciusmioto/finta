@@ -7,7 +7,7 @@ class YellowCard : virtual public Fact {
    public:
     YellowCard(Player* player, std::string minute);
 
-    virtual ~YellowCard();
+    virtual ~YellowCard() = default;
 };
 
 #endif  // YELLOW_CARD_HPP

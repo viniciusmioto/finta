@@ -5,8 +5,6 @@ Goal::Goal(Player* player, std::string minute, bool isOwnGoal)
     player->setGoalsScored(player->getGoalsScored() + 1);
 }
 
-Goal::~Goal() {}
-
 bool Goal::getIsOwnGoal() const { return this->isOwnGoal; }
 
 void Goal::setIsOwnGoal(bool isOwnGoal) { this->isOwnGoal = isOwnGoal; }

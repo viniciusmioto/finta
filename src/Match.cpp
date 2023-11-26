@@ -2,35 +2,17 @@
 
 unsigned long int Match::nextId{1};
 
-std::ostream& operator<<(std::ostream& os, const Match& match) {
-    os << "🔰 Match ID: " << match.id << " | 📌 Match Day: " << match.matchDay
-       << std::endl;
-
-    os << "\n" << *match.matchResult << "\n" << std::endl;
-    os << *match.matchInfo << std::endl;
-
-    os << "Home Team Stats: " << std::endl;
-
-    os << *match.homeMatchStats << std::endl;
-
-    os << "Away Team Stats: " << std::endl;
-
-    os << *match.awayMatchStats << std::endl;
-
-    return os;
-}
-
 Match::Match(unsigned short matchDay, MatchResult* MatchResult)
     : id{nextId}, matchResult{MatchResult} {
     setMatchDay(matchDay);
-    this->nextId++;
+    Match::nextId++;
 }
 
 Match::Match(unsigned short matchDay, MatchResult* MatchResult,
              MatchInfo* MatchInfo)
     : id{nextId}, matchResult{MatchResult}, matchInfo{MatchInfo} {
     setMatchDay(matchDay);
-    this->nextId++;
+    Match::nextId++;
 }
 
 Match::Match(unsigned short matchDay, MatchResult* MatchResult,
@@ -42,7 +24,7 @@ Match::Match(unsigned short matchDay, MatchResult* MatchResult,
       homeMatchStats{HomeMatchStats},
       awayMatchStats{AwayMatchStats} {
     this->setMatchDay(matchDay);
-    this->nextId++;
+    Match::nextId++;
 }
 
 Match::~Match() {
@@ -84,4 +66,22 @@ MatchStats* Match::getAwayMatchStats() const { return this->awayMatchStats; }
 
 void Match::setAwayMatchStats(MatchStats* awayMatchStats) {
     this->awayMatchStats = awayMatchStats;
+}
+
+std::ostream& operator<<(std::ostream& os, const Match& match) {
+    os << "🔰 Match ID: " << match.id << " | 📌 Match Day: " << match.matchDay
+       << std::endl;
+
+    os << "\n" << *match.matchResult << "\n" << std::endl;
+    os << *match.matchInfo << std::endl;
+
+    os << "Home Team Stats: " << std::endl;
+
+    os << *match.homeMatchStats << std::endl;
+
+    os << "Away Team Stats: " << std::endl;
+
+    os << *match.awayMatchStats << std::endl;
+
+    return os;
 }

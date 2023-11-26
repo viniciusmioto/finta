@@ -21,7 +21,8 @@ class MatchInfo {
               std::list<Goal*> awayGoals, std::list<Fact*> homeYellowCards,
               std::list<Fact*> awayYellowCards, std::list<Fact*> homeRedCards,
               std::list<Fact*> awayRedCards);
-    ~MatchInfo();
+
+    virtual ~MatchInfo();
 
     std::string getMatchDate() const;
     void setMatchDate(const std::string& matchDate);

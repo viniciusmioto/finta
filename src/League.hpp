@@ -15,7 +15,7 @@ class League {
     League(std::string name, std::list<Team*> teams);
     League(std::string name, std::list<Team*> teams, std::list<Match*> matches);
 
-    ~League();
+    virtual ~League();
 
     std::string getName() const;
     void setName(std::string name);

@@ -1,14 +1,5 @@
 #include "MatchResult.hpp"
 
-std::ostream& operator<<(std::ostream& os, const MatchResult& matchResult) {
-    os << matchResult.getHomeTeam()->getName() << " "
-       << matchResult.getHomeTeamScore() << " x "
-       << matchResult.getAwayTeamScore() << " "
-       << matchResult.getAwayTeam()->getName();
-
-    return os;
-}
-
 MatchResult::MatchResult(Team* homeTeam, Team* awayTeam,
                          unsigned short int homeTeamScore,
                          unsigned short int awayTeamScore)
@@ -82,4 +73,13 @@ unsigned short int MatchResult::getAwayTeamScore() const {
 
 void MatchResult::setAwayTeamScore(unsigned short int awayTeamScore) {
     this->awayTeamScore = awayTeamScore;
+}
+
+std::ostream& operator<<(std::ostream& os, const MatchResult& matchResult) {
+    os << matchResult.getHomeTeam()->getName() << " "
+       << matchResult.getHomeTeamScore() << " x "
+       << matchResult.getAwayTeamScore() << " "
+       << matchResult.getAwayTeam()->getName();
+
+    return os;
 }

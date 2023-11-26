@@ -11,7 +11,7 @@ class Goal : virtual public Fact {
    public:
     Goal(Player* player, std::string minute, bool isOwnGoal = false);
 
-    virtual ~Goal();
+    virtual ~Goal() = default;
 
     bool getIsOwnGoal() const;
     void setIsOwnGoal(bool isOwnGoal);
