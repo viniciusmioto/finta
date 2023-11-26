@@ -10,4 +10,4 @@ class YellowCard : virtual public Fact {
     virtual ~YellowCard();
 };
 
-#endif // YELLOW_CARD_HPP
+#endif  // YELLOW_CARD_HPP

@@ -200,7 +200,6 @@ void League::fillMatches(const std::string& filePath) {
                     awayMatchStats->setPassAccuracy(
                         convertPercentageToInt(awayStat));
                 } else {
- 
                     if (statName == "Chutes") {
                         homeMatchStats->setShots(std::stoi(homeStat));
                         awayMatchStats->setShots(std::stoi(awayStat));
@@ -256,6 +255,6 @@ unsigned short League::convertPercentageToInt(const std::string& percentage) {
     }
 
     // Convert the modified string to an integer
-  
+
     return std::stoi(modifiedPercentage);
 }

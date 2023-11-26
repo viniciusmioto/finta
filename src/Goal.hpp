@@ -2,21 +2,22 @@
 #define GOAL_HPP
 
 #include <string>
+
 #include "Fact.hpp"
 #include "Player.hpp"
 #include "Team.hpp"
 
 class Goal : virtual public Fact {
-    public:
-        Goal(Player* player, std::string minute, bool isOwnGoal = false);
+   public:
+    Goal(Player* player, std::string minute, bool isOwnGoal = false);
 
-        virtual ~Goal();
+    virtual ~Goal();
 
-        bool getIsOwnGoal() const;
-        void setIsOwnGoal(bool isOwnGoal);
+    bool getIsOwnGoal() const;
+    void setIsOwnGoal(bool isOwnGoal);
 
-    private:
-        bool isOwnGoal;
+   private:
+    bool isOwnGoal;
 };
 
-#endif // GOAL_HPP
+#endif  // GOAL_HPP

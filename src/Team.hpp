@@ -1,15 +1,14 @@
 #ifndef TEAM_HPP
 #define TEAM_HPP
 
+#include <iostream>
 #include <list>
 #include <string>
 
-#include <iostream>
-
-#include "Staff.hpp"
 #include "Player.hpp"
+#include "Staff.hpp"
 
-class MatchResult; // Forward declaration
+class MatchResult;  // Forward declaration
 
 class Team {
    public:
@@ -33,7 +32,7 @@ class Team {
 
     unsigned short int getLosses() const;
     void addLosses(const unsigned short int losses);
-    
+
     unsigned short int getGoals() const;
     void addGoals(const unsigned short int goals);
 
@@ -41,7 +40,7 @@ class Team {
     void addStaff(Staff* staff);
 
     Staff* findOrCreateStaff(const std::string& staffName);
-    void updateStaffStats(Staff *staffMember, short result);
+    void updateStaffStats(Staff* staffMember, short result);
 
     const std::list<Player*>& getPlayers() const;
     void addPlayer(Player* player);

@@ -74,7 +74,6 @@ MatchInfo* Match::getMatchInfo() const { return this->matchInfo; }
 
 void Match::setMatchInfo(MatchInfo* matchInfo) { this->matchInfo = matchInfo; }
 
-
 MatchStats* Match::getHomeMatchStats() const { return this->homeMatchStats; }
 
 void Match::setHomeMatchStats(MatchStats* homeMatchStats) {

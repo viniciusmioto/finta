@@ -1,15 +1,18 @@
 #ifndef MATCH_RESULT_HPP
 #define MATCH_RESULT_HPP
 
-#include <string>
 #include <cstdint>
+#include <string>
+
 #include "Team.hpp"
 
 class MatchResult {
-    friend std::ostream& operator<<(std::ostream& os, const MatchResult& matchResult);
+    friend std::ostream& operator<<(std::ostream& os,
+                                    const MatchResult& matchResult);
 
    public:
-    MatchResult(Team* homeTeam, Team* awayTeam, unsigned short int homeTeamScore,
+    MatchResult(Team* homeTeam, Team* awayTeam,
+                unsigned short int homeTeamScore,
                 unsigned short int awayTeamScore);
 
     Team* getHomeTeam() const;
@@ -17,7 +20,7 @@ class MatchResult {
 
     Team* getAwayTeam() const;
     void setAwayTeam(Team* awayTeam);
-    
+
     unsigned short int getHomeTeamScore() const;
     void setHomeTeamScore(unsigned short int homeTeamScore);
 

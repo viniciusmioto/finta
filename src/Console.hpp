@@ -46,7 +46,8 @@ class Console {
                                             const Player* player2);
     static bool comparePlayersByRedCards(const Player* player1,
                                          const Player* player2);
-    static bool comparePlayersByName(const Player* player1, const Player* player2);
+    static bool comparePlayersByName(const Player* player1,
+                                     const Player* player2);
 };
 
 #endif  // CONSOLE_HPP

@@ -1,6 +1,6 @@
 CC = g++
 CFLAGS_COMMON = -pedantic-errors -Wall -Wextra -Werror -std=c++20 -O3
-BOOST_ROOT := -I$(HOME)/boost_1_82_0
+BOOST_ROOT := -I$(HOME)/boost
 PROGRAM = finta
 OBJECTS = main.o \
 		League.o \

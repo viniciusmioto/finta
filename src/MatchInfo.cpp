@@ -95,11 +95,15 @@ void MatchInfo::setMatchPlace(const std::string& matchPlace) {
     this->matchPlace = matchPlace;
 }
 
-const std::list<Goal*>& MatchInfo::getHomeGoals() const { return this->homeGoals; }
+const std::list<Goal*>& MatchInfo::getHomeGoals() const {
+    return this->homeGoals;
+}
 
 void MatchInfo::addHomeGoal(Goal* goal) { this->homeGoals.push_back(goal); }
 
-const std::list<Goal*>& MatchInfo::getAwayGoals() const { return this->awayGoals; }
+const std::list<Goal*>& MatchInfo::getAwayGoals() const {
+    return this->awayGoals;
+}
 
 void MatchInfo::addAwayGoal(Goal* goal) { this->awayGoals.push_back(goal); }
 

@@ -49,7 +49,9 @@ unsigned short MatchStats::getShots() const { return this->shots; }
 
 void MatchStats::setShots(const unsigned short shots) { this->shots = shots; }
 
-unsigned short MatchStats::getShotsOnTarget() const { return this->shotsOnTarget; }
+unsigned short MatchStats::getShotsOnTarget() const {
+    return this->shotsOnTarget;
+}
 
 void MatchStats::setShotsOnTarget(const unsigned short shotsOnTarget) {
     this->shotsOnTarget = shotsOnTarget;
@@ -67,7 +69,9 @@ void MatchStats::setPasses(const unsigned short passes) {
     this->passes = passes;
 }
 
-unsigned short MatchStats::getPassAccuracy() const { return this->passAccuracy; }
+unsigned short MatchStats::getPassAccuracy() const {
+    return this->passAccuracy;
+}
 
 void MatchStats::setPassAccuracy(const unsigned short passAccuracy) {
     this->passAccuracy = passAccuracy;

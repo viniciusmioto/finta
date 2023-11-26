@@ -1,7 +1,6 @@
 @startuml name "finta"
 
 class Fact {
-  - player: Player
   - time: string
 
   + Fact(player: Player, time: string)
@@ -30,8 +29,6 @@ class Match {
   - id: unsigned long int
   - {static} nextId: unsigned long int
   - matchDay: unsigned short
-  - matchInfo: MatchInfo
-  - matchResult: MatchResult
 
   + Match()
   + getId(): unsigned long int
@@ -44,8 +41,6 @@ class Match {
 }
 
 class MatchResult {
-  - homeTeam: Team
-  - awayTeam: Team
   - homeTeamScore: unsigned short
   - awayTeamScore: unsigned short
 
@@ -59,17 +54,14 @@ class MatchResult {
 }
 
 Class MatchInfo {
-  - matchDate: Date
-  - matchTime: Time
+  - matchDate: string
+  - matchTime: string
   - matchPlace: string
-  - goals: Goal[]
-  - yellowCards: Fact[]
-  - redCards: Fact[]
 
-  + MatchInfo(matchDate: Date, matchTime: Time, matchPlace: string)
-  + getMatchDate(): Date
+  + MatchInfo(matchDate: string, matchTime: string, matchPlace: string)
+  + getMatchDate(): string
   + setMatchDate(matchDate: Date): void
-  + getMatchHour(): Time
+  + getMatchHour(): string
   + setMatchTime(matchTime: Time): void
   + getMatchPlace(): string
   + setMatchPlace(matchPlace: string): void
@@ -122,9 +114,6 @@ Class MatchStats {
 class Team {
   - name: string
   - points: unsigned short
-  - matchResults: MatchResult[]
-  - staff: Person[]
-  - players: Player[]
   - goals: unsigned short
   - goalsAgainst: unsigned short
   - goalsDifference: unsigned short
@@ -168,8 +157,6 @@ class Player {
 
 class League {
   - name: string
-  - teams: Team[]
-  - matchResults: MatchResult[]
 
   + League(name: string)
   + League(name: string, teams: Team[])

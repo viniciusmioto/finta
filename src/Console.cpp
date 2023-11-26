@@ -46,7 +46,7 @@ void Console::printTeams(const std::list<Team*>& teams) {
     std::cout << "Teams:\n" << std::endl;
     std::list<Team*>::iterator it;
 
-    for (auto it = teams.begin(); it != teams.end(); it++) {
+    for (auto it = teams.begin(); it != teams.end(); ++it) {
         std::cout << (*it)->getName() << std::endl;
     }
 
@@ -82,7 +82,7 @@ void Console::printPlayers(const std::list<Player*>& players,
               << " | " << std::setw(NAME_WIDTH * 1.5) << "Name"
               << std::setw(NAME_WIDTH * 1.5) << RESET_TEXT << std::endl;
 
-    for (auto it = playersCopy.begin(); it != playersCopy.end(); it++) {
+    for (auto it = playersCopy.begin(); it != playersCopy.end(); ++it) {
         std::cout << std::setw(NUM_WIDTH) << (*it)->getGoalsScored() << " |"
                   << std::setw(NUM_WIDTH) << (*it)->getYellowCards() << " |"
                   << std::setw(NUM_WIDTH) << (*it)->getRedCards() << " | "
@@ -102,7 +102,7 @@ void Console::printStaff(const std::list<Staff*>& staff) {
               << "  |" << std::setw(NAME_WIDTH * 1.4) << "Name"
               << std::setw(NAME_WIDTH * 1.4) << RESET_TEXT << std::endl;
 
-    for (auto it = staff.begin(); it != staff.end(); it++) {
+    for (auto it = staff.begin(); it != staff.end(); ++it) {
         std::cout << std::setw(NUM_WIDTH) << (*it)->getMatches() << "|"
                   << std::setw(NUM_WIDTH) << (*it)->getWins() << "|"
                   << std::setw(NUM_WIDTH) << (*it)->getDraws() << "|"
@@ -124,7 +124,7 @@ void Console::printMatchResults(const Team& team) {
     std::list<MatchResult*>::const_iterator it;
 
     unsigned short int matchDay = 1;
-    for (it = matchResultsList.begin(); it != matchResultsList.end(); it++) {
+    for (it = matchResultsList.begin(); it != matchResultsList.end(); ++it) {
         // show match day
         std::cout << PURPLE_TXT;
         if (matchDay < 10)
@@ -183,7 +183,7 @@ void Console::printMatchResults(const std::list<Match*>& matches,
 
     std::list<Match*>::const_iterator it;
 
-    for (it = matches.begin(); it != matches.end(); it++) {
+    for (it = matches.begin(); it != matches.end(); ++it) {
         if ((*it)->getMatchDay() == matchDay) {
             std::cout << CYAN_TXT << "[" << (*it)->getId() << "] " << RESET_TEXT
                       << *((*it)->getMatchResult()) << std::endl;
@@ -235,7 +235,7 @@ void Console::printTable(const std::list<Team*>& teams) {
               << std::setw(NAME_WIDTH) << "Team" << RESET_TEXT << std::endl;
 
     // Print the table rows
-    for (it = teamsCopy.begin(); it != teamsCopy.end(); it++) {
+    for (it = teamsCopy.begin(); it != teamsCopy.end(); ++it) {
         std::string color = RESET_TEXT;
 
         if (position <= 6)
