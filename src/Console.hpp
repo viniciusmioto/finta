@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+#include "InvalidMatchDayException.hpp"
+#include "InvalidMatchIdException.hpp"
 #include "Match.hpp"
 #include "Team.hpp"
 
@@ -20,6 +22,8 @@ static const std::string PURPLE_BG{"\033[44m"};
 static const std::string RED_BG{"\033[45m"};
 static const std::string BLUE_BG{"\033[46m"};
 static const std::string ORANGE_BG{"\033[47m"};
+static constexpr int NUM_WIDTH = 3;
+static constexpr int NAME_WIDTH = 13;
 
 class Console {
    public:
@@ -36,8 +40,8 @@ class Console {
     static void printMatchDetails(const Match& match);
     static void printTable(const std::list<Team*>& teams);
 
-    static constexpr int NUM_WIDTH = 3;
-    static constexpr int NAME_WIDTH = 13;
+    static unsigned short askMatchId();
+    static unsigned short askMatchDay();
 
    private:
     static bool compareTeams(const Team* homeTeam, const Team* awayTeam);

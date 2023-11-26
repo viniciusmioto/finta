@@ -1,6 +1,8 @@
 #include <iostream>
 
 #include "Console.hpp"
+#include "InvalidMatchDayException.hpp"
+#include "InvalidMatchIdException.hpp"
 #include "League.hpp"
 #include "Match.hpp"
 #include "Team.hpp"
@@ -14,7 +16,7 @@ int main() {
     std::string dataFile;
 
     // choose the year
-    std::cout << "Enter the year (2006-2022): ";
+    std::cout << "Enter the year (2014-2022): ";
     std::cin >> dataYear;
 
     // Generate the file path based on the user input.
@@ -29,7 +31,7 @@ int main() {
 
     Console::printMenu();
 
-    int option;
+    unsigned short option;
     std::cout << " Option: ";
     std::cin >> option;
     std::string teamName;
@@ -41,17 +43,14 @@ int main() {
                 Console::printMatchResults(league.getMatches());
                 break;
             case 2:
-                unsigned short int matchDay;
-                std::cout << "\033[2J\033[1;1H";
-                std::cout << WHITE_BG
-                          << " Choose a match day (1 - 38): " << RESET_TEXT;
-                std::cin >> matchDay;
-                if (matchDay < 1 || matchDay > 38) {
-                    std::cout << YELLOW_TXT << "Invalid match day" << RESET_TEXT
+                try {
+                    unsigned short matchDay = Console::askMatchDay();
+                    Console::printMatchResults(league.getMatches(), matchDay);
+                } catch (const InvalidMatchDayException& e) {
+                    std::cout << YELLOW_TXT << e.what() << RESET_TEXT
                               << std::endl;
                     break;
                 }
-                Console::printMatchResults(league.getMatches(), matchDay);
                 break;
             case 3:
                 std::cout << "\033[2J\033[1;1H";
@@ -59,23 +58,29 @@ int main() {
                 std::cout << WHITE_BG << " Choose a team:" << RESET_TEXT;
                 std::cin.ignore();
                 std::getline(std::cin, teamName);
+
                 for (Team* team : league.getTeams()) {
                     if (teamName == team->getName()) {
                         std::cout << team->getName() << std::endl;
                         Console::printMatchResults(*team);
                     }
                 }
+
                 break;
             case 4:
-                std::cout << "\033[2J\033[1;1H";
-                unsigned short matchId;
-                std::cout << WHITE_BG << " Choose a match id: " << RESET_TEXT;
-                std::cin >> matchId;
-                for (Match* match : league.getMatches()) {
-                    if (matchId == match->getId()) {
-                        Console::printMatchDetails(*match);
+                try {
+                    unsigned short matchId = Console::askMatchId();
+                    for (Match* match : league.getMatches()) {
+                        if (matchId == match->getId()) {
+                            Console::printMatchDetails(*match);
+                        }
                     }
+                } catch (const InvalidMatchIdException& e) {
+                    std::cout << YELLOW_TXT << e.what() << RESET_TEXT
+                              << std::endl;
+                    break;
                 }
+
                 break;
             case 5:
                 std::cout << "\033[2J\033[1;1H";
@@ -120,7 +125,7 @@ int main() {
                 }
 
                 break;
-            case 8:
+            case 7:
                 std::cout << "\033[2J\033[1;1H";
                 Console::printTable(league.getTeams());
                 break;

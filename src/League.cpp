@@ -52,7 +52,8 @@ void League::fillMatches(const std::string& filePath) {
         boost::property_tree::read_json(filePath, data);
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
-        exit(1);
+        std::cout << "Using the most recent data available (2022)" << std::endl;
+        boost::property_tree::read_json("../data/brasileirao-2022.json", data);
     }
     for (unsigned short matchDay = 1; matchDay <= 38; ++matchDay) {
         for (const auto& match : data.get_child(std::to_string(matchDay))) {

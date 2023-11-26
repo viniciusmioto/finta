@@ -36,7 +36,7 @@ void Console::printMenu() {
               << " 4 - Show match details\n"
               << " 5 - Show players of a team\n"
               << " 6 - Show staff of a team\n"
-              << " 8 - Show classification table\n"
+              << " 7 - Show classification table\n"
               << " 0 - Exit" << std::endl
               << std::endl;
 }
@@ -272,4 +272,32 @@ void Console::printTable(const std::list<Team*>& teams) {
     std::cout << RED_BG << "  " << RESET_TEXT << " Relegation" << std::endl;
 
     std::cout << std::endl;
+}
+
+unsigned short Console::askMatchId() {
+    std::cout << "\033[2J\033[1;1H";
+    unsigned short matchId;
+    std::cout << WHITE_BG << " Choose a match id: " << RESET_TEXT;
+    std::cin >> matchId;
+
+    if (matchId < 1 || matchId > 380) {
+        throw InvalidMatchIdException{matchId};
+        return 0;
+    }
+
+    return matchId;
+}
+
+unsigned short Console::askMatchDay() {
+    std::cout << "\033[2J\033[1;1H";
+    unsigned short matchDay;
+    std::cout << WHITE_BG << " Choose a match day (1 - 38): " << RESET_TEXT;
+    std::cin >> matchDay;
+
+    if (matchDay < 1 || matchDay > 38) {
+        throw InvalidMatchDayException{matchDay};
+        return 0;
+    }
+
+    return matchDay;
 }

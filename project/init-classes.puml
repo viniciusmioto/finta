@@ -181,26 +181,40 @@ class Console {
   + {static} printTable(teams: Team[]): void
 }
 
-MatchInfo *-- "goals 0..*" Goal
-MatchInfo *-- "yellowCards 0..*" Fact
-MatchInfo *-- "redCards 0..*" Fact
+class InvalidMatchIdException {
+  - matchDay: unsigned short
 
-MatchResult "0..*" -- "homeTeam 1" Team
-MatchResult "0..*" -- "1 awayTeam" Team
-Team o-- "staff 1..*" Person
-Team  o-- "players 1..*" Player
-League "0..*" -- "teams 20" Team
-League "0..*" -- "matches 1..380" Match
+  + InvalidMatchIdException(matchDay: unsigned short)
+  + getMatchDay(): unsigned short
+}
+
+MatchInfo *-- "goals 0..*" Goal
+MatchInfo *-- "yellowCards 0..*" Fact 
+MatchInfo *-- "redCards 0..*" Fact 
+
+MatchResult "0..*" -- "homeTeam 1" Team : has <
+MatchResult "0..*" -- "1 awayTeam" Team : has <
+
+Team *-- "staff 0..*" Person 
+Team  *-- "players 0..*" Player 
+
+League "1" --* "teams 20" Team 
+League "1" --* "matches 0..380" Match 
+League .. InvalidMatchIdException : <<throws>>
 
 Person <|-- Player
+
 Fact <|-- Goal
 Fact <|-- YellowCard
 Fact <|-- RedCard
 
-Match *-- MatchResult
-Match *-- MatchInfo
-Match *-- MatchStats
+Match *-- MatchResult 
+Match *-- MatchInfo 
+Match *-- MatchStats 
 
-MatchResult -- Console
+Fact o-- Player : player
+
+
+MatchResult .. Console
 
 @enduml

@@ -17,6 +17,8 @@ OBJECTS = main.o \
 		YellowCard.o \
 		RedCard.o \
 		MatchStats.o \
+		InvalidMatchIdException.o \
+		InvalidMatchDayException.o \
 
 .PHONY: clean purge all debug
 
