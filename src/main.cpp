@@ -7,12 +7,11 @@
 #include "Match.hpp"
 #include "Team.hpp"
 
-using namespace finta;
 
 int main() {
-    std::list<Team*> teams;
-    std::list<Match*> matches;
-    League league("brasileirão", teams, matches);
+    std::list<finta::Team*> teams;
+    std::list<finta::Match*> matches;
+    finta::League league("brasileirão", teams, matches);
 
     int dataYear;
     std::string dataFile;
@@ -31,7 +30,7 @@ int main() {
     Console::printTeams(league.getTeams());
 #endif
 
-    Console::printMenu();
+    finta::Console::printMenu();
 
     unsigned short option;
     std::cout << " Option: ";
@@ -42,43 +41,43 @@ int main() {
         switch (option) {
             case 1:
                 std::cout << "\033[2J\033[1;1H";
-                Console::printMatchResults(league.getMatches());
+                finta::Console::printMatchResults(league.getMatches());
                 break;
             case 2:
                 try {
-                    unsigned short matchDay = Console::askMatchDay();
-                    Console::printMatchResults(league.getMatches(), matchDay);
-                } catch (const InvalidMatchDayException& e) {
-                    std::cout << YELLOW_TXT << e.what() << RESET_TEXT
+                    unsigned short matchDay = finta::Console::askMatchDay();
+                    finta::Console::printMatchResults(league.getMatches(), matchDay);
+                } catch (const finta::InvalidMatchDayException& e) {
+                    std::cout << finta::YELLOW_TXT << e.what() << finta::RESET_TEXT
                               << std::endl;
                     break;
                 }
                 break;
             case 3:
                 std::cout << "\033[2J\033[1;1H";
-                Console::printTeams(league.getTeams());
-                std::cout << WHITE_BG << " Choose a team:" << RESET_TEXT;
+                finta::Console::printTeams(league.getTeams());
+                std::cout << finta::WHITE_BG << " Choose a team:" << finta::RESET_TEXT;
                 std::cin.ignore();
                 std::getline(std::cin, teamName);
 
-                for (Team* team : league.getTeams()) {
+                for (finta::Team* team : league.getTeams()) {
                     if (teamName == team->getName()) {
                         std::cout << team->getName() << std::endl;
-                        Console::printMatchResults(*team);
+                        finta::Console::printMatchResults(*team);
                     }
                 }
 
                 break;
             case 4:
                 try {
-                    unsigned short matchId = Console::askMatchId();
-                    for (Match* match : league.getMatches()) {
+                    unsigned short matchId = finta::Console::askMatchId();
+                    for (finta::Match* match : league.getMatches()) {
                         if (matchId == match->getId()) {
-                            Console::printMatchDetails(*match);
+                            finta::Console::printMatchDetails(*match);
                         }
                     }
-                } catch (const InvalidMatchIdException& e) {
-                    std::cout << YELLOW_TXT << e.what() << RESET_TEXT
+                } catch (const finta::InvalidMatchIdException& e) {
+                    std::cout << finta::YELLOW_TXT << e.what() << finta::RESET_TEXT
                               << std::endl;
                     break;
                 }
@@ -87,14 +86,14 @@ int main() {
             case 5:
                 std::cout << "\033[2J\033[1;1H";
                 short int parameter;
-                Console::printTeams(league.getTeams());
-                std::cout << WHITE_BG << " Choose a team:" << RESET_TEXT;
+                finta::Console::printTeams(league.getTeams());
+                std::cout << finta::WHITE_BG << " Choose a team:" << finta::RESET_TEXT;
                 std::cin.ignore();
                 std::getline(std::cin, teamName);
 
                 std::cout << "\n"
-                          << WHITE_BG
-                          << " Choose an sorting parameter:" << RESET_TEXT
+                          << finta::WHITE_BG
+                          << " Choose an sorting parameter:" << finta::RESET_TEXT
                           << std::endl;
 
                 std::cout << "  0 - Alphabetic\n"
@@ -102,43 +101,43 @@ int main() {
                           << "  2 - Yellow Cards\n"
                           << "  3 - Red Cards\n"
                           << std::endl;
-                std::cout << WHITE_BG << " Option: " << RESET_TEXT;
+                std::cout << finta::WHITE_BG << " Option: " << finta::RESET_TEXT;
                 std::cin >> parameter;
 
-                for (Team* team : league.getTeams()) {
+                for (finta::Team* team : league.getTeams()) {
                     if (teamName == team->getName()) {
                         std::cout << team->getName() << std::endl;
-                        Console::printPlayers(team->getPlayers(), parameter);
+                        finta::Console::printPlayers(team->getPlayers(), parameter);
                     }
                 }
                 break;
             case 6:
                 std::cout << "\033[2J\033[1;1H";
-                Console::printTeams(league.getTeams());
-                std::cout << WHITE_BG << " Choose a team:" << RESET_TEXT;
+                finta::Console::printTeams(league.getTeams());
+                std::cout << finta::WHITE_BG << " Choose a team:" << finta::RESET_TEXT;
                 std::cin.ignore();
                 std::getline(std::cin, teamName);
 
-                for (Team* team : league.getTeams()) {
+                for (finta::Team* team : league.getTeams()) {
                     if (teamName == team->getName()) {
                         std::cout << team->getName() << std::endl;
-                        Console::printStaff(team->getStaff());
+                        finta::Console::printStaff(team->getStaff());
                     }
                 }
 
                 break;
             case 7:
                 std::cout << "\033[2J\033[1;1H";
-                Console::printTable(league.getTeams());
+                finta::Console::printTable(league.getTeams());
                 break;
             default:
                 std::cout << "Invalid option" << std::endl;
                 break;
         }
 
-        Console::printMenu();
+        finta::Console::printMenu();
 
-        std::cout << WHITE_BG << " Option: " << RESET_TEXT;
+        std::cout << finta::WHITE_BG << " Option: " << finta::RESET_TEXT;
         std::cin >> option;
     }
 
