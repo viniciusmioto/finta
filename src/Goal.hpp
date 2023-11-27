@@ -7,6 +7,7 @@
 #include "Player.hpp"
 #include "Team.hpp"
 
+namespace finta {
 class Goal : virtual public Fact {
    public:
     Goal(Player* player, std::string minute, bool isOwnGoal = false);
@@ -19,5 +20,5 @@ class Goal : virtual public Fact {
    private:
     bool isOwnGoal;
 };
-
+}  // namespace finta
 #endif  // GOAL_HPP

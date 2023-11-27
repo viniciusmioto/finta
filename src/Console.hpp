@@ -7,7 +7,9 @@
 #include "InvalidMatchIdException.hpp"
 #include "Match.hpp"
 #include "Team.hpp"
+#include <iomanip>
 
+namespace finta {
 static const std::string RESET_TEXT{"\033[0m"};
 static const std::string UNDERLINE{"\033[4m"};
 static const std::string WHITE_BG{"\033[7m"};
@@ -54,5 +56,5 @@ class Console {
     static bool comparePlayersByName(const Player* player1,
                                      const Player* player2);
 };
-
+}  // namespace finta
 #endif  // CONSOLE_HPP

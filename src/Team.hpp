@@ -8,12 +8,13 @@
 #include "Player.hpp"
 #include "Staff.hpp"
 
-class MatchResult;  // Forward declaration
 
+namespace finta {
+class MatchResult;  // Forward declaration
 class Team {
    public:
     Team(std::string name);
-    
+
     virtual ~Team();
 
     std::string getName() const;
@@ -70,5 +71,5 @@ class Team {
     std::list<Staff*> staff;
     std::list<Player*> players;
 };
-
+}  // namespace finta
 #endif  // TEAM_HPP

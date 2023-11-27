@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 
+namespace finta {
 class MatchStats {
     friend std::ostream& operator<<(std::ostream& os,
                                     const MatchStats& matchStats);
@@ -58,5 +59,5 @@ class MatchStats {
     unsigned short offsides;
     unsigned short corners;
 };
-
+}  // namespace finta
 #endif  // MATCH_STATS_HPP

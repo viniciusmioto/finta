@@ -6,6 +6,7 @@
 
 #include "Person.hpp"
 
+namespace finta {
 class Staff : public Person {
    public:
     Staff(std::string name);
@@ -30,5 +31,5 @@ class Staff : public Person {
     unsigned short draws;
     unsigned short losses;
 };
-
+}  // namespace finta
 #endif  // STAFF_HPP

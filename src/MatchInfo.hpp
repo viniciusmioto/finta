@@ -5,7 +5,9 @@
 #include "MatchResult.hpp"
 #include "RedCard.hpp"
 #include "YellowCard.hpp"
+#include <iomanip>
 
+namespace finta {
 class MatchInfo {
     friend std::ostream& operator<<(std::ostream& os,
                                     const MatchInfo& matchInfo);
@@ -62,5 +64,5 @@ class MatchInfo {
     std::list<Fact*> homeRedCards;
     std::list<Fact*> awayRedCards;
 };
-
+}  // namespace finta
 #endif  // MATCH_INFO_HPP

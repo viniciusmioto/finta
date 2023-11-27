@@ -5,7 +5,9 @@
 
 #include "Player.hpp"
 #include "Team.hpp"
+#include <iomanip>
 
+namespace finta {
 class Fact {
     friend std::ostream& operator<<(std::ostream& os, const Fact& fact);
 
@@ -24,4 +26,5 @@ class Fact {
     std::string minute;
 };
 
+}  // namespace finta
 #endif  // FACT_HPP

@@ -1,5 +1,7 @@
 #include "InvalidMatchDayException.hpp"
 
+using namespace finta;
+
 InvalidMatchDayException::InvalidMatchDayException(
     const unsigned short matchDay)
     : std::runtime_error(

@@ -1,5 +1,7 @@
 #include "MatchStats.hpp"
 
+namespace finta {
+
 MatchStats::MatchStats()
     : shots{0},
       shotsOnTarget{0},
@@ -88,7 +90,7 @@ void MatchStats::setCorners(const unsigned short corners) {
     this->corners = corners;
 }
 
-std::ostream& operator<<(std::ostream& os, const MatchStats& stats) {
+std::ostream& operator<<(std::ostream& os, const finta::MatchStats& stats) {
     os << "🥅 Shots: " << stats.getShots() << std::endl;
     os << "🎯 Shots on target: " << stats.getShotsOnTarget() << std::endl;
     os << "✳️  Possession: " << stats.getPossession() << "%" << std::endl;
@@ -102,3 +104,4 @@ std::ostream& operator<<(std::ostream& os, const MatchStats& stats) {
 
     return os;
 }
+}  // namespace finta

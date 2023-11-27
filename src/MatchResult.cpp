@@ -1,5 +1,7 @@
 #include "MatchResult.hpp"
 
+namespace finta {
+
 MatchResult::MatchResult(Team* homeTeam, Team* awayTeam,
                          unsigned short int homeTeamScore,
                          unsigned short int awayTeamScore)
@@ -75,7 +77,7 @@ void MatchResult::setAwayTeamScore(unsigned short int awayTeamScore) {
     this->awayTeamScore = awayTeamScore;
 }
 
-std::ostream& operator<<(std::ostream& os, const MatchResult& matchResult) {
+std::ostream& operator<<(std::ostream& os, const finta::MatchResult& matchResult) {
     os << matchResult.getHomeTeam()->getName() << " "
        << matchResult.getHomeTeamScore() << " x "
        << matchResult.getAwayTeamScore() << " "
@@ -83,3 +85,4 @@ std::ostream& operator<<(std::ostream& os, const MatchResult& matchResult) {
 
     return os;
 }
+}  // namespace finta

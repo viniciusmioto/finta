@@ -1,5 +1,7 @@
 #include "League.hpp"
 
+using namespace finta;
+
 League::League(std::string name) : name{name} {}
 
 League::League(std::string name, std::list<Team*> teams)
@@ -10,7 +12,7 @@ League::League(std::string name, std::list<Team*> teams,
     : name{name}, teams(teams), matches(matches) {}
 
 League::~League() {
-    for (auto team: teams) delete team;
+    for (auto team : teams) delete team;
 
     for (auto match : matches) delete match;
 }
@@ -44,7 +46,13 @@ Team* League::findOrCreateTeam(const std::string& teamName) {
 
 const std::list<Match*>& League::getMatches() const { return this->matches; }
 
-void League::addMatch(Match* match) { this->matches.push_back(match); }
+void League::addMatch(Match* match) {
+    // can not be more than 380 matches
+    if (this->matches.size() >= 380) {
+        throw std::out_of_range("The league is already full");
+    }
+    this->matches.push_back(match);
+}
 
 void League::fillMatches(const std::string& filePath) {
     boost::property_tree::ptree data;
@@ -233,8 +241,13 @@ void League::fillMatches(const std::string& filePath) {
             }
 
             // Add the match
-            this->matches.push_back(new Match{matchDay, matchResult, matchInfo,
-                                              homeMatchStats, awayMatchStats});
+            try {
+                this->matches.push_back(new Match{matchDay, matchResult,
+                                                  matchInfo, homeMatchStats,
+                                                  awayMatchStats});
+            } catch (const std::invalid_argument& e) {
+                std::cerr << "Error: " << e.what() << std::endl;
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
 #include "Match.hpp"
 
+namespace finta {
+
 unsigned long int Match::nextId{1};
 
 Match::Match(unsigned short matchDay, MatchResult* MatchResult)
@@ -68,20 +70,21 @@ void Match::setAwayMatchStats(MatchStats* awayMatchStats) {
     this->awayMatchStats = awayMatchStats;
 }
 
-std::ostream& operator<<(std::ostream& os, const Match& match) {
-    os << "🔰 Match ID: " << match.id << " | 📌 Match Day: " << match.matchDay
+std::ostream& operator<<(std::ostream& os, const finta::Match& match) {
+    os << "🔰 Match ID: " << match.getId() << " | 📌 Match Day: " << match.getMatchDay()
        << std::endl;
 
-    os << "\n" << *match.matchResult << "\n" << std::endl;
-    os << *match.matchInfo << std::endl;
+    os << "\n" << *match.getMatchResult() << "\n" << std::endl;
+    os << *match.getMatchInfo() << std::endl;
 
     os << "Home Team Stats: " << std::endl;
 
-    os << *match.homeMatchStats << std::endl;
+    os << *match.getHomeMatchStats() << std::endl;
 
     os << "Away Team Stats: " << std::endl;
 
-    os << *match.awayMatchStats << std::endl;
+    os << *match.getAwayMatchStats() << std::endl;
 
     return os;
 }
+}  // namespace finta

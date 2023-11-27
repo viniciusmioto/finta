@@ -7,6 +7,8 @@
 #include "Match.hpp"
 #include "Team.hpp"
 
+using namespace finta;
+
 int main() {
     std::list<Team*> teams;
     std::list<Match*> matches;

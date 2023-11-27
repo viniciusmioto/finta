@@ -6,6 +6,7 @@
 
 #include "Team.hpp"
 
+namespace finta {
 class MatchResult {
     friend std::ostream& operator<<(std::ostream& os,
                                     const MatchResult& matchResult);
@@ -33,5 +34,5 @@ class MatchResult {
     unsigned short int homeTeamScore;
     unsigned short int awayTeamScore;
 };
-
+}  // namespace finta
 #endif  // MATCH_RESULT_HPP

@@ -1,5 +1,7 @@
 #include "Team.hpp"
 
+using namespace finta;
+
 Team::Team(std::string name)
     : name{name},
       points{0},

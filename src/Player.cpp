@@ -1,5 +1,7 @@
 #include "Player.hpp"
 
+using namespace finta;
+
 Player::Player(std::string name)
     : Person{name}, goalsScored{0}, yellowCards{0}, redCards{0} {}
 

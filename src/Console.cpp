@@ -2,7 +2,8 @@
 
 #include <iomanip>
 
-// Define a custom comparison function or lambda
+namespace finta {
+
 bool Console::compareTeams(const Team* homeTeam, const Team* awayTeam) {
     return *homeTeam > *awayTeam;
 }
@@ -301,3 +302,4 @@ unsigned short Console::askMatchDay() {
 
     return matchDay;
 }
+} // namespace finta

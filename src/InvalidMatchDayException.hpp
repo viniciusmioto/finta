@@ -3,6 +3,7 @@
 
 #include <stdexcept>
 
+namespace finta {
 class InvalidMatchDayException : public std::runtime_error {
    public:
     const unsigned short matchDay;
@@ -11,5 +12,5 @@ class InvalidMatchDayException : public std::runtime_error {
 
     virtual ~InvalidMatchDayException() = default;
 };
-
-#endif // INVALID_MATCH_DAY_EXCEPTION_HPP
+}  // namespace finta
+#endif  // INVALID_MATCH_DAY_EXCEPTION_HPP

@@ -1,5 +1,7 @@
 #include "Staff.hpp"
 
+using namespace finta;
+
 Staff::Staff(std::string name)
     : Person(name), matches{0}, wins{0}, draws{0}, losses{0} {}
 

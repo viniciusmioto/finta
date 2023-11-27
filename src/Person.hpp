@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 
+namespace finta {
 class Person {
    public:
     Person(std::string name);
@@ -18,5 +19,5 @@ class Person {
    private:
     std::string name;
 };
-
+}
 #endif  // PERSON_HPP

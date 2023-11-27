@@ -3,6 +3,7 @@
 
 #include "Person.hpp"
 
+namespace finta {
 class Player : public Person {
    public:
     Player(std::string name);
@@ -21,5 +22,5 @@ class Player : public Person {
     unsigned short yellowCards;
     unsigned short redCards;
 };
-
+}  // namespace finta
 #endif  // PLAYER_HPP

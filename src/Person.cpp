@@ -1,5 +1,7 @@
 #include "Person.hpp"
 
+using namespace finta;
+
 Person::Person(std::string name) : name{name} {}
 
 std::string Person::getName() const { return this->name; }

@@ -9,6 +9,7 @@
 #include "Match.hpp"
 #include "Team.hpp"
 
+namespace finta {
 class League {
    public:
     League(std::string name);
@@ -35,5 +36,5 @@ class League {
     std::list<Team*> teams;
     std::list<Match*> matches;
 };
-
+}  // namespace finta
 #endif  // LEAGUE_HPP

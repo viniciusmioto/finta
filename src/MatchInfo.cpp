@@ -1,5 +1,7 @@
 #include "MatchInfo.hpp"
 
+namespace finta{
+
 MatchInfo::MatchInfo(std::string matchDate, std::string matchTime,
                      std::string matchPlace)
     : matchDate{matchDate}, matchTime{matchTime}, matchPlace{matchPlace} {}
@@ -101,40 +103,43 @@ void MatchInfo::addAwayRedCard(Fact* redCard) {
     this->awayRedCards.push_back(redCard);
 }
 
-std::ostream& operator<<(std::ostream& os, const MatchInfo& matchInfo) {
-    os << "🗓️  Date: " << matchInfo.matchDate << std::endl;
-    os << "🕖 Time: " << matchInfo.matchTime << std::endl;
-    os << "🏟️  Stadium: " << matchInfo.matchPlace << "\n" << std::endl;
+std::ostream& operator<<(std::ostream& os, const finta::MatchInfo& matchInfo) {
+    os << "🗓️  Date: " << matchInfo.getMatchDate() << std::endl;
+    os << "🕖 Time: " << matchInfo.getMatchHour() << std::endl;
+    os << "🏟️  Stadium: " << matchInfo.getMatchPlace() << "\n" << std::endl;
 
     os << "Home goals: " << std::endl;
 
-    for (auto goal : matchInfo.homeGoals) os << "⚽  " << *goal << std::endl;
+    for (auto goal : matchInfo.getHomeGoals())
+        os << "⚽  " << *goal << std::endl;
 
     os << std::endl;
 
     os << "Away goals: " << std::endl;
 
-    for (auto goal : matchInfo.awayGoals) os << "⚽  " << *goal << std::endl;
+    for (auto goal : matchInfo.getAwayGoals())
+        os << "⚽  " << *goal << std::endl;
 
     os << std::endl;
 
     os << "Home cards: " << std::endl;
 
-    for (auto yellowCard : matchInfo.homeYellowCards)
+    for (auto yellowCard : matchInfo.getHomeYellowCards())
         os << "🟨  " << *yellowCard << std::endl;
 
-    for (auto redCard : matchInfo.homeRedCards)
+    for (auto redCard : matchInfo.getHomeRedCards())
         os << "🟥  " << *redCard << std::endl;
 
     os << std::endl;
 
     os << "Away cards: " << std::endl;
 
-    for (auto yellowCard : matchInfo.awayYellowCards)
+    for (auto yellowCard : matchInfo.getAwayYellowCards())
         os << "🟨  " << *yellowCard << std::endl;
 
-    for (auto redCard : matchInfo.awayRedCards)
+    for (auto redCard : matchInfo.getAwayRedCards())
         os << "🟥  " << *redCard << std::endl;
 
     return os;
 }
+}  // namespace finta

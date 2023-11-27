@@ -1,10 +1,13 @@
 #ifndef MATCH_HPP
 #define MATCH_HPP
 
+#include <iomanip>
+#include <iostream>
 #include "MatchInfo.hpp"
 #include "MatchResult.hpp"
 #include "MatchStats.hpp"
 
+namespace finta {
 class Match {
     friend std::ostream& operator<<(std::ostream& os, const Match& match);
 
@@ -15,7 +18,7 @@ class Match {
     Match(unsigned short matchDay, MatchResult* matchResult,
           MatchInfo* matchInfo, MatchStats* homeMatchStats,
           MatchStats* awayMatchStats);
-    
+
     virtual ~Match();
 
     unsigned int getId() const;
@@ -44,5 +47,5 @@ class Match {
     MatchStats* homeMatchStats;
     MatchStats* awayMatchStats;
 };
-
+}  // namespace finta
 #endif  // MATCH_HPP
