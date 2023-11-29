@@ -39,8 +39,8 @@ class Match {
     void setAwayMatchStats(MatchStats* awayMatchStats);
 
    private:
-    static unsigned long int nextId;
-    unsigned long int id;
+    static unsigned int nextId;
+    unsigned int id;
     unsigned short matchDay;
     MatchResult* matchResult;
     MatchInfo* matchInfo;

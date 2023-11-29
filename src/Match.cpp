@@ -2,7 +2,7 @@
 
 namespace finta {
 
-unsigned long int Match::nextId{1};
+unsigned int Match::nextId{1};
 
 Match::Match(unsigned short matchDay, MatchResult* MatchResult)
     : id{nextId}, matchResult{MatchResult} {
