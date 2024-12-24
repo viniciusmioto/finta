@@ -1,2 +1,1 @@
-# finta
-FINTA (Football Insights &amp; Tactical Analysis)
+# FINTA (Football Insights &amp; Tactical Analysis)
